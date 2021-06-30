@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SchdlMemberPa extends Model
@@ -14,4 +15,14 @@ class SchdlMemberPa extends Model
     protected $fillable = [
         'project_schdl_id','member_id','score','explanation'  //欄位
     ];
+
+    public function project_schdl(): BelongsTo //屬於哪個專案
+    {
+        return $this->belongsTo('App\Models\ProjectSchdl','project_schdl_id');
+    }
+
+    public function member(): BelongsTo //屬於哪個成員
+    {
+        return $this->belongsTo('App\Models\Member','member_id');
+    }
 }
