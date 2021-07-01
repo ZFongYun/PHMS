@@ -19,7 +19,10 @@ Route::prefix('PHMS_admin')->group(function (){
         Route::post('/login','AdminController@login');
         Route::get('/logout','AdminController@logout');
     });
-    Route::get('/','AdminController@index');
+
+    Route::group(['middleware' => 'auth.admin'], function() {
+        Route::get('/','AdminController@index');
+    });
 });
 
 
