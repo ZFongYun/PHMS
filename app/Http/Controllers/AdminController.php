@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     public function index(){
-//        return view('admin_frontend.index');
         if (Auth::guard('admin')->check()){
-//            return redirect('/PHMS_admin');
             return view('admin_frontend.index');
         }
         return view('admin_frontend.login');
@@ -42,6 +40,6 @@ class AdminController extends Controller
 
     public  function  logout(){
         Auth::guard('admin')->logout();
-        return redirect('/PHMS_admin/AdminLogin');
+        return redirect('/PHMS_admin/login');
     }
 }
