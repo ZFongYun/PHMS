@@ -12,4 +12,3 @@
         <!-- end container-fluid -->
 @endsection
 @section('title','首頁')
-@section('user','阿國')

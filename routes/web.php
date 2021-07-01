@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('admin_frontend.index');
-//});
-
 Route::prefix('PHMS_admin')->group(function (){
+    Route::prefix('AdminLogin')->group(function (){
+        Route::get('/','AdminController@index');
+        Route::post('/login','AdminController@login');
+        Route::get('/logout','AdminController@logout');
+    });
     Route::get('/','AdminController@index');
-//    Route::post('/login','AdminController@login');
-//    Route::get('/logout','AdminController@logout');
 });
+
+
