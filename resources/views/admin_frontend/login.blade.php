@@ -31,7 +31,7 @@
             <h4 class="text-uppercase font-bold">後台管理員登入</h4>
         </div>
         <div class="p-2">
-            <form class="form-horizontal m-t-10" action="{{action('AdminController@login')}}" method="post">
+            <form class="form-horizontal m-t-10" action="{{action('AdminController@authenticate')}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group ">
                     <div class="col-12">

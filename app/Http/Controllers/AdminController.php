@@ -8,13 +8,18 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     public function index(){
-        if (Auth::guard('admin')->check()){
-            return view('admin_frontend.index');
-        }
-        return view('admin_frontend.login');
+        return view('admin_frontend.index');
     }
 
-    public function login(Request $request)
+    public function login_form(){
+        if (Auth::guard('admin')->check()){
+            return redirect('/PHMS_admin');
+        }else{
+            return view('admin_frontend.login');
+        }
+    }
+
+    public function authenticate(Request $request)
     {
         $validator = Validator($request->all(),[
             'account' => 'required',

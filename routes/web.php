@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('PHMS_admin')->group(function (){
     Route::prefix('login')->group(function (){
-        Route::get('/','AdminController@index');
-        Route::post('/login','AdminController@login');
+        Route::get('/','AdminController@login_form');
+        Route::post('/authenticate','AdminController@authenticate');
         Route::get('/logout','AdminController@logout');
     });
 
