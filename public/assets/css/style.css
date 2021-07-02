@@ -178,7 +178,7 @@ a:focus {
   font-weight: 600;
   margin-bottom: 0px;
   margin-top: 0px;
-  line-height: 80px;
+  line-height: 60px;
   font-family: "Karla", sans-serif;
 }
 
@@ -4566,3 +4566,13 @@ File: Responsive
   }
 }
 /*# sourceMappingURL=style.css.map */
+
+.bg-gray {
+  background-color: #D0D0D0;
+}
+
+.form-title{
+  font-size: 16px;
+  font-weight: 200;
+  font-family: "Noto Sans TC", sans-serif;
+}

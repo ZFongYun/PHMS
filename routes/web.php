@@ -22,6 +22,9 @@ Route::prefix('PHMS_admin')->group(function (){
 
     Route::group(['middleware' => 'auth.admin'], function() {
         Route::get('/','AdminController@index');
+        Route::resource('userinfo', 'AdminInfoController');
+        Route::get('userinfo/{id}/reset_edit', 'AdminInfoController@reset_edit')->name('Overall.reset_edit');
+        Route::post('userinfo/{id}/reset_update', 'AdminInfoController@reset_update')->name('Overall.reset_update');
     });
 });
 
