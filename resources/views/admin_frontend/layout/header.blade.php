@@ -19,8 +19,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-{{--                                {{route('prof.index')}}--}}
+                            <a href="{{action('AdminHrController@index')}}">
                                 <span> 人資管理 </span>
                             </a>
                         </li>

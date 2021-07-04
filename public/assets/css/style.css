@@ -4576,3 +4576,8 @@ File: Responsive
   font-weight: 200;
   font-family: "Noto Sans TC", sans-serif;
 }
+
+.center{
+  margin: 0 auto;
+  float: none;
+}
