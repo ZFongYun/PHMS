@@ -199,6 +199,7 @@ class AdminHrController extends Controller
         ]);
         Excel::import(new MembersImport, request()->file('import_file'));
 
+        return back()->with('success', '加入成功！');
     }
 
     public function download(){
