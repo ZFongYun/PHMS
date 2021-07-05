@@ -23,7 +23,7 @@ class MembersImport implements ToModel, WithHeadingRow
                 'student_ID' => @$row['student_id'],
                 'join_year' => @$row['join_year'],
                 'password' => Hash::make(@$row['password']),
-                'title' => 9,
+                'title' => 6,
             ]);
         }
 
