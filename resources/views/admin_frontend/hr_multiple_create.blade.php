@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title m-t-0 m-b-30">匯入成員資料說明</h4>
-                        <p>1、請先<a href="#">點選我</a>下載檔案格式，編輯完成後請儲存為<mark>CSV格式</mark>。</p>
+                        <p>1、請先<a href="{{route('Overall.download')}}">點選我</a>下載檔案格式，編輯完成後請儲存為<mark>CSV格式</mark>。</p>
                         <p>2、完成存儲後，請在下方區域上傳文件，接著再點擊新增按鈕。</p>
                         <p>※ 若匯入學號已經是知點成員的話，則不做處理，反之則加入為成員。</p>
                     </div>

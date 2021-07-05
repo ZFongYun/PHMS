@@ -183,4 +183,9 @@ class AdminHrController extends Controller
     public function multiple_create(){
         return view('admin_frontend.hr_multiple_create');
     }
+
+    public function download(){
+        $file = public_path().'/storage/PHMS_import_sample.xlsx';
+        return response()->download($file);
+    }
 }

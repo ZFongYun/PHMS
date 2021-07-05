@@ -29,6 +29,7 @@ Route::prefix('PHMS_admin')->group(function (){
 
         Route::resource('hr', 'AdminHrController');
         Route::get('HR/multiple_create', 'AdminHrController@multiple_create')->name('Overall.multiple_create');
+        Route::get('HR/download', 'AdminHrController@download')->name('Overall.download');
     });
 });
 
