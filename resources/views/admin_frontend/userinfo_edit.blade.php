@@ -36,4 +36,4 @@
     </div>
     <!-- end container-fluid -->
 @endsection
-@section('title','用戶資料')
+@section('title','編輯用戶資料')
