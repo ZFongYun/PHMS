@@ -16,8 +16,9 @@
                         <p>※ 若匯入學號已經是知點成員的話，則不做處理，反之則加入為成員。</p>
                     </div>
                 </div>
-                <form action="#" method="post">
-                    <input type="file" class="dropify" data-height="100" />
+                <form action="{{route('Overall.multiple_store')}}" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <input type="file" name="import_file" class="dropify" data-height="100" />
                     <button type="submit" class="btn btn-primary w-md m-t-10 waves-effect waves-light button-font">新增</button>
                 </form>
             </div><!-- end col -->

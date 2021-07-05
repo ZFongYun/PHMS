@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\MembersImport;
 use App\Models\Member;
 use App\Models\MemberPosition;
 use App\Models\MemberProject;
@@ -9,6 +10,7 @@ use App\Models\Project;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminHrController extends Controller
 {
@@ -182,6 +184,14 @@ class AdminHrController extends Controller
 
     public function multiple_create(){
         return view('admin_frontend.hr_multiple_create');
+    }
+
+    public function multiple_store(Request $request){
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+        Excel::import(new MembersImport, request()->file('import_file'));
+
     }
 
     public function download(){
