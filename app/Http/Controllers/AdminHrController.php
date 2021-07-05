@@ -28,7 +28,39 @@ class AdminHrController extends Controller
      */
     public function index()
     {
-        return view('admin_frontend.hr');
+        $member = Member::all()->toArray();
+        $member_id = Member::all('id')->toArray(); //取得所有member id
+        $position = array();
+        foreach ($member_id as $id){
+            $member_position = MemberPosition::where('member_id',$id)->get()->toArray();
+            $member_position_length = count($member_position);
+            $position_string = "";
+            for($i=0; $i < $member_position_length; $i++){
+                if ($member_position[$i]['position'] == 0){
+                    $position_string = $position_string." PM";
+                }elseif ($member_position[$i]['position'] == 1){
+                    $position_string = $position_string." HR";
+                }elseif ($member_position[$i]['position'] == 2){
+                    $position_string = $position_string." 核銷";
+                }elseif ($member_position[$i]['position'] == 3){
+                    $position_string = $position_string." 行政";
+                }elseif ($member_position[$i]['position'] == 4){
+                    $position_string = $position_string." 企劃講師";
+                }elseif ($member_position[$i]['position'] == 5){
+                    $position_string = $position_string." 程式講師";
+                }elseif ($member_position[$i]['position'] == 6){
+                    $position_string = $position_string." 美術講師";
+                }elseif ($member_position[$i]['position'] == 7){
+                    $position_string = $position_string." 企劃助教";
+                }elseif ($member_position[$i]['position'] == 8){
+                    $position_string = $position_string." 程式助教";
+                }elseif ($member_position[$i]['position'] == 9){
+                    $position_string = $position_string." 美術助教";
+                }
+            }
+            array_push($position,$position_string);
+        }
+        return view('admin_frontend.hr',compact('member','position'));
     }
 
     /**

@@ -3739,6 +3739,9 @@ th {
 
 .table td, .table th {
   padding: 8px;
+  vertical-align: middle;
+  text-align: center;
+
 }
 
 .table-bordered {
