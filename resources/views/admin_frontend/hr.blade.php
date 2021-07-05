@@ -95,7 +95,7 @@
                 </div>
                 <div class="modal-body center">
                     <a href="{{action('AdminHrController@create')}}" class="btn btn-primary btn-lg waves-effect waves-light">單一成員加入</a>
-                    <a href="#" class="btn btn-primary btn-lg waves-effect waves-light m-l-10">多位成員加入</a>
+                    <a href="{{route('Overall.multiple_create')}}" class="btn btn-primary btn-lg waves-effect waves-light m-l-10">多位成員加入</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

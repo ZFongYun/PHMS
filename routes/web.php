@@ -28,6 +28,7 @@ Route::prefix('PHMS_admin')->group(function (){
         Route::post('userinfo/{id}/reset_update', 'AdminInfoController@reset_update')->name('Overall.reset_update');
 
         Route::resource('hr', 'AdminHrController');
+        Route::get('HR/multiple_create', 'AdminHrController@multiple_create')->name('Overall.multiple_create');
     });
 });
 

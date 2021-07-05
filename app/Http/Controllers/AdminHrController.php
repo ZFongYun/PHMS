@@ -179,4 +179,8 @@ class AdminHrController extends Controller
     {
         //
     }
+
+    public function multiple_create(){
+        return view('admin_frontend.hr_multiple_create');
+    }
 }

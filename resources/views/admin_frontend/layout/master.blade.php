@@ -19,6 +19,9 @@
 {{--    <!-- Time picker css -->--}}
 {{--    <link href="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet">--}}
 
+    <!-- form Uploads -->
+    <link href="{{ URL::asset('../plugins/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
+
     <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ URL::asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
@@ -69,6 +72,9 @@
 {{--<script src="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>--}}
 {{--<script src="{{ URL::asset('../plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>--}}
 
+<!-- file uploads js -->
+<script src="{{ URL::asset('../plugins/dropify/js/dropify.min.js') }}"></script>
+
 <script>
     // Date Picker
     // jQuery('#datepicker').datepicker();
@@ -86,6 +92,18 @@
     // jQuery('#timepicker-upload').timepicker({
     //     showMeridian : false
     // });
+
+    $('.dropify').dropify({
+        messages: {
+            'default': '請將文件拖放到此處或單擊該區域上傳文件。',
+            'replace': '請將文件拖放到此處或單擊該區域上傳文件。',
+            'remove': '移除',
+            'error': '發生錯誤，請重新上傳。'
+        },
+        error: {
+            'fileSize': 'The file size is too big (1M max).'
+        }
+    });
 </script>
 
 </body>
