@@ -202,7 +202,9 @@ class AdminHrController extends Controller
      */
     public function edit($id)
     {
-        //
+        $memberToEdit = $this->member->find($id);
+        $member_position = MemberPosition::where('member_id',2)->get()->toArray();
+        return view('admin_frontend.hr_edit',compact('memberToEdit','member_position'));
     }
 
     /**
@@ -214,7 +216,8 @@ class AdminHrController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tt = $request->input('position_mu');
+        dd($tt);
     }
 
     /**
