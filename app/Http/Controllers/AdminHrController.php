@@ -9,6 +9,7 @@ use App\Models\MemberProject;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -152,7 +153,45 @@ class AdminHrController extends Controller
      */
     public function show($id)
     {
-        //
+        $memberToShow = $this->member->find($id);
+
+        $position_string = ""; //成員的職務
+        $member_position = MemberPosition::where('member_id',$id)->get()->toArray();
+        if (empty($member_position)){
+            $position_string = "無職務";
+        }else{
+            $member_position_length = count($member_position);
+            for($i=0; $i < $member_position_length; $i++){
+                if ($member_position[$i]['position'] == 0){
+                    $position_string = $position_string." PM";
+                }elseif ($member_position[$i]['position'] == 1){
+                    $position_string = $position_string." HR";
+                }elseif ($member_position[$i]['position'] == 2){
+                    $position_string = $position_string." 核銷";
+                }elseif ($member_position[$i]['position'] == 3){
+                    $position_string = $position_string." 行政";
+                }elseif ($member_position[$i]['position'] == 4){
+                    $position_string = $position_string." 企劃講師";
+                }elseif ($member_position[$i]['position'] == 5){
+                    $position_string = $position_string." 程式講師";
+                }elseif ($member_position[$i]['position'] == 6){
+                    $position_string = $position_string." 美術講師";
+                }elseif ($member_position[$i]['position'] == 7){
+                    $position_string = $position_string." 企劃助教";
+                }elseif ($member_position[$i]['position'] == 8){
+                    $position_string = $position_string." 程式助教";
+                }elseif ($member_position[$i]['position'] == 9){
+                    $position_string = $position_string." 美術助教";
+                }
+            }
+        }
+
+        $member_project = DB::table('member_project')
+            ->where('member_id',$id)
+            ->join('project','member_project.project_id','=','project.id')
+            ->select('project.id','project.name')
+            ->get()->toArray();
+        return view('admin_frontend.hr_show',compact('memberToShow','position_string','member_project'));
     }
 
     /**

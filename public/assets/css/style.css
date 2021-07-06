@@ -4622,3 +4622,9 @@ File: Responsive
   transition: all 300ms linear;
   font-size: 14px;
 }
+
+.info-title{
+  font-size: 18px;
+  font-weight: 200;
+  font-family: "Noto Sans TC", sans-serif;
+}
