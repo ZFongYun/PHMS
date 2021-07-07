@@ -182,6 +182,8 @@ class AdminHrController extends Controller
                     $position_string = $position_string." 程式助教";
                 }elseif ($member_position[$i]['position'] == 9){
                     $position_string = $position_string." 美術助教";
+                }elseif ($member_position[$i]['position'] == 10){
+                    $position_string = $position_string." 無職務";
                 }
             }
         }
