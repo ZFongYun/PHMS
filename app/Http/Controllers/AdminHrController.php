@@ -35,9 +35,8 @@ class AdminHrController extends Controller
         $member_id = Member::all('id')->toArray(); //取得所有member id
 
         $position = array();
-        $position_string = "";
-
         foreach ($member_id as $id){
+            $position_string = "";
             $member_position = MemberPosition::where('member_id',$id)->get()->toArray();
             if (empty($member_position)){
                 $position_string = "無職務";
@@ -224,8 +223,58 @@ class AdminHrController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tt = $request->input('position_mu');
-        dd($tt);
+        $name = $request->input('name');
+        $student_id = $request->input('student_id');
+        $email = $request->input('email');
+        $join_year = $request->input('join_year');
+        $title = $request->input('title');
+        $position = $request->input('position');
+        $position_mu = $request-> input('position_mu');
+        $skill = $request->input('skill');
+        $project = $request->input('project');
+        $remark = $request->input('remark');
+        $password = Member::where('id',$id)->value('password');
+
+        $hrToUpdate = $this->member;
+        $hrToUpdate -> student_ID = $student_id;
+        $hrToUpdate -> name = $name;
+        $hrToUpdate -> email = $email;
+        $hrToUpdate -> join_year = $join_year;
+        $hrToUpdate -> title = $title;
+        $hrToUpdate -> skill = $skill;
+        $hrToUpdate -> remark = $remark;
+        $hrToUpdate -> password = $password;
+//        $hrToUpdate -> save();
+
+//        $positionToDelete = MemberPosition::where('member_id',$id)->delete(); //把舊有資料刪除
+
+        $hrPositionToUpdate = $this->member_position;
+        $hrPositionToUpdate -> member_id = $id;
+        $hrPositionToUpdate -> position = $position;
+//        $hrPositionToUpdate -> save(); //儲存固定的職務
+
+        if ($position_mu != null){
+            foreach ($position_mu as $row)
+            {
+                $MemberPosition = new MemberPosition();
+                $MemberPosition -> member_id = $id;
+                $MemberPosition -> position = $row;
+//                $MemberPosition -> save(); //儲存其他的職務
+            }
+        }
+
+//        $projectToDelete = MemberProject::where('member_id',$id)->delete(); //把舊有資料刪除
+
+        if ($project != null){
+            foreach ($project as $row){
+                $MemberProject = new MemberProject();
+                $MemberProject -> member_id = $id;
+                $MemberProject -> project_id = $row;
+//                $MemberProject -> save();
+            }
+        }
+
+//        return redirect('/PHMS_admin/hr');
     }
 
     /**
