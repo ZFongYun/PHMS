@@ -203,8 +203,14 @@ class AdminHrController extends Controller
     public function edit($id)
     {
         $memberToEdit = $this->member->find($id);
-        $member_position = MemberPosition::where('member_id',2)->get()->toArray();
-        return view('admin_frontend.hr_edit',compact('memberToEdit','member_position'));
+        $member_position = MemberPosition::where('member_id',$id)->get()->toArray();
+        $project = Project::all()->toArray();
+        $project_is_chk = DB::table('member_project')
+            ->where('member_id',$id)
+            ->join('project','member_project.project_id','=','project.id')
+            ->select('project.id')
+            ->get()->toArray();
+        return view('admin_frontend.hr_edit',compact('memberToEdit','member_position','project','project_is_chk'));
     }
 
     /**
