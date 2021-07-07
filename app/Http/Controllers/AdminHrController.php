@@ -188,10 +188,11 @@ class AdminHrController extends Controller
         }
 
         $member_project = DB::table('member_project')
-            ->where('member_id',$id)
+            ->where('member_id',$id)->whereNull('member_project.deleted_at')
             ->join('project','member_project.project_id','=','project.id')
             ->select('project.id','project.name')
             ->get()->toArray();
+
         return view('admin_frontend.hr_show',compact('memberToShow','position_string','member_project'));
     }
 
@@ -207,7 +208,7 @@ class AdminHrController extends Controller
         $member_position = MemberPosition::where('member_id',$id)->get()->toArray();
         $project = Project::all()->toArray();
         $project_is_chk = DB::table('member_project')
-            ->where('member_id',$id)
+            ->where('member_id',$id)->whereNull('member_project.deleted_at')
             ->join('project','member_project.project_id','=','project.id')
             ->select('project.id')
             ->get()->toArray();
@@ -235,7 +236,7 @@ class AdminHrController extends Controller
         $remark = $request->input('remark');
         $password = Member::where('id',$id)->value('password');
 
-        $hrToUpdate = $this->member;
+        $hrToUpdate = $this->member->find($id);
         $hrToUpdate -> student_ID = $student_id;
         $hrToUpdate -> name = $name;
         $hrToUpdate -> email = $email;
@@ -244,14 +245,14 @@ class AdminHrController extends Controller
         $hrToUpdate -> skill = $skill;
         $hrToUpdate -> remark = $remark;
         $hrToUpdate -> password = $password;
-//        $hrToUpdate -> save();
+        $hrToUpdate -> save();
 
-//        $positionToDelete = MemberPosition::where('member_id',$id)->delete(); //把舊有資料刪除
+        $positionToDelete = MemberPosition::where('member_id',$id)->delete(); //把舊有資料刪除
 
         $hrPositionToUpdate = $this->member_position;
         $hrPositionToUpdate -> member_id = $id;
         $hrPositionToUpdate -> position = $position;
-//        $hrPositionToUpdate -> save(); //儲存固定的職務
+        $hrPositionToUpdate -> save(); //儲存固定的職務
 
         if ($position_mu != null){
             foreach ($position_mu as $row)
@@ -259,22 +260,22 @@ class AdminHrController extends Controller
                 $MemberPosition = new MemberPosition();
                 $MemberPosition -> member_id = $id;
                 $MemberPosition -> position = $row;
-//                $MemberPosition -> save(); //儲存其他的職務
+                $MemberPosition -> save(); //儲存其他的職務
             }
         }
 
-//        $projectToDelete = MemberProject::where('member_id',$id)->delete(); //把舊有資料刪除
+        $projectToDelete = MemberProject::where('member_id',$id)->delete(); //把舊有資料刪除
 
         if ($project != null){
             foreach ($project as $row){
                 $MemberProject = new MemberProject();
                 $MemberProject -> member_id = $id;
                 $MemberProject -> project_id = $row;
-//                $MemberProject -> save();
+                $MemberProject -> save();
             }
         }
 
-//        return redirect('/PHMS_admin/hr');
+        return redirect('/PHMS_admin/hr');
     }
 
     /**
