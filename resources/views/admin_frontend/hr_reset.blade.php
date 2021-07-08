@@ -30,7 +30,7 @@
                             </div>
                             <input type="checkbox" onclick="myFunction()"> 顯示密碼
                             @if($messageWaining = Session::get('warning'))
-                                <label style="color: crimson;font-size: 10px">{{ $messageWaining }}</label>
+                                <div style="color: crimson;font-size: 10px">{{ $messageWaining }}</div>
                             @endif
                             <div class="m-t-10" align="right">
                                 <button type="submit" class="btn btn-primary waves-effect waves-light button-font">修改</button>
