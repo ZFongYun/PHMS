@@ -36,6 +36,7 @@
                         <th>職稱</th>
                         <th>知點職務</th>
                         <th>詳情</th>
+                        <th>密碼重設</th>
                         <th>編輯</th>
                         <th>刪除</th>
                     </tr>
@@ -69,6 +70,7 @@
                                     @endif
                                     <td>{{$position[$i]}}</td>
                                     <td><a href="{{action('AdminHrController@show',$member[$i]['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-info"><i class="zmdi zmdi-info-outline"></i></a></td>
+                                    <td><a href="{{route('Overall.hr_reset_edit',$member[$i]['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-purple"><i class="zmdi zmdi-key"></i></a></td>
                                     <td><a href="{{action('AdminHrController@edit',$member[$i]['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-warning"><i class="zmdi zmdi-edit"></i></a></td>
                                     <form action="#" method="post">
                                         <td><button type="submit" class="btn btn-icon btn-rounded btn-sm waves-effect waves-light btn-danger" onclick="return(confirm('是否刪除此筆資料？'))"> <i class="fa fa-remove"></i></button></td>

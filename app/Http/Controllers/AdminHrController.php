@@ -306,4 +306,39 @@ class AdminHrController extends Controller
         $file = public_path().'/storage/PHMS_import_sample.xlsx';
         return response()->download($file);
     }
+
+    public function reset_edit($id){
+        $memberToReset = $this->member->find($id);
+        return view('admin_frontend.hr_reset',compact('memberToReset'));
+    }
+
+    public function reset_update(Request $request,$id){
+        $password = $request->input('password');
+        $password_check = $request->input('password_check');
+
+        if ($password != $password_check){
+            return back()->with('warning','密碼不一致，請重新輸入。');
+        }else{
+            $member = Member::where('id',$id)->get()->toArray();
+            $name = $member[0]['name'];
+            $student_id = $member[0]['student_ID'];
+            $email = $member[0]['email'];
+            $join_year = $member[0]['join_year'];
+            $title = $member[0]['title'];
+            $skill = $member[0]['skill'];
+            $remark = $member[0]['remark'];
+
+            $memberToResetUpdate = $this->member->find($id);
+            $memberToResetUpdate -> student_ID = $student_id;
+            $memberToResetUpdate -> name = $name;
+            $memberToResetUpdate -> email = $email;
+            $memberToResetUpdate -> join_year = $join_year;
+            $memberToResetUpdate -> title = $title;
+            $memberToResetUpdate -> skill = $skill;
+            $memberToResetUpdate -> remark = $remark;
+            $memberToResetUpdate -> password = Hash::make($password);
+            $memberToResetUpdate->save();
+            return redirect('/PHMS_admin/hr');
+        }
+    }
 }
