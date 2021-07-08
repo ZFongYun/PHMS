@@ -31,39 +31,39 @@ class AdminHrController extends Controller
      */
     public function index()
     {
-        $member = Member::all()->toArray();
-        $member_id = Member::all('id')->toArray(); //取得所有member id
-
-        $position = array();
-        foreach ($member_id as $id){
-            $position_string = "";
-            $member_position = MemberPosition::where('member_id',$id)->get()->toArray();
-            if (empty($member_position)){
+        $member = Member::all()->toArray(); //取得全部member
+        $position = array(); //儲存所有member的職務
+        foreach ($member as $item){
+            $position_string = ""; //暫存職務內容
+            $members = $this->member->find($item['id'])->position->toArray(); //使用關聯找尋於與member.id相符合的資料
+            if (empty($members)){
                 $position_string = "無職務";
                 array_push($position,$position_string);
             }else{
-                $member_position_length = count($member_position);
+                $member_position_length = count($members);
                 for($i=0; $i < $member_position_length; $i++){
-                    if ($member_position[$i]['position'] == 0){
+                    if ($members[$i]['position'] == 0){
                         $position_string = $position_string." PM";
-                    }elseif ($member_position[$i]['position'] == 1){
+                    }elseif ($members[$i]['position'] == 1){
                         $position_string = $position_string." HR";
-                    }elseif ($member_position[$i]['position'] == 2){
+                    }elseif ($members[$i]['position'] == 2){
                         $position_string = $position_string." 核銷";
-                    }elseif ($member_position[$i]['position'] == 3){
+                    }elseif ($members[$i]['position'] == 3){
                         $position_string = $position_string." 行政";
-                    }elseif ($member_position[$i]['position'] == 4){
+                    }elseif ($members[$i]['position'] == 4){
                         $position_string = $position_string." 企劃講師";
-                    }elseif ($member_position[$i]['position'] == 5){
+                    }elseif ($members[$i]['position'] == 5){
                         $position_string = $position_string." 程式講師";
-                    }elseif ($member_position[$i]['position'] == 6){
+                    }elseif ($members[$i]['position'] == 6){
                         $position_string = $position_string." 美術講師";
-                    }elseif ($member_position[$i]['position'] == 7){
+                    }elseif ($members[$i]['position'] == 7){
                         $position_string = $position_string." 企劃助教";
-                    }elseif ($member_position[$i]['position'] == 8){
+                    }elseif ($members[$i]['position'] == 8){
                         $position_string = $position_string." 程式助教";
-                    }elseif ($member_position[$i]['position'] == 9){
+                    }elseif ($members[$i]['position'] == 9){
                         $position_string = $position_string." 美術助教";
+                    }elseif ($members[$i]['position'] == 10){
+                        $position_string = $position_string." 無職務";
                     }
                 }
                 array_push($position,$position_string);
@@ -154,38 +154,38 @@ class AdminHrController extends Controller
     {
         $memberToShow = $this->member->find($id);
 
-        $position_string = ""; //成員的職務
-        $member_position = MemberPosition::where('member_id',$id)->get()->toArray();
-        if (empty($member_position)){
-            $position_string = "無職務";
-        }else{
-            $member_position_length = count($member_position);
-            for($i=0; $i < $member_position_length; $i++){
-                if ($member_position[$i]['position'] == 0){
-                    $position_string = $position_string." PM";
-                }elseif ($member_position[$i]['position'] == 1){
-                    $position_string = $position_string." HR";
-                }elseif ($member_position[$i]['position'] == 2){
-                    $position_string = $position_string." 核銷";
-                }elseif ($member_position[$i]['position'] == 3){
-                    $position_string = $position_string." 行政";
-                }elseif ($member_position[$i]['position'] == 4){
-                    $position_string = $position_string." 企劃講師";
-                }elseif ($member_position[$i]['position'] == 5){
-                    $position_string = $position_string." 程式講師";
-                }elseif ($member_position[$i]['position'] == 6){
-                    $position_string = $position_string." 美術講師";
-                }elseif ($member_position[$i]['position'] == 7){
-                    $position_string = $position_string." 企劃助教";
-                }elseif ($member_position[$i]['position'] == 8){
-                    $position_string = $position_string." 程式助教";
-                }elseif ($member_position[$i]['position'] == 9){
-                    $position_string = $position_string." 美術助教";
-                }elseif ($member_position[$i]['position'] == 10){
-                    $position_string = $position_string." 無職務";
+        $position_string = ""; //暫存職務內容
+            $members = $this->member->find($id)->position->toArray(); //使用關聯找尋於與member.id相符合的資料
+            if (empty($members)){
+                $position_string = "無職務";
+            }else{
+
+                for($i=0; $i < count($members); $i++){
+                    if ($members[$i]['position'] == 0){
+                        $position_string = $position_string." PM";
+                    }elseif ($members[$i]['position'] == 1){
+                        $position_string = $position_string." HR";
+                    }elseif ($members[$i]['position'] == 2){
+                        $position_string = $position_string." 核銷";
+                    }elseif ($members[$i]['position'] == 3){
+                        $position_string = $position_string." 行政";
+                    }elseif ($members[$i]['position'] == 4){
+                        $position_string = $position_string." 企劃講師";
+                    }elseif ($members[$i]['position'] == 5){
+                        $position_string = $position_string." 程式講師";
+                    }elseif ($members[$i]['position'] == 6){
+                        $position_string = $position_string." 美術講師";
+                    }elseif ($members[$i]['position'] == 7){
+                        $position_string = $position_string." 企劃助教";
+                    }elseif ($members[$i]['position'] == 8){
+                        $position_string = $position_string." 程式助教";
+                    }elseif ($members[$i]['position'] == 9){
+                        $position_string = $position_string." 美術助教";
+                    }elseif ($members[$i]['position'] == 10){
+                        $position_string = $position_string." 無職務";
+                    }
                 }
             }
-        }
 
         $member_project = DB::table('member_project')
             ->where('member_id',$id)->whereNull('member_project.deleted_at')
