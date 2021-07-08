@@ -286,7 +286,9 @@ class AdminHrController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $memberToDestroy = $this->member->find($id);
+        $memberToDestroy -> delete();
+        return redirect('/PHMS_admin/hr');
     }
 
     public function multiple_create(){
