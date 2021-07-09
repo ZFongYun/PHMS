@@ -33,6 +33,7 @@ Route::prefix('PHMS_admin')->group(function (){
         Route::get('HR/download', 'AdminHrController@download')->name('Overall.download');
         Route::get('HR/{id}/reset_edit', 'AdminHrController@reset_edit')->name('Overall.hr_reset_edit');
         Route::post('HR/{id}/reset_update', 'AdminHrController@reset_update')->name('Overall.hr_reset_update');
+        Route::post('HR/search', 'AdminHrController@search')->name('Overall.hr_search');
 
         Route::resource('pm', 'AdminPmController');
     });
