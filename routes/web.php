@@ -34,6 +34,7 @@ Route::prefix('PHMS_admin')->group(function (){
         Route::get('HR/{id}/reset_edit', 'AdminHrController@reset_edit')->name('Overall.hr_reset_edit');
         Route::post('HR/{id}/reset_update', 'AdminHrController@reset_update')->name('Overall.hr_reset_update');
         Route::post('HR/search', 'AdminHrController@search')->name('Overall.hr_search');
+        Route::get('HR/{id}/destroy_exception', 'AdminHrController@destroy_exception')->name('Overall.hr_destroy_exception');
 
         Route::resource('pm', 'AdminPmController');
     });

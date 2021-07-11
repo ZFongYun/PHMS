@@ -413,4 +413,10 @@ class AdminHrController extends Controller
         return $allResult;
 //        return $members.$position;
     }
+
+    public function destroy_exception($id){
+        $memberToDestroy = $this->member->find($id);
+        $memberToDestroy -> delete();
+        return redirect('/PHMS_admin/hr');
+    }
 }
