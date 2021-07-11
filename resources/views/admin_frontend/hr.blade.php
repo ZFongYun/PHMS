@@ -12,7 +12,7 @@
             </div>
             <div class="col-sm-8 m-b-15" align="right">
                 <div class="input-group col-sm-9">
-                    <button type="button" class="btn waves-effect waves-light btn-primary btn-sm m-r-5">顯示全部資料</button>
+                    <button type="button" class="btn waves-effect waves-light btn-primary btn-sm m-r-5" onclick="displayAllDate()">顯示全部資料</button>
                     <select class="form-control-select col-sm-3 m-r-5" id="target" name="target">
                         <option>請選擇</option>
                         <option value="0">加入學年度</option>
@@ -47,8 +47,10 @@
                     </span>
                 </div>
             </div>
+
+            {{--   all_data_table   --}}
             <div class="table-responsive">
-                <table class="table table-hover m-0">
+                <table class="table table-hover m-0" id="all_date">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -106,6 +108,30 @@
                     </tbody>
                 </table>
             </div>
+
+            {{--   search_data_table   --}}
+            <div class="table-responsive">
+                <table class="table table-hover m-0" style="display: none" id="search_date">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>加入學年度</th>
+                        <th>學號</th>
+                        <th>姓名</th>
+                        <th>電子信箱</th>
+                        <th>職稱</th>
+                        <th>知點職務</th>
+                        <th>詳情</th>
+                        <th>密碼重設</th>
+                        <th>編輯</th>
+                        <th>刪除</th>
+                    </tr>
+                    </thead>
+                    <tbody id="search_body">
+
+                    </tbody>
+                </table>
+            </div>
         </div>
         <!-- end row -->
     </div>
@@ -150,11 +176,17 @@
             }
         });
 
+        function displayAllDate(){
+            $('#all_date').show();
+            $('#search_date').hide();
+        }
+
         $(document).on('click', '.search', function() {
             var target = $('#target').val();
             var keyword = $('#keyword').val();
             var keyword_title = $('#keyword_title').val();
             var keyword_position = $('#keyword_position').val();
+            var html_result = '';
 
             if (target == "請選擇"){
                 alert("請選擇搜尋目標")
@@ -172,6 +204,45 @@
                         },
                         success: function (data) {
                             console.log(data)
+                            $('#all_date').hide();
+                            $('#search_date').show();
+                            if (data[0] == ''){
+                                html_result += '<tr>';
+                                html_result += '<td colspan="11">無結果</td></tr>';
+                                $('#search_body').html(html_result);
+                            }else {
+                                for (var i = 0; i<data[0].length; i++){
+                                    html_result += '<tr>';
+                                    html_result += '<td>'+data[0][i].id+'</td>';
+                                    html_result += '<td>'+data[0][i].join_year+'</td>';
+                                    html_result += '<td>'+data[0][i].student_ID+'</td>';
+                                    html_result += '<td>'+data[0][i].neme+'</td>';
+                                    html_result += '<td>'+data[0][i].email+'</td>';
+                                    html_result += '<td>'+data[0][i].title+'</td>';
+                                    html_result += '<td>'+data[1][i]+'</td>';
+
+                                    {{--<td><a href="{{action('AdminHrController@show',$member[$i]['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-info"><i class="zmdi zmdi-info-outline"></i></a></td>--}}
+                                    {{--<td><a href="{{route('Overall.hr_reset_edit',$member[$i]['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-purple"><i class="zmdi zmdi-key"></i></a></td>--}}
+                                    {{--<td><a href="{{action('AdminHrController@edit',$member[$i]['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-warning"><i class="zmdi zmdi-edit"></i></a></td>--}}
+                                    {{--<form action="{{action('AdminHrController@destroy',$member[$i]['id'])}}" method="post">--}}
+                                    {{--    <td><button type="submit" class="btn btn-icon btn-rounded btn-sm waves-effect waves-light btn-danger" onclick="return(confirm('是否刪除此筆資料？'))"> <i class="fa fa-remove"></i></button></td>--}}
+                                    {{--    <input type="hidden" name="_method" value="DELETE">--}}
+                                    {{--        <input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+                                    {{--</form>--}}
+
+{{--                                    html_result += '<td><a href="{{action('AdminHrController@show',data[0][i].id)}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-info"><i class="zmdi zmdi-info-outline"></i></a></td>';--}}
+{{--                                    html_result += '<td><a href="{{route('Overall.hr_reset_edit',data[0][i].id)}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-purple"><i class="zmdi zmdi-key"></i></a></td>';--}}
+{{--                                    html_result += '<td><a href="{{action('AdminHrController@edit',data[0][i].id)}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-warning"><i class="zmdi zmdi-edit"></i></a></td>';--}}
+{{--                                    html_result += '<form action="{{action('AdminHrController@destroy',data[0][i].id)}}" method="post">';--}}
+//                                         html_result += '<td><button type="submit" class="btn btn-icon btn-rounded btn-sm waves-effect waves-light btn-danger" onclick="return(confirm('是否刪除此筆資料？'))"> <i class="fa fa-remove"></i></button></td></tr>';
+//                                     html_result += '<input type="hidden" name="_method" value="DELETE">';
+{{--                                    html_result += '<input type="hidden" name="_token" value="{{ csrf_token() }}">';--}}
+//                                     html_result += '</form>'
+                                    $('#search_body').html(html_result);
+                                }
+
+                            }
+
                         },
                         error: function () {
                             alert('error')
