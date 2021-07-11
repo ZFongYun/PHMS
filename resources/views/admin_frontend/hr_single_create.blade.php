@@ -39,7 +39,7 @@
                             <label for="title" class="col-md-2 control-label form-title">職稱*</label>
                             <div class="col-md-8">
                                 <select class="form-control" id="title" name="title">
-                                    <option>請選擇</option>
+                                    <option value="6">請選擇</option>
                                     <option value="0">專任教授</option>
                                     <option value="1">知點助理</option>
                                     <option value="2">企劃</option>
@@ -54,7 +54,7 @@
                             <label for="position" class="col-md-2 control-label form-title">知點職務*</label>
                             <div class="col-md-8">
                                 <select class="form-control" id="position" name="position">
-                                    <option>請選擇</option>
+                                    <option value="10">請選擇</option>
                                     <option value="0">PM</option>
                                     <option value="1">HR</option>
                                     <option value="2">核銷</option>
@@ -119,7 +119,7 @@
     <script>
         function GetDynamicTextBox(value){
             return '<select class="form-control-select m-b-10" id="position" name="position_mu[]">'+
-                '<option>請選擇</option>'+
+                '<option value="10">請選擇</option>'+
                 '<option value="0">PM</option>'+
                 '<option value="1">HR</option>'+
                 '<option value="2">核銷</option>'+
