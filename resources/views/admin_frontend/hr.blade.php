@@ -216,7 +216,7 @@
                                     html_result += '<td>'+data[0][i].id+'</td>';
                                     html_result += '<td>'+data[0][i].join_year+'</td>';
                                     html_result += '<td>'+data[0][i].student_ID+'</td>';
-                                    html_result += '<td>'+data[0][i].neme+'</td>';
+                                    html_result += '<td>'+data[0][i].name+'</td>';
                                     html_result += '<td>'+data[0][i].email+'</td>';
                                     html_result += '<td>'+data[0][i].title+'</td>';
                                     html_result += '<td>'+data[1][i]+'</td>';
