@@ -24,8 +24,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-{{--                                {{route('prof.index')}}--}}
+                            <a href="{{action('AdminPmController@index')}}">
                                 <span> 專案管理 </span>
                             </a>
                         </li>

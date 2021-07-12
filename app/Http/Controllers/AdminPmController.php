@@ -13,7 +13,7 @@ class AdminPmController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin_frontend.pm');
     }
 
     /**
