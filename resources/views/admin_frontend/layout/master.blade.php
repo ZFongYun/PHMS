@@ -14,7 +14,7 @@
 {{--    <link href="{{ URL::asset('../plugins/custombox/dist/custombox.min.css') }}" rel="stylesheet">--}}
 
 {{--    <!-- Date picker css -->--}}
-{{--    <link href="{{ URL::asset('../plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">--}}
+    <link href="{{ URL::asset('../plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 
 {{--    <!-- Time picker css -->--}}
 {{--    <link href="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet">--}}
@@ -70,15 +70,15 @@
 
 <!-- Plugins Js -->
 {{--<script src="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>--}}
-{{--<script src="{{ URL::asset('../plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>--}}
+<script src="{{ URL::asset('../plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 
 <!-- file uploads js -->
 <script src="{{ URL::asset('../plugins/dropify/js/dropify.min.js') }}"></script>
 
 <script>
     // Date Picker
-    // jQuery('#datepicker').datepicker();
-    // jQuery('#datepicker-upload').datepicker();
+    jQuery('#datepicker-project-start').datepicker();
+    jQuery('#datepicker-project-end').datepicker();
 
     // Time Picker
     // jQuery('#timepicker-start').timepicker({

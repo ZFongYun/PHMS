@@ -23,7 +23,7 @@ class AdminPmController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin_frontend.pm_create');
     }
 
     /**
