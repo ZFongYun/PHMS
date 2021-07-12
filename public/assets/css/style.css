@@ -3262,7 +3262,7 @@ textarea.form-control {
 }
 
 label {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .form-control[disabled], fieldset[disabled] .form-control {

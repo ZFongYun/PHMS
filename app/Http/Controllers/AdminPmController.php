@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
+use App\Models\Project;
+use App\Models\ProjectMember;
 use Illuminate\Http\Request;
 
 class AdminPmController extends Controller
 {
+    public function __construct(Project $project)
+    {
+        $this->project = $project;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +31,8 @@ class AdminPmController extends Controller
      */
     public function create()
     {
-        return view('admin_frontend.pm_create');
+        $member = Member::all()->toArray();
+        return view('admin_frontend.pm_create',compact('member'));
     }
 
     /**
@@ -34,7 +43,38 @@ class AdminPmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->input('name');
+        $content = $request->input('content');
+        $school_year = $request->input('school_year');
+        $semester = $request->input('semester');
+        $project_start = $request->input('project_start');
+        $project_end = $request->input('project_end');
+        $status = $request->input('status');
+        $member = $request->input('memberId');
+
+        $pmToStore = $this->project;
+        $pmToStore -> name = $name;
+        $pmToStore -> content = $content;
+        $pmToStore -> school_year = $school_year;
+        $pmToStore -> semester = $semester;
+        $pmToStore -> start_date = $project_start;
+        $pmToStore -> end_date = $project_end;
+        $pmToStore -> status = $status;
+        $pmToStore -> save();
+
+        $cut_id = explode(",",$member);
+        $project_id = $this->project->where('name','=',$name)->value('id');
+        if ($cut_id != null){
+            foreach ($cut_id as $row)
+            {
+                $ProjectMember = new ProjectMember();
+                $ProjectMember -> project_id = $project_id;
+                $ProjectMember -> member_id = $row;
+                $ProjectMember -> save();
+            }
+        }
+
+        return redirect('/PHMS_admin/pm');
     }
 
     /**

@@ -35,10 +35,10 @@
                             </div>
                         </div>
                         <div class="input-group row">
-                            <label for="project-start" class="col-md-2 control-label form-title">開始日期*</label>
+                            <label for="project_start" class="col-md-2 control-label form-title">開始日期*</label>
                             <div class="col-md-8">
                                 <div class="input-group m-b-10">
-                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker-project-start" name="project-start" required="">
+                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker-project-start" name="project_start" required="">
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-primary b-0 text-white"><i class="ti-calendar"></i></span>
                                     </div>
@@ -46,10 +46,10 @@
                             </div>
                         </div><!-- input-group -->
                         <div class="input-group row">
-                            <label for="project-end" class="col-md-2 control-label form-title">結束日期</label>
+                            <label for="project_end" class="col-md-2 control-label form-title">結束日期</label>
                             <div class="col-md-8">
                                 <div class="input-group m-b-10">
-                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker-project-end" name="project-end">
+                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker-project-end" name="project_end">
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-primary b-0 text-white"><i class="ti-calendar"></i></span>
                                     </div>
@@ -72,11 +72,13 @@
                             <label class="col-md-2 control-label form-title">參與成員*</label>
                             <div class="col-md-8">
                                 <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#select-member">選擇</button>
-                                <div id="member"></div>
+                                <label>已選擇..</label>
+                                <span class="m-t-5" id="member"></span>
+                                <input type="hidden" id="memberId" name="memberId">
                             </div>
                         </div>
                     </div>
-                    <div class="m-t-30">
+                    <div>
                         <button type="submit" class="btn btn-success w-md waves-effect waves-light button-font">新增</button>
                     </div><!-- end col -->
                 </form>
@@ -92,17 +94,62 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title mt-0" id="myModalLabel">請選擇成員</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-
+                    <div class="table-responsive">
+                        <table class="table table-hover m-0">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>加入學年度</th>
+                                <th>學號</th>
+                                <th>姓名</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($member as $item)
+                                <tr>
+                                    <td><input type="checkbox" class="memberCheckbox" name="member[]" id="{{$item['name']}}" value="{{$item['id']}}"></td>
+                                    <td>{{$item['join_year']}}</td>
+                                    <td>{{$item['student_ID']}}</td>
+                                    <td>{{$item['name']}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="search btn waves-effect waves-light btn-primary" data-dismiss="modal">確認</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-
+        $(document).on('click', '.search', function() {
+            var member = '';
+            var checkedValue = [];
+            var inputElements = document.getElementsByClassName('memberCheckbox');
+            for(var i=0; inputElements[i]; ++i){
+                if(inputElements[i].checked){
+                    checkedValue.push(inputElements[i].value);
+                    member += '<label>'+ inputElements[i].id + '／' + '</label>';
+                }
+            }
+            $('#member').html(member);
+            $('#memberId').val(checkedValue);
+            console.log(checkedValue);
+        });
     </script>
 @endsection
 @section('title','新增專案')
