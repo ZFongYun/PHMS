@@ -86,7 +86,8 @@ class AdminPmController extends Controller
      */
     public function show($id)
     {
-        dd($id);
+        $projectToShow = $this->project->find($id);
+        return view('admin_frontend.pm_show',compact('projectToShow'));
     }
 
     /**
