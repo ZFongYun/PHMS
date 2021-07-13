@@ -6,6 +6,7 @@ use App\Models\Member;
 use App\Models\Project;
 use App\Models\ProjectMember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminPmController extends Controller
 {
@@ -87,7 +88,12 @@ class AdminPmController extends Controller
     public function show($id)
     {
         $projectToShow = $this->project->find($id);
-        return view('admin_frontend.pm_show',compact('projectToShow'));
+        $project_member = DB::table('project_member')
+            ->where('project_id',$id)->whereNull('project_member.deleted_at')
+            ->join('member','project_member.member_id','=','member.id')
+            ->select('member.name','member.title')
+            ->get()->toArray();
+        return view('admin_frontend.pm_show',compact('projectToShow','project_member'));
     }
 
     /**
