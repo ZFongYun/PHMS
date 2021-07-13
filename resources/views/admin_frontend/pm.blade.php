@@ -54,7 +54,7 @@
                     @foreach($project as $row)
                         <tr>
                             <th scope="row">{{$row['id']}}</th>
-                            <td>{{$row['school_year']}}</td>
+                            <td>{{$row['school_year']}}-0{{$row['semester']}}</td>
                             <td>{{$row['name']}}</td>
                             @if($row['status'] == 0)
                                 <td>執行中</td>
@@ -66,7 +66,11 @@
                                 <td>關閉</td>
                             @endif
                             <td>{{$row['start_date']}}</td>
-                            <td>{{$row['end_date']}}</td>
+                            @if($row['end_date']==null)
+                                <td>-無日期-</td>
+                            @else
+                                <td>{{$row['end_date']}}</td>
+                            @endif
                             <td width="8%"><a href="{{route('Overall.admin_schdlm',$row['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-custom"><i class="ti-ruler-pencil"></i></a></td>
                             <td width="8%"><a href="{{route('Overall.admin_result',$row['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-purple"><i class="ti-light-bulb"></i></a></td>
                             <td><a href="{{action('AdminPmController@show',$row['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-info"><i class="zmdi zmdi-info-outline"></i></a></td>
