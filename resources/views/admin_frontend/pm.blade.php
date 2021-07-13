@@ -51,7 +51,33 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($project as $row)
+                        <tr>
+                            <th scope="row">{{$row['id']}}</th>
+                            <td>{{$row['school_year']}}</td>
+                            <td>{{$row['name']}}</td>
+                            @if($row['status'] == 0)
+                                <td>執行中</td>
+                            @elseif($row['status'] == 1)
+                                <td>測試</td>
+                            @elseif($row['status'] == 2)
+                                <td>完成</td>
+                            @elseif($row['status'] == 3)
+                                <td>關閉</td>
+                            @endif
+                            <td>{{$row['start_date']}}</td>
+                            <td>{{$row['end_date']}}</td>
+                            <td width="8%"><a href="{{route('Overall.admin_schdlm',$row['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-custom"><i class="ti-ruler-pencil"></i></a></td>
+                            <td width="8%"><a href="{{route('Overall.admin_result',$row['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-purple"><i class="ti-light-bulb"></i></a></td>
+                            <td><a href="{{action('AdminPmController@show',$row['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-info"><i class="zmdi zmdi-info-outline"></i></a></td>
+                            <td><a href="{{action('AdminPmController@edit',$row['id'])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-warning"><i class="zmdi zmdi-edit"></i></a></td>
+                            <form action="{{action('AdminPmController@destroy',$row['id'])}}" method="post">
+                                <td><button type="submit" class="btn btn-icon btn-rounded btn-sm waves-effect waves-light btn-danger" onclick="return(confirm('是否刪除此筆資料？'))"> <i class="fa fa-remove"></i></button></td>
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            </form>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

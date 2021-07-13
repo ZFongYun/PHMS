@@ -21,7 +21,8 @@ class AdminPmController extends Controller
      */
     public function index()
     {
-        return view('admin_frontend.pm');
+        $project = Project::all()->toArray();
+        return view('admin_frontend.pm',compact('project'));
     }
 
     /**
@@ -120,5 +121,13 @@ class AdminPmController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function schdlm($id){
+        dd($id);
+    }
+
+    public function result($id){
+        dd($id);
     }
 }
