@@ -1,7 +1,7 @@
 @extends('admin_frontend.layout.master')
 @section('content')
-    <div class="container-fluid">
 
+    <div class="container-fluid">
         <!-- Page-Title -->
         <div class="row">
             <div class="col-sm-12">
@@ -35,12 +35,10 @@
                     <dt class="col-sm-2">知點職務</dt>
                     <dd class="col-sm-9">{{$position_string}}</dd>
                 </dl>
-
                 <p class="little-title">專長介紹</p>
                 <div class="col-sm-8 m-b-10" style="padding-left: 30px;">
                     <p>{{$memberToShow['skill']}}</p>
                 </div>
-
                 <p class="little-title">歷年製作的專案項目</p>
                 <div class="col-sm-8 m-b-10" style="padding-left: 30px">
                     @foreach($member_project as $row)
@@ -48,7 +46,6 @@
                         <br>
                     @endforeach
                 </div>
-
                 <p class="little-title">備註</p>
                 <div class="col-sm-8 m-b-10" style="padding-left: 30px;">
                     <p>{{$memberToShow['remark']}}</p>
@@ -60,4 +57,4 @@
     <!-- end container-fluid -->
 
 @endsection
-@section('title','人資管理')
+@section('title','成員詳情')
