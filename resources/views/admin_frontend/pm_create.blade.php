@@ -148,7 +148,6 @@
             }
             $('#member').html(member);
             $('#memberId').val(checkedValue);
-            console.log(checkedValue);
         });
     </script>
 @endsection

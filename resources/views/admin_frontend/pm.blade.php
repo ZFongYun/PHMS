@@ -34,7 +34,7 @@
 
             {{--   all_data_table   --}}
             <div class="table-responsive">
-                <table class="table table-hover m-0" id="all_date">
+                <table class="table table-hover m-0" id="all_data_table">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -92,7 +92,7 @@
 
             {{--   search_data_table   --}}
             <div class="table-responsive">
-                <table class="table table-hover m-0" style="display: none" id="search_date">
+                <table class="table table-hover m-0" style="display: none" id="search_data_table">
                     <thead>
                     <tr>
                         <th>#</th>

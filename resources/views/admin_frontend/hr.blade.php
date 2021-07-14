@@ -1,7 +1,7 @@
 @extends('admin_frontend.layout.master')
 @section('content')
-    <div class="container-fluid">
 
+    <div class="container-fluid">
         <!-- Page-Title -->
         <div class="row">
             <div class="col-sm-12">
@@ -51,7 +51,7 @@
 
             {{--   all_data_table   --}}
             <div class="table-responsive">
-                <table class="table table-hover m-0" id="all_date">
+                <table class="table table-hover m-0" id="all_data_table">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -112,7 +112,7 @@
 
             {{--   search_data_table   --}}
             <div class="table-responsive">
-                <table class="table table-hover m-0" style="display: none" id="search_date">
+                <table class="table table-hover m-0" style="display: none" id="search_data_table">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -178,8 +178,8 @@
         });
 
         function displayAllDate(){
-            $('#all_date').show();
-            $('#search_date').hide();
+            $('#all_data_table').show();
+            $('#search_data_table').hide();
         }
 
         $(document).on('click', '.search', function() {
@@ -204,9 +204,8 @@
                             _token: '{{csrf_token()}}'
                         },
                         success: function (data) {
-                            console.log(data)
-                            $('#all_date').hide();
-                            $('#search_date').show();
+                            $('#all_data_table').hide();
+                            $('#search_data_table').show();
                             if (data[0] == ''){
                                 html_result += '<tr>';
                                 html_result += '<td colspan="11">無結果</td></tr>';
