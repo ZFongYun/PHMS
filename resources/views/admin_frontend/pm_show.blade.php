@@ -16,7 +16,11 @@
                         <dd class="col-sm-9">{{$projectToShow['content']}}</dd>
                     @endif
                     <dt class="col-sm-2">專案學年期</dt>
-                    <dd class="col-sm-9">{{$projectToShow['school_year']}}-0{{$projectToShow['semester']}}</dd>
+                    @if($projectToShow['semester'] == 0)
+                        <dd class="col-sm-9">{{$projectToShow['school_year']}}-01</dd>
+                    @else
+                        <dd class="col-sm-9">{{$projectToShow['school_year']}}-02</dd>
+                    @endif
                     <dt class="col-sm-2">開始日期</dt>
                     <dd class="col-sm-9">{{$projectToShow['start_date']}}</dd>
                     <dt class="col-sm-2">結束日期</dt>

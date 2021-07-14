@@ -54,7 +54,11 @@
                     @foreach($project as $row)
                         <tr>
                             <th scope="row">{{$row['id']}}</th>
-                            <td>{{$row['school_year']}}-0{{$row['semester']}}</td>
+                            @if($row['semester'] == 0)
+                                <td>{{$row['school_year']}}-01</td>
+                            @else
+                                <td>{{$row['school_year']}}-02</td>
+                            @endif
                             <td>{{$row['name']}}</td>
                             @if($row['status'] == 0)
                                 <td>執行中</td>
