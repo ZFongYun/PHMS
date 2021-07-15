@@ -39,6 +39,8 @@ Route::prefix('PHMS_admin')->group(function (){
         Route::resource('pm', 'AdminPmController');
         Route::get('pm/{id}/schdlm', 'AdminPmController@schdlm')->name('Overall.admin_schdlm');
         Route::get('pm/{id}/result', 'AdminPmController@result')->name('Overall.admin_result');
+        Route::post('PM/search', 'AdminPmController@search')->name('Overall.pm_search');
+        Route::get('PM/{id}/destroy_exception', 'AdminPmController@destroy_exception')->name('Overall.pm_destroy_exception');
 
     });
 });

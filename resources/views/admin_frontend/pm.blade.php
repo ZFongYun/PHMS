@@ -12,7 +12,7 @@
             </div>
             <div class="col-sm-8 m-b-15" align="right">
                 <div class="input-group col-sm-9">
-                    <button type="button" class="btn waves-effect waves-light btn-primary btn-sm m-r-5" onclick="displayAllDate()">顯示全部資料</button>
+                    <button type="button" class="btn waves-effect waves-light btn-primary btn-sm m-r-5" onclick="displayAllData()">顯示全部資料</button>
                     <select class="form-control-select col-sm-3 m-r-5" id="target" name="target">
                         <option>請選擇</option>
                         <option value="0">學年度</option>
@@ -20,7 +20,7 @@
                         <option value="2">狀態</option>
                     </select>
                     <input type="text" class="form-control" placeholder="表格搜尋" id="keyword" name="keyword">
-                    <select class="form-control-select col-sm-5" style="display: none" id="keyword_status" name="keyword_title">
+                    <select class="form-control-select col-sm-5" style="display: none" id="keyword_status" name="keyword_status">
                         <option value="0">執行中</option>
                         <option value="1">測試</option>
                         <option value="2">完成</option>
@@ -102,6 +102,7 @@
                         <th>開始日期</th>
                         <th>結束日期</th>
                         <th>進度管理</th>
+                        <th>成果展示</th>
                         <th>詳情</th>
                         <th>編輯</th>
                         <th>刪除</th>
@@ -124,6 +125,90 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        $("#target").change(function(){
+            var target = $('#target').val();
+            if (target == 2){
+                $('#keyword').hide();
+                $('#keyword_status').show();
+            }else {
+                $('#keyword').show();
+                $('#keyword_status').hide();
+            }
+        });
+
+        function displayAllData(){
+            $('#all_data_table').show();
+            $('#search_data_table').hide();
+        }
+
+        $(document).on('click', '.search', function() {
+            var target = $('#target').val();
+            var keyword = $('#keyword').val();
+            var keyword_status = $('#keyword_status').val();
+            var html_result = '';
+
+            if (target == "請選擇"){
+                alert("請選擇搜尋目標");
+            }else {
+                $(document).ready(function() {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'PM/search',
+                        data: {
+                            target: target,
+                            keyword: keyword,
+                            keyword_status: keyword_status,
+                            _token: '{{csrf_token()}}'
+                        },
+                        success: function (data) {
+                            $('#all_data_table').hide();
+                            $('#search_data_table').show();
+                            if (data == ''){
+                                html_result += '<tr>';
+                                html_result += '<td colspan="11">無結果</td></tr>';
+                                $('#search_body').html(html_result);
+                            }else {
+                                for (var i = 0; i<data.length; i++){
+                                    html_result += '<tr>';
+                                    html_result += '<td>'+data[i].id+'</td>';
+                                    if (data[i].semester == 0){
+                                        html_result += '<td>'+data[i].school_year+'-01</td>';
+                                    }else{
+                                        html_result += '<td>'+data[i].school_year+'-02</td>';
+                                    }
+                                    html_result += '<td>'+data[i].name+'</td>';
+                                    if (data[i].status == 0){
+                                        html_result += '<td>執行中</td>';
+                                    }else if(data[i].status == 1){
+                                        html_result += '<td>測試</td>';
+                                    }else if(data[i].status == 2){
+                                        html_result += '<td>完成</td>';
+                                    }else if (data[i].status == 3){
+                                        html_result += '<td>關閉</td>';
+                                    }
+                                    html_result += '<td>'+data[i].start_date+'</td>';
+                                    html_result += '<td>'+data[i].end_date+'</td>';
+                                    html_result += '<td width="8%"><a href="pm/'+ data[i].id +'/schdlm" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-custom"><i class="ti-ruler-pencil"></i></a></td>'
+                                    html_result += '<td width="8%"><a href="pm/'+ data[i].id +'/result" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-purple"><i class="ti-light-bulb"></i></a></td>'
+                                    html_result += '<td><a href="pm/'+ data[i].id +'" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-info"><i class="zmdi zmdi-info-outline"></i></a></td>'
+                                    html_result += '<td><a href="pm/'+ data[i].id +'/edit" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-warning"><i class="zmdi zmdi-edit"></i></a></td>'
+                                    html_result += '<td><a href="PM/'+data[i].id+'/destroy_exception" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-danger" onclick="warning()"><i class="fa fa-remove"></i></a></td>';
+                                    $('#search_body').html(html_result);
+                                }
+                            }
+                        },
+                        error: function () {
+                           alert('error')
+                        }
+                    });
+                });
+            }
+        });
+
+        function warning(){
+            return(confirm('是否刪除此筆資料？'))
+        }
 
     </script>
 

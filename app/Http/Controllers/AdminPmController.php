@@ -179,4 +179,26 @@ class AdminPmController extends Controller
     public function result($id){
         dd($id);
     }
+
+    public function search(Request $request){
+        $target = $request->input('target');
+        $keyword = $request->input('keyword');
+        $keyword_status = $request->input('keyword_status');
+
+        if ($target == 0){
+            $projects = Project::where('school_year',$keyword)->get();
+        }elseif ($target == 1){
+            $projects = Project::where('name','like','%'.$keyword.'%')->get();
+        }elseif ($target == 2){
+            $projects = Project::where('status',$keyword_status)->get();
+        }
+
+        return $projects;
+    }
+
+    public function destroy_exception($id){
+        $projectToDestroy = $this->project->find($id);
+        $projectToDestroy -> delete();
+        return redirect('/PHMS_admin/pm');
+    }
 }
