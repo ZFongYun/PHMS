@@ -48,4 +48,13 @@ Route::prefix('PHMS_admin')->group(function (){
     });
 });
 
+Route::prefix('PHMS_member')->group(function (){
+//    Route::prefix('login')->group(function (){
+//        Route::get('/','AdminController@login_form');
+//        Route::post('/authenticate','AdminController@authenticate');
+//        Route::get('/logout','AdminController@logout');
+//    });
 
+    Route::get('/','MemberController@index');
+
+});

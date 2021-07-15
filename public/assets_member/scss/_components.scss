@@ -1,0 +1,1176 @@
+
+/*
+Template Name: Flacto - Bootstrap 4 Responsive Admin Dashboard
+Author: CoderThemes
+Email: coderthemes@gmail.com
+File: Components
+*/
+
+/* =============
+  == Components List==
+
+   - Buttons
+   - Checkbox and radio
+   - Cards
+   - Portlets
+   - Progressbars
+   - Tables
+   - Widgets
+   - Form elements
+
+============= */
+
+/* =============
+   Buttons
+============= */
+.btn {
+  border-radius: 2px;
+  padding: 6px 14px;
+  font-size: 14px;
+}
+.btn-group-lg>.btn, .btn-lg {
+  padding: 10px 16px !important;
+  font-size: 16px;
+}
+.btn-group-sm>.btn, .btn-sm {
+  padding: 5px 10px !important;
+  font-size: 12px;
+}
+.btn-group-xs>.btn, .btn-xs {
+  padding: 1px 5px !important;
+  font-size: 12px;
+}
+
+.btn-group .btn+.btn, .btn-group .btn+.btn-group, .btn-group .btn-group+.btn, .btn-group .btn-group+.btn-group {
+  margin-left: 0px;
+}
+.btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: 0 0 0 100px rgba(0,0,0,.1) inset;
+  box-shadow: 0 0 0 100px rgba(0,0,0,.1) inset;
+}
+.btn-custom,.btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger, .btn-inverse, .btn-purple, .btn-pink {
+  color: $white !important;
+}
+
+.btn-custom {
+  background-color: $custom !important;
+  border-color: $custom !important;
+}
+.btn-custom:hover, .btn-custom:focus, .btn-custom:active, .btn-custom.active,
+.btn-custom.focus, .btn-custom:active, .btn-custom:focus, .btn-custom:hover,
+.open > .dropdown-toggle.btn-custom  {
+  background-color: darken($custom, 5%) !important;
+  border: 1px solid darken($custom, 5%) !important;
+}
+
+.btn-primary{
+  background-color: $primary !important;
+  border: 1px solid $primary !important;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active,
+.btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover,
+.open > .dropdown-toggle.btn-primary  {
+  background-color: darken($primary, 5%) !important;
+  border: 1px solid darken($primary, 5%) !important;
+}
+
+.btn-success {
+  background-color: $success !important;
+  border: 1px solid $success !important;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .btn-success.focus, .btn-success:active, .btn-success:focus, .btn-success:hover, .open > .dropdown-toggle.btn-success {
+  background-color: darken($success, 5%) !important;
+  border: 1px solid darken($success, 5%) !important;
+}
+
+.btn-info {
+  background-color: $info !important;
+  border: 1px solid $info !important;
+}
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .btn-info.focus, .btn-info:active, .btn-info:focus, .btn-info:hover, .open > .dropdown-toggle.btn-info {
+  background-color: darken($info, 5%) !important;
+  border: 1px solid darken($info, 5%) !important;
+}
+
+.btn-warning {
+  background-color: $warning !important;
+  border: 1px solid $warning !important;
+}
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .btn-warning.focus, .btn-warning:active, .btn-warning:focus, .btn-warning:hover, .open > .dropdown-toggle.btn-warning {
+  background-color: darken($warning, 5%) !important;
+  border: 1px solid darken($warning, 5%) !important;
+}
+
+.btn-danger {
+  background-color: $danger !important;
+  border: 1px solid $danger !important;
+}
+.btn-danger:active, .btn-danger:focus, .btn-danger:hover, .btn-danger.active, .btn-danger.focus, .btn-danger:active, .btn-danger:focus, .btn-danger:hover, .open > .dropdown-toggle.btn-danger {
+  background-color: darken($danger, 5%) !important;
+  border: 1px solid darken($danger, 5%) !important;
+}
+
+.btn-inverse {
+  background-color: $inverse !important;
+  border: 1px solid $inverse !important;
+}
+.btn-inverse:hover, .btn-inverse:focus, .btn-inverse:active, .btn-inverse.active, .btn-inverse.focus, .btn-inverse:active, .btn-inverse:focus, .btn-inverse:hover, .open > .dropdown-toggle.btn-inverse {
+  background-color: darken($inverse, 5%) !important;
+  border: 1px solid darken($inverse, 5%) !important;
+}
+
+.btn-purple {
+  background-color: $purple !important;
+  border: 1px solid $purple !important;
+}
+.btn-purple:hover, .btn-purple:focus, .btn-purple:active {
+  background-color: darken($purple, 5%) !important;
+  border: 1px solid darken($purple, 5%) !important;
+}
+
+.btn-pink {
+  background-color: $pink !important;
+  border: 1px solid $pink !important;
+}
+.btn-pink:hover, .btn-pink:focus, .btn-pink:active {
+  background-color: darken($pink, 5%) !important;
+  border: 1px solid darken($pink, 5%) !important;
+}
+
+
+.btn-bordred {
+  border-bottom: 3px solid transparent;
+}
+
+.btn-bordred.btn-secondary {
+  border-bottom: 2px solid lighten($lightdark4, 7%) !important;
+}
+.btn-bordred.btn-custom {
+  background-color: $custom;
+  border-bottom: 2px solid darken($custom, 7%) !important;
+}
+
+.btn-bordred.btn-primary {
+  border-bottom: 2px solid darken($primary, 7%) !important;
+}
+
+.btn-bordred.btn-success {
+  border-bottom: 2px solid darken($success, 7%) !important;
+}
+
+.btn-bordred.btn-info {
+  border-bottom: 2px solid darken($info, 7%) !important;
+}
+
+.btn-bordred.btn-warning {
+  border-bottom: 2px solid darken($warning, 10%) !important;
+}
+
+.btn-bordred.btn-danger {
+  border-bottom: 2px solid darken($danger, 10%) !important;
+}
+
+.btn-bordred.btn-inverse {
+  border-bottom: 2px solid darken($inverse, 20%) !important;
+}
+
+.btn-bordred.btn-purple {
+  border-bottom: 2px solid darken($purple, 7%) !important;
+}
+
+.btn-bordred.btn-pink {
+  border-bottom: 2px solid darken($pink, 7%) !important;
+}
+
+.btn-rounded {
+  border-radius: 2em;
+  padding: 6px 18px;
+}
+
+.btn-trans.btn-secondary {
+  border: 1px solid rgba($lightdark4, 0.1) !important;
+  background-color: rgba($lightdark4, 0.15) !important;
+  color: $dark !important;
+}
+
+.btn-trans.btn-custom {
+  border: 1px solid rgba($custom, 0.1) !important;
+  background-color: rgba($custom, 0.15) !important;
+  color: $custom !important;
+}
+
+.btn-trans.btn-primary {
+  border: 1px solid rgba($primary, 0.1) !important;
+  background-color: rgba($primary, 0.15) !important;
+  color: $primary !important;
+}
+
+.btn-trans.btn-success {
+  border: 1px solid rgba($success, 0.1) !important;
+  background-color: rgba($success, 0.15) !important;
+  color: $success !important;
+}
+
+.btn-trans.btn-info {
+  border: 1px solid rgba($info, 0.1) !important;
+  background-color: rgba($info, 0.15) !important;
+  color: $info !important;
+}
+
+.btn-trans.btn-warning {
+  border: 1px solid rgba($warning, 0.1) !important;
+  background-color: rgba($warning, 0.15) !important;
+  color: $warning !important;
+}
+
+.btn-trans.btn-danger {
+  border: 1px solid rgba($danger, 0.1) !important;
+  background-color: rgba($danger, 0.15) !important;
+  color: $danger !important;
+}
+
+.btn-trans.btn-inverse {
+  border: 1px solid rgba($inverse, 0.1) !important;
+  background-color: rgba($inverse, 0.15) !important;
+  color: $inverse !important;
+}
+
+.btn-trans.btn-purple {
+  border: 1px solid rgba($purple, 0.1) !important;
+  background-color: rgba($purple, 0.15) !important;
+  color: $purple !important;
+}
+
+.btn-trans.btn-pink {
+  border: 1px solid rgba($pink, 0.1) !important;
+  background-color: rgba($pink, 0.15) !important;
+  color: $pink !important;
+}
+
+.btn-group-justified {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  > .btn{
+    display: table-cell;
+  float: none;
+  width: 1%;
+  }
+}
+
+/* File Upload */
+.fileupload {
+  overflow: hidden;
+  position: relative;
+}
+.fileupload input.upload {
+  cursor: pointer;
+  filter: alpha(opacity=0);
+  font-size: 20px;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Social Buttons */
+.btn-facebook {
+  color: $white !important;
+  background-color: #3b5998 !important;
+}
+.btn-twitter {
+  color: $white !important;
+  background-color: #00aced !important;
+}
+.btn-linkedin {
+  color: $white !important;
+  background-color: #007bb6 !important;
+}
+.btn-dribbble {
+  color: $white !important;
+  background-color: #ea4c89 !important;
+}
+.btn-googleplus {
+  color: $white !important;
+  background-color: #dd4b39 !important;
+}
+.btn-instagram {
+  color: $white !important;
+  background-color: #517fa4 !important;
+}
+.btn-pinterest {
+  color: $white !important;
+  background-color: #cb2027 !important;
+}
+.btn-dropbox {
+  color: $white !important;
+  background-color: #007ee5 !important;
+}
+.btn-flickr {
+  color: $white !important;
+  background-color: #ff0084 !important;
+}
+.btn-tumblr {
+  color: $white !important;
+  background-color: #32506d !important;
+}
+.btn-skype {
+  color: $white !important;
+  background-color: #00aff0 !important;
+}
+.btn-youtube {
+  color: $white !important;
+  background-color: #bb0000 !important;
+}
+.btn-github {
+  color: $white !important;
+  background-color: #171515 !important;
+}
+
+/* =============
+   Checkbox and Radios
+============= */
+
+.checkbox {
+  margin: 10px 0px;
+  padding-left: 7px;
+  label {
+    display: inline-block;
+    padding-left: 5px;
+    position: relative;
+    line-height: 18px;
+    margin-bottom: 0px;
+    font-weight: 400;
+
+    &::before {
+      -o-transition: 0.3s ease-in-out;
+      -webkit-transition: 0.3s ease-in-out;
+      border-radius: 2px;
+      border: 2px solid $lightdark-alt;
+      content: "";
+      display: inline-block;
+      height: 18px;
+      left: 0;
+      margin-left: -20px;
+      position: absolute;
+      transition: 0.3s ease-in-out;
+      width: 18px;
+      outline: none !important;
+    }
+    &::after {
+      color: $lightdark5;
+      display: inline-block;
+      font-size: 10px;
+      height: 18px;
+      left: 2px;
+      margin-left: -20px;
+      padding-left: 2px;
+      position: absolute;
+      top: 0;
+      width: 18px;
+    }
+  }
+  input[type="checkbox"] {
+    cursor: pointer;
+    opacity: 0;
+    z-index: 1;
+    outline: none !important;
+
+    &:disabled + label {
+      opacity: 0.65;
+    }
+  }
+  input[type="checkbox"]:focus + label {
+    &::before {
+      outline-offset: -2px;
+      outline: none;
+    }
+  }
+  input[type="checkbox"]:checked + label {
+    &::after {
+      content: "\f00c";
+      font-family: 'FontAwesome';
+    }
+  }
+  input[type="checkbox"]:disabled + label {
+    &::before {
+      background-color: $light;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.checkbox.checkbox-circle {
+  label {
+    &::before {
+      border-radius: 50%;
+    }
+    &::after {
+      padding-left: 2px;
+    }
+  }
+}
+
+.checkbox.checkbox-circle.checkbox-inline {
+  label {
+    &::after {
+      padding-left: 3px;
+    }
+  }
+}
+
+.checkbox.checkbox-inline {
+  margin-top: 0;
+  label::after {
+    left: 1px;
+  }
+}
+
+.checkbox.checkbox-single {
+  input {
+    position: relative;
+  }
+  label {
+    height: 17px;
+  }
+}
+
+.checkbox-custom {
+  input[type="checkbox"]:checked + label {
+    &::before {
+      background-color: $custom;
+      border-color: $custom;
+    }
+    &::after {
+      color: $white;
+    }
+  }
+}
+
+.checkbox-primary {
+  input[type="checkbox"]:checked + label {
+    &::before {
+      background-color: $primary;
+      border-color: $primary;
+    }
+    &::after {
+      color: $white;
+    }
+  }
+}
+
+.checkbox-danger {
+  input[type="checkbox"]:checked + label {
+    &::before {
+      background-color: $danger;
+      border-color: $danger;
+    }
+    &::after {
+      color: $white;
+    }
+  }
+}
+
+.checkbox-info {
+  input[type="checkbox"]:checked + label {
+    &::before {
+      background-color: $info;
+      border-color: $info;
+    }
+    &::after {
+      color: $white;
+    }
+  }
+}
+
+.checkbox-warning {
+  input[type="checkbox"]:checked + label {
+    &::before {
+      background-color: $warning;
+      border-color: $warning;
+    }
+    &::after {
+      color: $white;
+    }
+  }
+}
+
+.checkbox-success {
+  input[type="checkbox"]:checked + label {
+    &::before {
+      background-color: $success;
+      border-color: $success;
+    }
+    &::after {
+      color: $white;
+    }
+  }
+}
+
+.checkbox-purple {
+  input[type="checkbox"]:checked + label {
+    &::before {
+      background-color: $purple;
+      border-color: $purple;
+    }
+    &::after {
+      color: $white;
+    }
+  }
+}
+
+.checkbox-pink {
+  input[type="checkbox"]:checked + label {
+    &::before {
+      background-color: $pink;
+      border-color: $pink;
+    }
+    &::after {
+      color: $white;
+    }
+  }
+}
+
+.checkbox-inverse {
+  input[type="checkbox"]:checked + label {
+    &::before {
+      background-color: $inverse;
+      border-color: $inverse;
+    }
+    &::after {
+      color: $white;
+    }
+  }
+}
+
+/* Radios */
+
+.radio {
+  margin: 10px 0px;
+  padding-left: 7px;
+  label {
+    display: inline-block;
+    padding-left: 5px;
+    position: relative;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-weight: 400;
+
+    &::before {
+      -o-transition: border 0.5s ease-in-out;
+      -webkit-transition: border 0.5s ease-in-out;
+      border-radius: 50%;
+      border: 2px solid $lightdark-alt;
+      content: "";
+      display: inline-block;
+      height: 18px;
+      left: 0;
+      margin-left: -20px;
+      outline: none !important;
+      position: absolute;
+      transition: border 0.5s ease-in-out;
+      width: 18px;
+    }
+    &::after {
+      -moz-transition: -moz-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+      -ms-transform: scale(0, 0);
+      -o-transform: scale(0, 0);
+      -o-transition: -o-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+      -webkit-transform: scale(0, 0);
+      -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+      background-color: $lightdark5;
+      border-radius: 50%;
+      content: " ";
+      display: inline-block;
+      height: 10px;
+      left: 4px;
+      margin-left: -20px;
+      position: absolute;
+      top: 4px;
+      transform: scale(0, 0);
+      transition: transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+      width: 10px;
+    }
+  }
+  input[type="radio"] {
+    cursor: pointer;
+    opacity: 0;
+    z-index: 1;
+    outline: none !important;
+    &:disabled + label {
+      opacity: 0.65;
+    }
+  }
+  input[type="radio"]:focus + label {
+    &::before {
+      outline-offset: -2px;
+    }
+  }
+  input[type="radio"]:checked + label {
+    &::after {
+      -ms-transform: scale(1, 1);
+      -o-transform: scale(1, 1);
+      -webkit-transform: scale(1, 1);
+      transform: scale(1, 1);
+    }
+  }
+  input[type="radio"]:disabled + label {
+    &::before {
+      cursor: not-allowed;
+    }
+  }
+}
+
+.radio.radio-inline {
+  margin-top: 0;
+}
+
+.radio.radio-single {
+  input {
+    position: relative;
+  }
+  label {
+    height: 17px;
+  }
+}
+
+
+
+.radio-custom {
+  input[type="radio"] + label {
+    &::after {
+      background-color: $custom;
+    }
+  }
+  input[type="radio"]:checked + label {
+    &::before {
+      border-color: $custom;
+    }
+    &::after {
+      background-color: $custom;
+    }
+  }
+}
+
+.radio-primary {
+  input[type="radio"] + label {
+    &::after {
+      background-color: $primary;
+    }
+  }
+  input[type="radio"]:checked + label {
+    &::before {
+      border-color: $primary;
+    }
+    &::after {
+      background-color: $primary;
+    }
+  }
+}
+
+.radio-danger {
+  input[type="radio"] + label {
+    &::after {
+      background-color: $danger;
+    }
+  }
+  input[type="radio"]:checked + label {
+    &::before {
+      border-color: $danger;
+    }
+    &::after {
+      background-color: $danger;
+    }
+  }
+}
+
+.radio-info {
+  input[type="radio"] + label {
+    &::after {
+      background-color: $info;
+    }
+  }
+  input[type="radio"]:checked + label {
+    &::before {
+      border-color: $info;
+    }
+    &::after {
+      background-color: $info;
+    }
+  }
+}
+
+.radio-warning {
+  input[type="radio"] + label {
+    &::after {
+      background-color: $warning;
+    }
+  }
+  input[type="radio"]:checked + label {
+    &::before {
+      border-color: $warning;
+    }
+    &::after {
+      background-color: $warning;
+    }
+  }
+}
+
+.radio-success {
+  input[type="radio"] + label {
+    &::after {
+      background-color: $success;
+    }
+  }
+  input[type="radio"]:checked + label {
+    &::before {
+      border-color: $success;
+    }
+    &::after {
+      background-color: $success;
+    }
+  }
+}
+
+.radio-purple {
+  input[type="radio"] + label {
+    &::after {
+      background-color: $purple;
+    }
+  }
+  input[type="radio"]:checked + label {
+    &::before {
+      border-color: $purple;
+    }
+    &::after {
+      background-color: $purple;
+    }
+  }
+}
+
+.radio-pink {
+  input[type="radio"] + label {
+    &::after {
+      background-color: $pink;
+    }
+  }
+  input[type="radio"]:checked + label {
+    &::before {
+      border-color: $pink;
+    }
+    &::after {
+      background-color: $pink;
+    }
+  }
+}
+
+
+
+/* =============
+   Cards
+============= */
+
+.card-heading {
+  border: none !important;
+  padding: 10px 20px;
+}
+
+.card-title {
+  font-size: 16px
+}
+
+.card-footer {
+  background: $lightdark;
+  border-top: 0px;
+}
+
+.card-color {
+  overflow: hidden;
+  .card-heading{
+    margin: -1px;
+  }
+}
+
+.card-border {
+  .card-heading {
+    padding: 10px 20px 0px;
+    background-color: transparent;
+  }
+  .card-body {
+    padding: 15px 20px 20px 20px;
+  }
+}
+
+.card-border.card-custom {
+  border-color: rgba($custom, 0.5) !important;
+}
+
+.card-border.card-success {
+  border-color: rgba($success, 0.5) !important;
+}
+
+.card-border.card-primary {
+  border-color: rgba($primary, 0.5) !important;
+}
+
+.card-border.card-info {
+  border-color: rgba($info, 0.5) !important;
+}
+
+.card-border.card-warning {
+  border-color: rgba($warning, 0.5) !important;
+}
+
+.card-border.card-pink {
+  border-color: rgba($pink, 0.5) !important;
+}
+
+.card-border.card-danger {
+  border-color: rgba($danger, 0.5) !important;
+}
+
+.card-border.card-purple {
+  border-color: rgba($purple, 0.5) !important;
+}
+
+.card-border.card-inverse {
+  border-color: rgba($inverse, 0.5) !important;
+}
+
+.card-box {
+  .card {
+    .card-header {
+      border-color: $lightdark;
+      a[data-toggle=collapse].collapsed {
+        &:before {
+          content: '\f055';
+        }
+      }
+      .accordion-toggle.collapsed {
+        &:before {
+          content: '\f055';
+        }
+      }
+      a[data-toggle=collapse] {
+        display: block;
+        &:before {
+          content: '\f056';
+          display: block;
+          float: right;
+          font-family: 'FontAwesome';
+          font-size: 14px;
+          text-align: right;
+          width: 25px;
+        }
+      }
+      .accordion-toggle {
+        display: block;
+        &:before {
+          content: '\f0d8';
+          display: block;
+          float: right;
+          font-family: 'FontAwesome';
+          font-size: 14px;
+          text-align: right;
+          width: 25px;
+        }
+      }
+    }
+    .card-header + .card-collapse {
+      .card-body {
+        border: 1px solid $lightdark;
+        border-top: none;
+      }
+    }
+  }
+  .card-header {
+    padding: 12px 26px;
+  }
+}
+
+/* Panel tabs */
+.panel-tabs {
+  .nav-pills {
+    .nav-item {
+      .nav-link{
+        background-color: transparent !important;
+        font-weight: 600;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        color: $white !important;
+        padding: 9px 15px;
+      }
+    }
+    .nav-item{
+      .nav-link.active{
+        background-color: $lightdark !important;
+        color: $dark !important;
+      }
+    }
+  }
+  .tab-content {
+    padding: 0px;
+    border: none;
+  }
+}
+
+/* Card tabs */
+.card-tabs {
+  .nav-pills {
+    .nav-item {
+      .nav-link{
+        padding: 8px 14px;
+        font-size: 13px;
+        background-color: transparent !important;
+        font-weight: 600;
+        color: $dark !important;
+      }
+    }
+    .nav-item {
+      .nav-link.active {
+        background-color: $custom !important;
+        color: $white !important;
+      }
+    }
+  }
+  .tab-content {
+    padding: 0px;
+    border: none;
+  }
+}
+
+/* =============
+   Portlets
+============== */
+
+.portlet {
+  border: 1px solid darken($lightdark,10%);
+  border-radius: 5px;
+  -webkit-transition: opacity 3s ease-in-out;
+  -moz-transition: opacity 3s ease-in-out;
+  -ms-transition: opacity 3s ease-in-out;
+  -o-transition: opacity 3s ease-in-out;
+  opacity: 1;
+  margin-bottom: 20px;
+
+  .portlet-heading {
+    border-radius: 3px 3px 0px 0px;
+    margin: -1px;
+    color: $white;
+    padding: 12px 20px;
+
+    .portlet-title {
+      color: $white;
+      float: left;
+      font-size: 16px;
+      margin-bottom: 0;
+      margin-top: 0;
+      letter-spacing: 0.03em;
+    }
+    .portlet-widgets {
+      display: inline-block;
+      float: right;
+      font-size: 15px;
+      line-height: 30px;
+      padding-left: 15px;
+      position: relative;
+      text-align: right;
+      .divider {
+        margin: 0 5px;
+      }
+      .collapsed {
+        .zmdi-minus {
+          &:before {
+             content: "\f278" !important;
+          }
+        }
+      }
+    }
+    a {
+      color: #999999;
+      padding: 0px 5px;
+    }
+  }
+  .portlet-body {
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 20px;
+  }
+}
+
+.portlet-default {
+  .portlet-title {
+    color: $lightdark7 !important;
+  }
+}
+
+.portlet .portlet-heading.bg-custom a, .portlet .portlet-heading.bg-purple a,
+.portlet .portlet-heading.bg-info a, .portlet .portlet-heading.bg-success a,
+.portlet .portlet-heading.bg-primary a, .portlet .portlet-heading.bg-danger a,
+.portlet .portlet-heading.bg-warning a, .portlet .portlet-heading.bg-inverse a,
+.portlet .portlet-heading.bg-pink a {
+  color: $white;
+  padding: 0px 5px;
+}
+
+.panel-disabled {
+  background: rgba($dark, 0.2);
+  bottom: 20px;
+  left: 10px;
+  cursor: wait;
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+
+.loader-1 {
+  width: 30px;
+  height: 30px;
+  background-color: $dark;
+  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+  animation: sk-rotateplane 1.2s infinite ease-in-out;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -15px;
+  margin-top: -15px;
+}
+
+
+
+
+/* =============
+   Progressbars
+============= */
+
+
+.progress {
+  -webkit-box-shadow: none !important;
+  background-color: $light5;
+  box-shadow: none !important;
+  height: 10px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  box-shadow: none;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 12px;
+}
+
+.progress.progress-sm {
+  height: 5px !important;
+  .progress-bar {
+    font-size: 8px;
+    line-height: 5px;
+  }
+}
+
+.progress.progress-md {
+  height: 15px !important;
+  .progress-bar {
+    font-size: 10.8px;
+    line-height: 14.4px;
+  }
+}
+
+.progress.progress-lg {
+  height: 20px !important;
+  .progress-bar {
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+
+.progress-bar-primary {
+  background-color: $primary;
+}
+
+.progress-bar-success {
+  background-color: $success;
+}
+
+.progress-bar-info {
+  background-color: $info;
+}
+
+.progress-bar-warning {
+  background-color: $warning;
+}
+
+.progress-bar-danger {
+  background-color: $danger;
+}
+
+.progress-bar-inverse {
+  background-color: $inverse;
+}
+
+.progress-bar-purple {
+  background-color: $purple;
+}
+
+.progress-bar-pink {
+  background-color: $pink;
+}
+.progress-bar-custom {
+  background-color: $custom;
+}
+
+/* Custom progressbars */
+.progress-bar-custom-alt {
+  background-color: rgba($custom, 0.2);
+}
+.progress-bar-primary-alt {
+  background-color: rgba($primary, 0.2);
+}
+.progress-bar-success-alt {
+  background-color: rgba($success, 0.2);
+}
+.progress-bar-info-alt {
+  background-color: rgba($info, 0.2);
+}
+.progress-bar-warning-alt {
+  background-color: rgba($warning, 0.2);
+}
+.progress-bar-danger-alt {
+  background-color: rgba($danger, 0.2);
+}
+.progress-bar-purple-alt {
+  background-color: rgba($purple, 0.2);
+}
+.progress-bar-inverse-alt {
+  background-color: rgba($inverse, 0.2);
+}
+.progress-bar-pink-alt {
+  background-color: rgba($pink, 0.2);
+}
+
+.progress-animated {
+  -webkit-animation-duration: 5s;
+  -webkit-animation-name: animationProgress;
+  -webkit-transition: 5s all;
+  animation-duration: 5s;
+  animation-name: animationProgress;
+  transition: 5s all;
+}
+
+
+
+
+
+
+
+
+
+
+

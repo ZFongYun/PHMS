@@ -1,0 +1,180 @@
+
+/*
+Template Name: Flacto - Bootstrap 4 Responsive Admin Dashboard
+Author: CoderThemes
+Email: coderthemes@gmail.com
+File: Responsive
+*/
+
+@media only screen and (max-width: 6000px) and (min-width: 700px) {
+  .wrapper.right-bar-enabled {
+    .right-bar {
+      right: 0;
+      z-index: 99;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .button-menu-mobile {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+    padding-bottom: 90px;
+  }
+  .topbar-left {
+    width: 70px !important;
+  }
+  .content-page .content {
+    margin-top: 95px;
+  }
+  .topbar .topbar-left {
+    height: 75px;
+  }
+  .navbar-right {
+    margin: 0px;
+    float: right;
+
+    li {
+      line-height: 1px;
+    }
+  }
+  .notification-box {
+    display: inline;
+  }
+  #topnav .navbar-toggle {
+    margin-right: 5px;
+  }
+  .nav {
+    .open {
+      .dropdown-menu {
+        background-color: $white;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+        left: auto;
+        position: absolute;
+        right: 0;
+
+        li{
+          display: block;
+        }
+      }
+    }
+  }
+  .content-page {
+    margin-left: 0px !important;
+  }
+  .footer {
+    left: 0px !important;
+  }
+
+  .mobile-sidebar {
+    left: 0px;
+  }
+
+  .mobile-content {
+    left: 250px;
+    right: -250px;
+  }
+
+  .wrapper-page {
+    margin: 0 20px;
+  }
+
+  .dataTables_wrapper {
+    .col-6 {
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  div#datatable-buttons_info {
+    float: none;
+  }
+}
+
+@media (max-width: 576px){
+  .pull-none{
+    float: none !important;
+    text-align: center;
+  }
+  .mo-mb-10{
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-menu-mobile {
+    display: block;
+  }
+
+  .search-bar {
+    display: none !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .hide-phone {
+    display: none !important;
+  }
+}
+
+/* Container-alt */
+@media (min-width: 768px) {
+  .container-alt {
+    width: 750px;
+  }
+
+  .nav-tabs.nav-justified>li>a {
+    border-bottom: 2px solid darken($lightdark,5%);
+  }
+
+  .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:focus, .nav-tabs.nav-justified > .active > a:hover {
+    border-bottom-color: $lightdark;
+  }
+  .navbar-left {
+    float: left!important;
+  }
+  #full-width-modal.modal{
+    padding-right: 0px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-alt {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-alt {
+    width: 1170px;
+  }
+}
+@media (max-width: 419px) {
+  .topbar-left {
+    width: 70px !important;
+  }
+  .content-page {
+    margin-left: 70px;
+  }
+  .ms-container {
+    width: 100%;
+  }
+  .display-xs-none {
+    display: none;
+  }
+  .footer ul li a {
+    font-size: 11px;
+  }
+}
+
