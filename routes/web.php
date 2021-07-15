@@ -33,14 +33,17 @@ Route::prefix('PHMS_admin')->group(function (){
         Route::get('HR/download', 'AdminHrController@download')->name('Overall.download');
         Route::get('HR/{id}/reset_edit', 'AdminHrController@reset_edit')->name('Overall.hr_reset_edit');
         Route::post('HR/{id}/reset_update', 'AdminHrController@reset_update')->name('Overall.hr_reset_update');
-        Route::post('HR/search', 'AdminHrController@search')->name('Overall.hr_search');
         Route::get('HR/{id}/destroy_exception', 'AdminHrController@destroy_exception')->name('Overall.hr_destroy_exception');
 
         Route::resource('pm', 'AdminPmController');
         Route::get('pm/{id}/schdlm', 'AdminPmController@schdlm')->name('Overall.admin_schdlm');
         Route::get('pm/{id}/result', 'AdminPmController@result')->name('Overall.admin_result');
-        Route::post('PM/search', 'AdminPmController@search')->name('Overall.pm_search');
         Route::get('PM/{id}/destroy_exception', 'AdminPmController@destroy_exception')->name('Overall.pm_destroy_exception');
+
+        Route::prefix('search')->group(function (){
+            Route::post('/hr_search','SearchController@hr_search');
+            Route::post('/pm_search','SearchController@pm_search');
+        });
 
     });
 });

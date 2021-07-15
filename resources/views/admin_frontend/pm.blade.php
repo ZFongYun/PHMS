@@ -154,7 +154,7 @@
                 $(document).ready(function() {
                     $.ajax({
                         type: 'POST',
-                        url: 'PM/search',
+                        url: 'search/pm_search',
                         data: {
                             target: target,
                             keyword: keyword,

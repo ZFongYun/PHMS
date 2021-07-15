@@ -195,7 +195,7 @@
                 $(document).ready(function() {
                     $.ajax({
                         type: 'POST',
-                        url: 'HR/search',
+                        url: 'search/hr_search',
                         data: {
                             target: target,
                             keyword: keyword,
