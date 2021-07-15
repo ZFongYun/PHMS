@@ -3741,7 +3741,6 @@ th {
   padding: 8px;
   vertical-align: middle;
   text-align: center;
-
 }
 
 .table-bordered {
@@ -4570,6 +4569,7 @@ File: Responsive
 }
 /*# sourceMappingURL=style.css.map */
 
+/* custom css */
 .bg-gray {
   background-color: #D0D0D0;
 }
