@@ -167,7 +167,9 @@ class AdminPmController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $projectToDestroy = $this->project->find($id);
+        $projectToDestroy -> delete();
+        return redirect('/PHMS_admin/pm');
     }
 
     public function schdlm($id){
