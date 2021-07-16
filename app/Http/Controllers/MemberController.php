@@ -56,7 +56,11 @@ class MemberController extends Controller
     }
 
     public function signup_form(){
-        return view('member_frontend.signup');
+        if (Auth::guard('member')->check()){
+            return redirect('/PHMS_member');
+        }else{
+            return view('member_frontend.signup');
+        }
     }
 
     public function register(Request $request){
