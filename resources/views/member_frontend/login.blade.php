@@ -65,7 +65,7 @@
 
                 <div class="form-group m-t-20 m-b-0 text-center">
                     <div class="col-sm-12">
-                        <a href="#" class="btn btn-link waves-effect waves-light">前往註冊</a>
+                        <a href="{{action('MemberController@signup_form')}}" class="btn btn-link waves-effect waves-light">前往註冊</a>
                     </div>
                 </div>
 

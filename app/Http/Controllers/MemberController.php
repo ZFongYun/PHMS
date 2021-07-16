@@ -43,8 +43,16 @@ class MemberController extends Controller
         }
     }
 
-    public  function  logout(){
+    public function logout(){
         Auth::guard('member')->logout();
         return redirect('/PHMS_member/login');
+    }
+
+    public function signup_form(){
+        return view('member_frontend.signup');
+    }
+
+    public function register(Request $request){
+
     }
 }
