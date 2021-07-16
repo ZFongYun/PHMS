@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
+    public function __construct(Member $member)
+    {
+        $this->member = $member;
+    }
+
     public function index(){
         return view('member_frontend.index');
     }
@@ -53,6 +60,43 @@ class MemberController extends Controller
     }
 
     public function register(Request $request){
+        $validator = Validator($request->all(),[  //認證
+            'name' => 'required',
+            'student_id' => 'required',
+            'join_year' => 'required',
+            'title' => 'required',
+            'password' => 'required'
+        ]);
 
+        if($validator->passes()){
+            //認證通過...
+
+            $name = $request->input('name');
+            $student_id = $request->input('student_id');
+            $join_year = $request->input('join_year');
+            $title = $request->input('title');
+            $password = $request->input('password');
+
+            $member_check = $this->member->where('student_ID',$student_id)->get()->toArray();
+            //判斷此學號是否已存在
+
+            if ($member_check == null){
+                $memberToRegister = $this->member;
+                $memberToRegister->name = $name;
+                $memberToRegister->student_ID = $student_id;
+                $memberToRegister->join_year = $join_year;
+                $memberToRegister->title = $title;
+                $memberToRegister->password = HASH::make($password);
+                $memberToRegister -> save();
+                return redirect('/PHMS_member/login');
+            }else{
+                return back()->with('warningAccount','此帳號已存在。');
+            }
+
+        }else{
+            //認證失敗...
+            return back()->with('warning','欄位必填。');
+            //返回前一頁面
+        }
     }
 }

@@ -20,15 +20,15 @@
 </head>
 <body>
 <div class="wrapper-page row">
-        <div class="col-sm-6" style="border:5px #FFAC55 solid;">
-            <div class="text-center logo-alt-box">
-                <p class="logo"><span class="text-inverse">專案暨人資考核系統</span></p>
+        <div class="col-sm-6" style="margin-top: auto; margin-bottom: auto; padding-left: 150pt">
+            <div class="text-center">
+                <h2 class="text-inverse">專案暨人資考核系統</h2>
                 <h4 class="text-uppercase font-bold">用戶註冊</h4>
             </div>
         </div>
-        <div class="col-sm-6" style="border:5px #1c7430 solid;">
+        <div class="col-sm-6" style="padding-right: 150pt">
         <div class="m-t-30 card card-body">
-                <form action="{{action('MemberController@authenticate')}}" method="post">
+                <form action="{{action('MemberController@register')}}" method="post">
                     {{ csrf_field() }}
                     <p><mark>請輸入用戶資料</mark></p>
                     <div class="form-group row">
@@ -70,14 +70,20 @@
                             <input type="text" class="form-control" id="password" name="password" required="">
                         </div>
                     </div>
+                    @if($messageWaining = Session::get('warning'))
+                        <label style="color: crimson;font-size: 10px">{{$messageWaining}}</label>
+                    @endif
+                    @if($messageWaining = Session::get('warningAccount'))
+                        <label style="color: crimson;font-size: 10px">{{$messageWaining}}</label>
+                    @endif
                     <div class="form-group text-center m-t-20">
                         <div class="col-12">
                             <button class="btn btn-success btn-bordred btn-block waves-effect waves-light text-uppercase" type="submit">註冊</button>
                         </div>
                     </div>
-                    <div class="form-group m-t-20 m-b-0 text-center">
+                    <div class="form-group m-t-20 text-center">
                         <div class="col-sm-12">
-                            <a href="#" class="btn btn-link waves-effect waves-light">前往登入</a>
+                            <a href="{{action('MemberController@login_form')}}" class="btn btn-link waves-effect waves-light">前往登入</a>
                         </div>
                     </div>
                 </form>
