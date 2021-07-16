@@ -54,7 +54,8 @@ Route::prefix('PHMS_member')->group(function (){
         Route::post('/authenticate','MemberController@authenticate');
         Route::get('/logout','MemberController@logout');
     });
-
-    Route::get('/','MemberController@index');
+    Route::group(['middleware' => 'auth.member'], function() {
+        Route::get('/','MemberController@index');
+    });
 
 });
