@@ -37,12 +37,12 @@
                 <ul class="nav navbar-right float-right list-inline">
                     <li class="dropdown user-box list-inline-item">
                         <a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true">
-{{--                            {{auth('admin')->user()->account}} --}}
+                            {{auth('member')->user()->student_ID}}
                             <i class="zmdi zmdi-chevron-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li><a href="#" class="dropdown-item"><i class="fa fa-user m-r-10"></i> 用戶資料</a></li>
-                            <li><a href="#" class="dropdown-item"><i class="fa fa-sign-out m-r-10"></i>登出</a></li>
+                            <li><a href="{{action('MemberController@logout')}}" class="dropdown-item"><i class="fa fa-sign-out m-r-10"></i>登出</a></li>
                         </ul>
                     </li>
                 </ul>
