@@ -18,8 +18,8 @@
     <script src="{{ URL::asset('assets_member/js/modernizr.min.js') }}"></script>
 
 </head>
-<body>
-<div class="wrapper-page row">
+<body style="height: 100%">
+<div class="row">
         <div class="col-sm-6" style="margin-top: auto; margin-bottom: auto; padding-left: 150pt">
             <div class="text-center">
                 <h2 class="text-inverse">專案暨人資考核系統</h2>
