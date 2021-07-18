@@ -63,6 +63,8 @@ Route::prefix('PHMS_member')->group(function (){
         Route::get('/','MemberController@index');
 
         Route::resource('userinfo', 'MemberInfoController');
+        Route::get('userinfo/{id}/reset_edit', 'MemberInfoController@reset_edit')->name('Overall.member_reset_edit');
+        Route::post('userinfo/{id}/reset_update', 'MemberInfoController@reset_update')->name('Overall.member_reset_update');
 
         Route::resource('pm', 'MemberPmController');
 

@@ -7,6 +7,7 @@ use App\Models\MemberProject;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class MemberInfoController extends Controller
 {
@@ -168,5 +169,24 @@ class MemberInfoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function reset_edit($id){
+        $memberToReset = $this->member->find($id);
+        return view('member_frontend.userinfo_reset',compact('memberToReset'));
+    }
+
+    public function reset_update(Request $request,$id){
+        $password = $request->input('password');
+        $password_check = $request->input('password_check');
+
+        if ($password != $password_check){
+            return back()->with('warning','密碼不一致，請重新輸入。');
+        }else{
+            $memberToUpdate = $this->member->find($id);
+            $memberToUpdate->password = Hash::make($password);
+            $memberToUpdate->save();
+            return redirect('/PHMS_member/userinfo');
+        }
     }
 }

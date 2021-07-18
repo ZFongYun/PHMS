@@ -9,7 +9,7 @@
             </div>
             <div class="col-sm-12 m-b-20">
                 <a href="{{action('MemberInfoController@edit',$memberToIndex['id'])}}" class="btn btn-warning waves-effect waves-light">編輯</a>
-                <a href="#" class="btn btn-info waves-effect waves-light m-l-10">修改密碼</a>
+                <a href="{{route('Overall.member_reset_edit',$memberToIndex['id'])}}" class="btn btn-info waves-effect waves-light m-l-10">修改密碼</a>
             </div>
 
             <div class="col-lg-6">
