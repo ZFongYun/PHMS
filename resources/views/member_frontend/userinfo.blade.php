@@ -8,7 +8,7 @@
                 <h4 class="page-title">用戶資料</h4>
             </div>
             <div class="col-sm-12 m-b-20">
-                <a href="#" class="btn btn-warning waves-effect waves-light">編輯</a>
+                <a href="{{action('MemberInfoController@edit',$memberToIndex['id'])}}" class="btn btn-warning waves-effect waves-light">編輯</a>
                 <a href="#" class="btn btn-info waves-effect waves-light m-l-10">修改密碼</a>
             </div>
 

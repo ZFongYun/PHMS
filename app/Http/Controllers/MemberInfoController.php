@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use App\Models\MemberProject;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -103,7 +105,14 @@ class MemberInfoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $memberToEdit = $this->member->find($id);
+        $project = Project::all()->toArray();
+        $project_is_chk = DB::table('member_project')
+            ->where('member_id',$id)->whereNull('member_project.deleted_at')
+            ->join('project','member_project.project_id','=','project.id')
+            ->select('project.id')
+            ->get()->toArray();
+        return view('member_frontend.userinfo_edit',compact('memberToEdit','project','project_is_chk'));
     }
 
     /**
@@ -115,7 +124,39 @@ class MemberInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->input('name');
+        $student_id = $request->input('student_id');
+        $email = $request->input('email');
+        $join_year = $request->input('join_year');
+        $title = $request->input('title');
+        $skill = $request->input('skill');
+        $project = $request->input('project');
+        $remark = $request->input('remark');
+        $password = Member::where('id',$id)->value('password');
+
+        $memberToUpdate = $this->member->find($id);
+        $memberToUpdate -> student_ID = $student_id;
+        $memberToUpdate -> name = $name;
+        $memberToUpdate -> email = $email;
+        $memberToUpdate -> join_year = $join_year;
+        $memberToUpdate -> title = $title;
+        $memberToUpdate -> skill = $skill;
+        $memberToUpdate -> remark = $remark;
+        $memberToUpdate -> password = $password;
+        $memberToUpdate -> save();
+
+        $projectToDelete = MemberProject::where('member_id',$id)->delete(); //把舊有資料刪除
+
+        if ($project != null){
+            foreach ($project as $row){
+                $MemberProject = new MemberProject();
+                $MemberProject -> member_id = $id;
+                $MemberProject -> project_id = $row;
+                $MemberProject -> save();
+            }
+        }
+
+        return redirect('/PHMS_member/userinfo');
     }
 
     /**
