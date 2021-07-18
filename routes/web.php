@@ -61,6 +61,11 @@ Route::prefix('PHMS_member')->group(function (){
 
     Route::group(['middleware' => 'auth.member'], function() {
         Route::get('/','MemberController@index');
+
+        Route::resource('userinfo', 'MemberInfoController');
+
+        Route::resource('pm', 'MemberPmController');
+
     });
 
 });
