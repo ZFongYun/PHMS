@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use App\Models\MemberPosition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
-    public function __construct(Member $member)
+    protected $member;
+    protected $member_position;
+
+    public function __construct(Member $member, MemberPosition $member_position)
     {
         $this->member = $member;
+        $this->member_position = $member_position;
     }
 
     public function index(){
@@ -91,7 +96,14 @@ class MemberController extends Controller
                 $memberToRegister->join_year = $join_year;
                 $memberToRegister->title = $title;
                 $memberToRegister->password = HASH::make($password);
-                $memberToRegister -> save();
+                $memberToRegister->save();
+
+                $member_id = $this->member->where('student_ID','=',$student_id)->value('id'); //取得id
+                $positionToRegister = $this->member_position;
+                $positionToRegister -> member_id = $member_id;
+                $positionToRegister -> position = '10';
+                $positionToRegister -> save();
+
                 return redirect('/PHMS_member/login');
             }else{
                 return back()->with('warningAccount','此帳號已存在。');
