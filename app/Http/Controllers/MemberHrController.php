@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Models\MemberPosition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MemberHrController extends Controller
 {
@@ -91,7 +92,48 @@ class MemberHrController extends Controller
      */
     public function show($id)
     {
-        //
+        $memberToShow = $this->member->find($id);
+
+        $position_string = ""; //暫存職務內容
+        $members = $this->member->find($id)->position->toArray(); //使用關聯找尋於與member.id相符合的資料
+        if (empty($members)){
+            $position_string = "無職務";
+        }else{
+
+            for($i=0; $i < count($members); $i++){
+                if ($members[$i]['position'] == 0){
+                    $position_string = $position_string." PM";
+                }elseif ($members[$i]['position'] == 1){
+                    $position_string = $position_string." HR";
+                }elseif ($members[$i]['position'] == 2){
+                    $position_string = $position_string." 核銷";
+                }elseif ($members[$i]['position'] == 3){
+                    $position_string = $position_string." 行政";
+                }elseif ($members[$i]['position'] == 4){
+                    $position_string = $position_string." 企劃講師";
+                }elseif ($members[$i]['position'] == 5){
+                    $position_string = $position_string." 程式講師";
+                }elseif ($members[$i]['position'] == 6){
+                    $position_string = $position_string." 美術講師";
+                }elseif ($members[$i]['position'] == 7){
+                    $position_string = $position_string." 企劃助教";
+                }elseif ($members[$i]['position'] == 8){
+                    $position_string = $position_string." 程式助教";
+                }elseif ($members[$i]['position'] == 9){
+                    $position_string = $position_string." 美術助教";
+                }elseif ($members[$i]['position'] == 10){
+                    $position_string = $position_string." 無職務";
+                }
+            }
+        }
+
+        $member_project = DB::table('member_project')
+            ->where('member_id',$id)->whereNull('member_project.deleted_at')
+            ->join('project','member_project.project_id','=','project.id')
+            ->select('project.id','project.name')
+            ->get()->toArray();
+
+        return view('member_frontend.hr_show',compact('memberToShow','position_string','member_project'));
     }
 
     /**
