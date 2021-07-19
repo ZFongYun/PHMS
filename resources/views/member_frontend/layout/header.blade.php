@@ -14,12 +14,12 @@
                     <!-- Navigation Menu-->
                     <ul class="navigation-menu">
                         <li>
-                            <a href="#">
+                            <a href="{{action('MemberController@index')}}">
                                 <span> 首頁 </span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{action('MemberHrController@index')}}">
                                 <span> 人資管理 </span>
                             </a>
                         </li>
