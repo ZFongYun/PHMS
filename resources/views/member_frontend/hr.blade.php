@@ -8,7 +8,7 @@
                 <h4 class="page-title">人資管理</h4>
             </div>
             <div class="col-sm-12 m-b-15" align="right">
-                <div class="input-group col-sm-5">
+                <div class="input-group col-sm-6">
                     <button type="button" class="btn waves-effect waves-light btn-primary btn-sm m-r-5" onclick="displayAllDate()">顯示全部資料</button>
                     <select class="form-control-select col-sm-3 m-r-5" id="target" name="target">
                         <option>請選擇</option>
