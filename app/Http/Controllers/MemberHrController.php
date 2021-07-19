@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class MemberHrController extends Controller
 {
+    protected $member;
+    protected $member_position;
+
     public function __construct(Member $member, MemberPosition $member_position)
     {
         $this->member = $member;

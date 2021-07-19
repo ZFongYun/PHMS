@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
+    protected $member;
+    protected $project;
+
     public function __construct(Member $member, Project $project)
     {
         $this->member = $member;
@@ -100,6 +103,4 @@ class SearchController extends Controller
 
         return $projects;
     }
-
-
 }

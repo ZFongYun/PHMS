@@ -11,16 +11,18 @@ use Illuminate\Support\Facades\Hash;
 
 class MemberInfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $member;
+
     public function __construct(Member $member)
     {
         $this->member = $member;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $member_id = auth('member')->user()->id;

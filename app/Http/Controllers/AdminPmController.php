@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class AdminPmController extends Controller
 {
+    protected $project;
+
     public function __construct(Project $project)
     {
         $this->project = $project;
