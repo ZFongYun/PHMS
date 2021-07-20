@@ -73,6 +73,9 @@ Route::prefix('PHMS_member')->group(function (){
         Route::resource('hr', 'MemberHrController');
         //====專案管理====
         Route::resource('pm', 'MemberPmController');
+        Route::get('pm/{id}/schdlm', 'MemberPmController@schdlm')->name('Overall.member_schdlm');
+        Route::get('pm/{id}/result', 'MemberPmController@result')->name('Overall.member_result');
+
         //====搜尋====
         Route::prefix('search')->group(function (){
             Route::post('/hr_search','SearchController@hr_search');

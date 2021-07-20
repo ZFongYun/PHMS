@@ -24,7 +24,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{action('MemberPmController@index')}}">
                                 <span> 專案管理 </span>
                             </a>
                         </li>
