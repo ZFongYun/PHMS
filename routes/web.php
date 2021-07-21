@@ -79,7 +79,7 @@ Route::prefix('PHMS_member')->group(function (){
         //====搜尋====
         Route::prefix('search')->group(function (){
             Route::post('/hr_search','SearchController@hr_search');
-            Route::post('/pm_search','SearchController@pm_search');
+            Route::post('/pm_search','SearchController@member_pm_search');
         });
     });
 });

@@ -6,6 +6,7 @@ use App\Models\Member;
 use App\Models\MemberPosition;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -99,6 +100,42 @@ class SearchController extends Controller
             $projects = Project::where('name','like','%'.$keyword.'%')->get();
         }elseif ($target == 2){
             $projects = Project::where('status',$keyword_status)->get();
+        }
+
+        return $projects;
+    }
+
+    public function member_pm_search(Request $request){
+        $target = $request->input('target');
+        $keyword = $request->input('keyword');
+        $keyword_status = $request->input('keyword_status');
+
+        $member_id = auth('member')->user()->id;
+
+        if ($target == 0){
+            $projects = DB::table('project_member')
+                ->where('member_id',$member_id)->whereNull('project_member.deleted_at')
+                ->join('project','project_member.project_id','=','project.id')
+                ->select('project.*')
+                ->where('project.school_year',$keyword)
+                ->orderByRaw('id asc')
+                ->get()->toArray();
+        }elseif ($target == 1){
+            $projects = DB::table('project_member')
+                ->where('member_id',$member_id)->whereNull('project_member.deleted_at')
+                ->join('project','project_member.project_id','=','project.id')
+                ->select('project.*')
+                ->where('project.name','like','%'.$keyword.'%')
+                ->orderByRaw('id asc')
+                ->get()->toArray();
+        }elseif ($target == 2){
+            $projects = DB::table('project_member')
+                ->where('member_id',$member_id)->whereNull('project_member.deleted_at')
+                ->join('project','project_member.project_id','=','project.id')
+                ->select('project.*')
+                ->where('project.status',$keyword_status)
+                ->orderByRaw('id asc')
+                ->get()->toArray();
         }
 
         return $projects;

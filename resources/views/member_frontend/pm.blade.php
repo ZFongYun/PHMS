@@ -79,7 +79,6 @@
                     </tbody>
                 </table>
             </div>
-
             {{--   search_data_table   --}}
             <div class="table-responsive">
                 <table class="table table-hover m-0" style="display: none" id="search_data_table">
@@ -106,7 +105,6 @@
         <!-- end row -->
     </div>
     <!-- end container-fluid -->
-
 
     <script type="text/javascript">
         $.ajaxSetup({
@@ -151,6 +149,7 @@
                             _token: '{{csrf_token()}}'
                         },
                         success: function (data) {
+                            // console.log(data);
                             $('#all_data_table').hide();
                             $('#search_data_table').show();
                             if (data == ''){
@@ -194,6 +193,5 @@
             }
         });
     </script>
-
 @endsection
 @section('title','專案管理')
