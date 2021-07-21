@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,4 +89,9 @@ Route::prefix('PHMS_member')->group(function (){
             Route::post('/pm_search','SearchController@member_pm_search');
         });
     });
+
+    Route::get('test', function() {
+        Storage::disk('google')->put('test20210721.txt', 'Hello World');
+    });
+
 });
