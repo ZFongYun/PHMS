@@ -5,19 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Models\Project;
 use App\Models\ProjectMember;
+use App\Models\ProjectSchdl;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class MemberPmController extends Controller
 {
     protected $member;
     protected $project;
+    protected $project_schdl;
 
-    public function __construct(Member $member, Project $project)
+    public function __construct(Member $member, Project $project, ProjectSchdl $project_schdl)
     {
         $this->member = $member;
         $this->project = $project;
+        $this->project_schdl = $project_schdl;
     }
 
     /**
@@ -196,7 +201,49 @@ class MemberPmController extends Controller
     }
 
     public function schdlm_store(Request $request, $id){
-        dd($id);
+        $validator = validator($request->all(),
+            ['file' => 'required|mimes:pptx,rar,zip|max:100000'],
+            [
+                'file.required'=>'請選擇檔案',
+                'file.mimes'=>'上傳格式錯誤',
+                'file.max'=>'上傳檔案大小過大',
+            ]);
+
+        if($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }else{
+            $name = $request->input('name');
+            $schdl_start = $request->input('schdl_start');
+            $schdl_end = $request->input('schdl_end');
+            $file = $request->file('file');
+            $limit_start_data = $request->input('limit_start_data');
+            $limit_start_time = $request->input('limit_start_time');
+            $limit_end_data = $request->input('limit_end_data');
+            $limit_end_time = $request->input('limit_end_time');
+            $remark = $request->input('remark');
+            $file_name = $file->getClientOriginalName();
+
+            $schdlToStore = $this->project_schdl;
+            $schdlToStore -> project_id = $id;
+            $schdlToStore -> name = $name;
+            $schdlToStore -> schdl_start_date = $schdl_start;
+            $schdlToStore -> schdl_end_date = $schdl_end;
+            $schdlToStore -> file_name = $file_name;
+            $schdlToStore -> pa_start_date = $limit_start_data;
+            $schdlToStore -> pa_start_time = $limit_start_time;
+            $schdlToStore -> pa_end_date = $limit_end_data;
+            $schdlToStore -> pa_end_time = $limit_end_time;
+            $schdlToStore -> remark = $remark;
+            $schdlToStore -> save();
+
+            //將檔案存儲到雲端
+            $filePath = $file->getPathName();
+            $fileData = File::get($filePath);
+
+            Storage::cloud()->put($file_name, $fileData);
+
+            return redirect('/PHMS_member/pm/'.$id.'/schdlm');
+        }
     }
 
     public function result($id){
