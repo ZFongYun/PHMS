@@ -17,10 +17,10 @@
     <link href="{{ URL::asset('../plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 
 {{--    <!-- Time picker css -->--}}
-{{--    <link href="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet">--}}
+    <link href="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet">
 
 <!-- form Uploads -->
-{{--    <link href="{{ URL::asset('../plugins/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />--}}
+    <link href="{{ URL::asset('../plugins/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ URL::asset('assets_member/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ URL::asset('assets_member/css/icons.css') }}" rel="stylesheet" type="text/css" />
@@ -46,9 +46,6 @@
     var resizefunc = [];
 </script>
 
-
-
-
 <!-- jQuery  -->
 <script src="{{ URL::asset('assets_member/js/jquery.min.js') }}"></script>
 <script src="{{ URL::asset('assets_member/js/bootstrap.bundle.min.js') }}"></script>
@@ -69,41 +66,39 @@
 <script src="{{ URL::asset('assets_member/js/jquery.app.js') }}"></script>
 
 <!-- Plugins Js -->
-{{--<script src="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>--}}
+<script src="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
 <script src="{{ URL::asset('../plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-
-<!-- file uploads js -->
-{{--<script src="{{ URL::asset('../plugins/dropify/js/dropify.min.js') }}"></script>--}}
+<script src="{{ URL::asset('../plugins/dropify/js/dropify.min.js') }}"></script>
 
 <script>
     // Date Picker
-    jQuery('#datepicker-project-start').datepicker();
-    jQuery('#datepicker-project-end').datepicker();
+    jQuery('#datepicker-project-start').datepicker(); //專案開始日期
+    jQuery('#datepicker-project-end').datepicker(); //專案結束日期
+    jQuery('#datepicker_schdl_start').datepicker(); //進度開始日期
+    jQuery('#datepicker_schdl_end').datepicker(); //進度結束日期
+    jQuery('#datepicker_limit_start').datepicker(); //考核開始日期
+    jQuery('#datepicker_limit_end').datepicker(); //考核結束日期
 
     // Time Picker
-    // jQuery('#timepicker-start').timepicker({
-    //     showMeridian : false
-    // });
+    jQuery('#timepicker_limit_start').timepicker({
+        showMeridian : false
+    });
 
-    // jQuery('#timepicker-end').timepicker({
-    //     showMeridian : false
-    // });
+    jQuery('#timepicker_limit_end').timepicker({
+        showMeridian : false
+    });
 
-    // jQuery('#timepicker-upload').timepicker({
-    //     showMeridian : false
-    // });
-
-    // $('.dropify').dropify({
-    //     messages: {
-    //         'default': '請將文件拖放到此處或單擊該區域上傳文件。',
-    //         'replace': '請將文件拖放到此處或單擊該區域上傳文件。',
-    //         'remove': '移除',
-    //         'error': '發生錯誤，請重新上傳。'
-    //     },
-    //     error: {
-    //         'fileSize': 'The file size is too big (1M max).'
-    //     }
-    // });
+    $('.dropify').dropify({
+        messages: {
+            'default': '請將文件拖放到此處或單擊該區域上傳文件。',
+            'replace': '請將文件拖放到此處或單擊該區域上傳文件。',
+            'remove': '移除',
+            'error': '發生錯誤，請重新上傳。'
+        },
+        error: {
+            'fileSize': 'The file size is too big (1M max).'
+        }
+    });
 </script>
 
 </body>

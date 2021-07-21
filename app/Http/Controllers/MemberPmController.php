@@ -188,6 +188,14 @@ class MemberPmController extends Controller
     }
 
     public function schdlm($id){
+        return view('member_frontend.schdlm',compact('id'));
+    }
+
+    public function schdlm_create($id){
+        return view('member_frontend.schdlm_create',compact('id'));
+    }
+
+    public function schdlm_store(Request $request, $id){
         dd($id);
     }
 

@@ -74,6 +74,12 @@ Route::prefix('PHMS_member')->group(function (){
         //====專案管理====
         Route::resource('pm', 'MemberPmController');
         Route::get('pm/{id}/schdlm', 'MemberPmController@schdlm')->name('Overall.member_schdlm');
+
+        Route::prefix('pm/{id}/schdlm')->group(function (){
+            Route::get('/create', 'MemberPmController@schdlm_create')->name('Overall.member_schdlm_create');
+            Route::post('/store', 'MemberPmController@schdlm_store')->name('Overall.member_schdlm_store');
+        });
+
         Route::get('pm/{id}/result', 'MemberPmController@result')->name('Overall.member_result');
 
         //====搜尋====
