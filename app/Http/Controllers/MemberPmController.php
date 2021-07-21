@@ -122,7 +122,14 @@ class MemberPmController extends Controller
      */
     public function edit($id)
     {
-        //
+        $projectToEdit = $this->project->find($id);
+        $member = Member::all()->toArray();
+        $member_is_checked = DB::table('project_member')
+            ->where('project_id',$id)->whereNull('project_member.deleted_at')
+            ->join('member','project_member.member_id','=','member.id')
+            ->select('member.id')
+            ->get()->toArray();
+        return view('member_frontend.pm_edit',compact('projectToEdit','member','member_is_checked'));
     }
 
     /**
@@ -134,7 +141,39 @@ class MemberPmController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->input('name');
+        $content = $request->input('content');
+        $school_year = $request->input('school_year');
+        $semester = $request->input('semester');
+        $project_start = $request->input('project_start');
+        $project_end = $request->input('project_end');
+        $status = $request->input('status');
+        $member = $request->input('memberId');
+
+        $pmToStore = $this->project->find($id);
+        $pmToStore -> name = $name;
+        $pmToStore -> content = $content;
+        $pmToStore -> school_year = $school_year;
+        $pmToStore -> semester = $semester;
+        $pmToStore -> start_date = $project_start;
+        $pmToStore -> end_date = $project_end;
+        $pmToStore -> status = $status;
+        $pmToStore -> save();
+
+        $memberToDelete = ProjectMember::where('project_id',$id)->delete(); //把舊有的參與成員刪除
+
+        $cut_id = explode(",",$member);
+        if ($cut_id != null){
+            foreach ($cut_id as $row)
+            {
+                $ProjectMember = new ProjectMember();
+                $ProjectMember -> project_id = $id;
+                $ProjectMember -> member_id = $row;
+                $ProjectMember -> save();
+            }
+        }
+
+        return redirect('/PHMS_member/pm');
     }
 
     /**
