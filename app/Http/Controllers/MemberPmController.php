@@ -194,7 +194,9 @@ class MemberPmController extends Controller
 
     public function schdlm($id){
         $schdlToIndex = $this->project_schdl->where('project_id',$id)->get();
-        return view('member_frontend.schdlm',compact('id','schdlToIndex'));
+        $project = $this->project->find($id);
+        $project_name = $project['name'];
+        return view('member_frontend.schdlm',compact('id','schdlToIndex','project_name'));
     }
 
     public function schdlm_create($id){

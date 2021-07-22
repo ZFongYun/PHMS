@@ -4,7 +4,7 @@
         <!-- Page-Title -->
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="page-title">進度管理</h4>
+                <h4 class="page-title">{{$project_name}} 進度管理</h4>
             </div>
             <div class="col-sm-4 m-b-15">
                 <a href="{{route('Overall.member_schdlm_create',$id)}}" class="btn btn-primary waves-effect waves-light">新增進度</a>
