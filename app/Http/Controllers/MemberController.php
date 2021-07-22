@@ -103,8 +103,8 @@ class MemberController extends Controller
                 $positionToRegister -> member_id = $member_id;
                 $positionToRegister -> position = '10';
                 $positionToRegister -> save();
-
-                return redirect('/PHMS_member/login');
+                echo "<script>alert('完成註冊。')</script>";
+                echo '<meta http-equiv=REFRESH CONTENT=0.5;url=/PHMS_member/login>';
             }else{
                 return back()->with('warningAccount','此帳號已存在。');
             }
