@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Models\MemberPosition;
 use App\Models\Project;
+use App\Models\ProjectSchdl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -139,5 +140,29 @@ class SearchController extends Controller
         }
 
         return $projects;
+    }
+
+    public function schdl_search(Request $request){
+        $target = $request->input('target');
+        $keyword = $request->input('keyword');
+        $keyword_status = $request->input('keyword_status');
+        $project_id = $request->input('project_id');
+        $current_time = strtotime(date("Y-m-d H:i:s"));
+
+        if ($target == 0){
+            $schdl = ProjectSchdl::where('project_id',$project_id)
+                ->where('name','like','%'.$keyword.'%')->get();
+        }else{
+            if ($keyword_status == 0){
+                $schdl = ProjectSchdl::where('project_id',$project_id)
+                    ->where('pa_start_date','>',$current_time)->get();
+            }elseif ($keyword_status == 2){
+
+            }elseif ($keyword_status == 3){
+
+            }
+        }
+
+        return $schdl;
     }
 }

@@ -90,6 +90,7 @@ Route::prefix('PHMS_member')->group(function (){
         Route::prefix('search')->group(function (){
             Route::post('/hr_search','SearchController@hr_search');
             Route::post('/pm_search','SearchController@member_pm_search');
+            Route::post('/schdl_search','SearchController@schdl_search');
         });
     });
 });

@@ -98,6 +98,54 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        $("#target").change(function(){
+            var target = $('#target').val();
+            if (target == 1){
+                $('#keyword').hide();
+                $('#keyword_status').show();
+            }else {
+                $('#keyword').show();
+                $('#keyword_status').hide();
+            }
+        });
+
+        function displayAllData(){
+            $('#all_data_table').show();
+            $('#search_data_table').hide();
+        }
+
+        $(document).on('click', '.search', function() {
+            var target = $('#target').val();
+            var keyword = $('#keyword').val();
+            var keyword_status = $('#keyword_status').val();
+            var project_id = {{$id}};
+            var html_result = '';
+
+            if (target == "請選擇"){
+                alert("請選擇搜尋目標");
+            }else {
+                $(document).ready(function() {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/PHMS_member/search/schdl_search',
+                        data: {
+                            target: target,
+                            keyword: keyword,
+                            keyword_status: keyword_status,
+                            project_id: project_id,
+                            _token: '{{csrf_token()}}'
+                        },
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function () {
+                            alert('error')
+                        }
+                    });
+                });
+            }
+        });
     </script>
 
 @endsection
