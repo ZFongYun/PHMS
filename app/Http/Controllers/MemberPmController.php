@@ -217,9 +217,9 @@ class MemberPmController extends Controller
             $schdl_start = $request->input('schdl_start');
             $schdl_end = $request->input('schdl_end');
             $file = $request->file('file');
-            $limit_start_data = $request->input('limit_start_data');
+            $limit_start_date = $request->input('limit_start_date');
             $limit_start_time = $request->input('limit_start_time');
-            $limit_end_data = $request->input('limit_end_data');
+            $limit_end_date = $request->input('limit_end_date');
             $limit_end_time = $request->input('limit_end_time');
             $remark = $request->input('remark');
             $file_name = $file->getClientOriginalName();
@@ -230,9 +230,9 @@ class MemberPmController extends Controller
             $schdlToStore -> schdl_start_date = $schdl_start;
             $schdlToStore -> schdl_end_date = $schdl_end;
             $schdlToStore -> file_name = $file_name;
-            $schdlToStore -> pa_start_date = $limit_start_data;
+            $schdlToStore -> pa_start_date = $limit_start_date;
             $schdlToStore -> pa_start_time = $limit_start_time;
-            $schdlToStore -> pa_end_date = $limit_end_data;
+            $schdlToStore -> pa_end_date = $limit_end_date;
             $schdlToStore -> pa_end_time = $limit_end_time;
             $schdlToStore -> remark = $remark;
             $schdlToStore -> save();
