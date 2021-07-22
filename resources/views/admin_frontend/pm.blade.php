@@ -193,7 +193,7 @@
                                     html_result += '<td width="8%"><a href="pm/'+ data[i].id +'/result" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-purple"><i class="ti-light-bulb"></i></a></td>'
                                     html_result += '<td><a href="pm/'+ data[i].id +'" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-info"><i class="zmdi zmdi-info-outline"></i></a></td>'
                                     html_result += '<td><a href="pm/'+ data[i].id +'/edit" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-warning"><i class="zmdi zmdi-edit"></i></a></td>'
-                                    html_result += '<td><a href="PM/'+data[i].id+'/destroy_exception" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-danger" onclick="warning()"><i class="fa fa-remove"></i></a></td>';
+                                    html_result += '<td><a href="PM/'+data[i].id+'/destroy_exception" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-danger" onclick="warning()"><i class="fa fa-remove"></i></a></td></tr>';
                                     $('#search_body').html(html_result);
                                 }
                             }

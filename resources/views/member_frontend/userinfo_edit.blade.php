@@ -11,13 +11,13 @@
                     <p class="little-title">基本資料</p>
                     <div class="col-md-8">
                         <div class="form-group row">
-                            <label for="name" class="col-md-2 control-label form-title">姓名*</label>
+                            <label for="name" class="col-md-2 control-label form-title"><span class="text-danger">*</span>姓名</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" id="name" name="name" required="" value="{{$memberToEdit['name']}}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="student_id" class="col-md-2 control-label form-title">學號*</label>
+                            <label for="student_id" class="col-md-2 control-label form-title"><span class="text-danger">*</span>學號</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" id="student_id" name="student_id" required="" value="{{$memberToEdit['student_ID']}}">
                             </div>
@@ -29,13 +29,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="join_year" class="col-md-2 control-label form-title">加入學年度*</label>
+                            <label for="join_year" class="col-md-2 control-label form-title"><span class="text-danger">*</span>加入學年度</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" id="join_year" name="join_year" required="" value="{{$memberToEdit['join_year']}}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="title" class="col-md-2 control-label form-title">職稱*</label>
+                            <label for="title" class="col-md-2 control-label form-title"><span class="text-danger">*</span>職稱</label>
                             <div class="col-md-8">
                                 <select class="form-control" id="title" name="title">
                                     <option>請選擇</option>

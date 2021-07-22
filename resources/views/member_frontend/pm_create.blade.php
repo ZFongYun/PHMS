@@ -6,12 +6,12 @@
         <div class="row">
             <div class="col-sm-12">
                 <h4 class="page-title">新增專案</h4>
-                <h5 class="star">注意！「*」為必填欄位</h5>
                 <form action="{{action('MemberPmController@store')}}" method="post">
                     {{ csrf_field() }}
                     <div class="col-md-8">
+                        <h5 class="star">注意！「*」為必填欄位</h5>
                         <div class="form-group row">
-                            <label for="name" class="col-md-2 control-label form-title">專案姓名*</label>
+                            <label for="name" class="col-md-2 control-label form-title"><span class="text-danger">*</span>專案姓名</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" id="name" name="name" required="">
                             </div>
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="school_year" class="col-md-2 control-label form-title">專案學年期*</label>
+                            <label for="school_year" class="col-md-2 control-label form-title"><span class="text-danger">*</span>專案學年期</label>
                             <div class="col-md-8">
                                 <div class="input-group">
                                     <input type="text" class="form-control m-r-10" id="school_year" name="school_year" required="">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="input-group row">
-                            <label for="project_start" class="col-md-2 control-label form-title">開始日期*</label>
+                            <label for="project_start" class="col-md-2 control-label form-title"><span class="text-danger">*</span>開始日期</label>
                             <div class="col-md-8">
                                 <div class="input-group m-b-10">
                                     <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker-project-start" name="project_start" required="">
@@ -57,7 +57,7 @@
                             </div>
                         </div><!-- input-group -->
                         <div class="form-group row">
-                            <label for="status" class="col-md-2 control-label form-title">狀態*</label>
+                            <label for="status" class="col-md-2 control-label form-title"><span class="text-danger">*</span>狀態</label>
                             <div class="col-md-8">
                                 <select class="form-control" id="status" name="status">
                                     <option value="3">請選擇</option>
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 control-label form-title">參與成員*</label>
+                            <label class="col-md-2 control-label form-title"><span class="text-danger">*</span>參與成員</label>
                             <div class="col-md-8">
                                 <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#select-member">選擇</button>
                                 <label>已選擇..</label>

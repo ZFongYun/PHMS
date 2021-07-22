@@ -12,13 +12,13 @@
                     <p class="little-title">基本資料</p>
                     <div class="col-md-8">
                         <div class="form-group row">
-                            <label for="name" class="col-md-2 control-label form-title">姓名*</label>
+                            <label for="name" class="col-md-2 control-label form-title"><span class="text-danger">*</span>姓名</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" id="name" name="name" required="">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="student_id" class="col-md-2 control-label form-title">學號*</label>
+                            <label for="student_id" class="col-md-2 control-label form-title"><span class="text-danger">*</span>學號</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" id="student_id" name="student_id" required="">
                             </div>
@@ -30,13 +30,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="join_year" class="col-md-2 control-label form-title">加入學年度*</label>
+                            <label for="join_year" class="col-md-2 control-label form-title"><span class="text-danger">*</span>加入學年度</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" id="join_year" name="join_year" required="">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="title" class="col-md-2 control-label form-title">職稱*</label>
+                            <label for="title" class="col-md-2 control-label form-title"><span class="text-danger">*</span>職稱</label>
                             <div class="col-md-8">
                                 <select class="form-control" id="title" name="title">
                                     <option value="6">請選擇</option>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="position" class="col-md-2 control-label form-title">知點職務*</label>
+                            <label for="position" class="col-md-2 control-label form-title"><span class="text-danger">*</span>知點職務</label>
                             <div class="col-md-8">
                                 <select class="form-control" id="position" name="position">
                                     <option value="10">請選擇</option>
@@ -92,7 +92,7 @@
                     <p class="little-title">帳戶設定</p>
                     <div class="col-md-8">
                         <div class="form-group row">
-                            <label for="password" class="col-md-2 control-label form-title">預設密碼*</label>
+                            <label for="password" class="col-md-2 control-label form-title"><span class="text-danger">*</span>預設密碼</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" id="password" name="password" required="">
                             </div>

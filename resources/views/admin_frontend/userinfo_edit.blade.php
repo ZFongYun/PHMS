@@ -17,7 +17,7 @@
                         <form action="{{action('AdminInfoController@update',$adminToEdit['id'])}}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group row">
-                                <label for="account" class="col-md-3 form-title">新帳號</label>
+                                <label for="account" class="col-md-3 form-title">新帳號<span class="text-danger">*</span></label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" id="account" name="account" required="">
                                 </div>

@@ -18,14 +18,16 @@
                         <h3 class="card-title m-0">帳號資料</h3>
                     </div>
                     <div class="card-body">
-                        <p>帳號：{{$adminToIndex['account']}}</p>
-                        <p>
+                        <dl class="row m-b-10">
+                            <dt class="col-sm-2">帳號</dt>
+                            <dd class="col-sm-9">{{$adminToIndex['account']}}</dd>
+                            <dt class="col-sm-2">用戶類型</dt>
                             @if($adminToIndex['access'] == '0')
-                                用戶類型：超級管理者[老師]
+                                <dd class="col-sm-9">超級管理者[老師]</dd>
                             @else
-                                用戶類型：⼀般管理者[助教/⾏政⼈員]
+                                <dd class="col-sm-9">⼀般管理者[助教/⾏政⼈員]</dd>
                             @endif
-                        </p>
+                        </dl>
                     </div>
                 </div>
             </div><!-- end col -->
