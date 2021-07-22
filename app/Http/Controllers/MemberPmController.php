@@ -247,6 +247,35 @@ class MemberPmController extends Controller
         }
     }
 
+    public function schdlm_download($id,$downloadId){
+        $filename = ProjectSchdl::where('id',$downloadId)->value('file_name');
+
+        $dir = '/';
+        $recursive = false; //是否取得資料夾下的目錄
+        $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last(); //在$contents找是否有符合的文件
+
+        $rawData = Storage::cloud()->get($file['path']); //從$file取得路徑名稱
+
+        return response($rawData, 200)
+            ->header('ContentType', $file['mimetype'])
+            ->header('Content-Disposition', "attachment; filename=$filename"); //下載文件
+    }
+
+    public function schdlm_edit($id, $schdlId){
+        dd($schdlId);
+    }
+
+    public function schdlm_update(Request $request, $id, $schdlId){
+
+    }
+
     public function result($id){
         dd($id);
     }
