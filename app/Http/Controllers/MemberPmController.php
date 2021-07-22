@@ -270,12 +270,71 @@ class MemberPmController extends Controller
 
     public function schdlm_edit($id, $schdlId){
         $schdlToEdit = ProjectSchdl::where('id',$schdlId)->get()->toArray();
-        return view('member_frontend.schdlm_edit',compact('id','schdlToEdit'));
+
+        $dir = '/';
+        $recursive = false; //是否取得資料夾下的目錄
+        $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($schdlToEdit[0]['file_name'], PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($schdlToEdit[0]['file_name'], PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last(); //在$contents找是否有符合的文件
+
+        $url = Storage::cloud()->url($file['path']);
+        $file_name = $file['name'];
+
+        return view('member_frontend.schdlm_edit',compact('id','schdlToEdit','url','file_name'));
     }
 
     public function schdlm_update(Request $request, $id, $schdlId){
-        dd($schdlId);
+        $isRe = $request->input('isRe');
+        $schdlToUpdate = $this->project_schdl->find($schdlId);
 
+        if ($isRe == 0){ //未改
+            $file_name = $schdlToUpdate['file_name'];
+        }else{
+            $validator = validator($request->all(),
+                ['file' => 'required|mimes:pptx,rar,zip|max:100000'],
+                [
+                    'file.required'=>'請選擇檔案',
+                    'file.mimes'=>'上傳格式錯誤',
+                    'file.max'=>'上傳檔案大小過大',
+                ]);
+            if($validator->fails()) {
+                return back()->withErrors($validator->errors());
+            }else{
+                $re_file = $request->file('file');
+                $file_name = $re_file->getClientOriginalName();
+
+                //將檔案存儲到雲端
+                $filePath = $re_file->getPathName();
+                $fileData = File::get($filePath);
+
+                Storage::cloud()->put($file_name, $fileData);
+            }
+        }
+        $name = $request->input('name');
+        $schdl_start = $request->input('schdl_start');
+        $schdl_end = $request->input('schdl_end');
+        $limit_start_date = $request->input('limit_start_date');
+        $limit_start_time = $request->input('limit_start_time');
+        $limit_end_date = $request->input('limit_end_date');
+        $limit_end_time = $request->input('limit_end_time');
+        $remark = $request->input('remark');
+        $schdlToUpdate -> project_id = $id;
+        $schdlToUpdate -> name = $name;
+        $schdlToUpdate -> schdl_start_date = $schdl_start;
+        $schdlToUpdate -> schdl_end_date = $schdl_end;
+        $schdlToUpdate -> file_name = $file_name;
+        $schdlToUpdate -> pa_start_date = $limit_start_date;
+        $schdlToUpdate -> pa_start_time = $limit_start_time;
+        $schdlToUpdate -> pa_end_date = $limit_end_date;
+        $schdlToUpdate -> pa_end_time = $limit_end_time;
+        $schdlToUpdate -> remark = $remark;
+        $schdlToUpdate -> save();
+        return redirect('/PHMS_member/pm/'.$id.'/schdlm');
     }
 
     public function result($id){

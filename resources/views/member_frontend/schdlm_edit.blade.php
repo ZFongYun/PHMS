@@ -34,12 +34,22 @@
                             </div>
                         </div>
 
-                        <div class="form-group row m-b-0">
+                        <div class="form-group row m-b-10" id="upload_file">
+                            <label for="status" class="col-md-2 control-label form-title"><span class="text-danger">*</span>進度上傳</label>
+                            <div class="col-md-8">
+                                <a href="{{$url}}">{{$file_name}}</a>
+                                <button type="button" class="btn waves-effect waves-light btn-primary btn-sm m-l-10" onclick="reUpload()">重新上傳</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group row m-b-0" id="re_upload_file" style="display: none">
                             <label for="status" class="col-md-2 control-label form-title"><span class="text-danger">*</span>進度上傳</label>
                             <div class="col-md-8">
                                 <input type="file" name="file" class="dropify" data-height="100" accept=".ppt,.pptx,.rar,.zip" data-max-file-size="50M"/>
+                                <button type="button" class="btn waves-effect waves-light btn-primary btn-sm" onclick="cancel()">取消</button>
                                 <p class="text-danger m-b-0"><strong><ins>{{ $errors->first('file') }}</ins></strong></p>
                                 <label class="text-primary">*上傳格式：ppt、pptx、zip、rar<br>*檔案大小限制：50MB</label>
+                                <input type="hidden" id="isRe" name="isRe" value="0">
                             </div>
                         </div>
 
@@ -85,5 +95,18 @@
         <!-- end row -->
     </div>
     <!-- end container-fluid -->
+
+    <script type="text/javascript">
+        function reUpload(){
+            $('#re_upload_file').show();
+            $('#upload_file').hide();
+            $('#isRe').val(1);
+        }
+        function cancel(){
+            $('#re_upload_file').hide();
+            $('#upload_file').show();
+            $('#isRe').val(0);
+        }
+    </script>
 @endsection
 @section('title','編輯進度')
