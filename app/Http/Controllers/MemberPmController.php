@@ -274,6 +274,7 @@ class MemberPmController extends Controller
     }
 
     public function schdlm_update(Request $request, $id, $schdlId){
+        dd($schdlId);
 
     }
 

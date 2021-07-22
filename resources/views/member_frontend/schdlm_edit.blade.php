@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <h4 class="page-title">編輯進度</h4>
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="{{route('Overall.member_schdlm_update',[$id,$schdlToEdit[0]['id']])}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="col-md-8">
                         <h5 class="star">注意！「*」為必填欄位</h5>

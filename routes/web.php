@@ -80,7 +80,7 @@ Route::prefix('PHMS_member')->group(function (){
             Route::get('/create', 'MemberPmController@schdlm_create')->name('Overall.member_schdlm_create');
             Route::post('/store', 'MemberPmController@schdlm_store')->name('Overall.member_schdlm_store');
             Route::get('/{schdlId}/edit', 'MemberPmController@schdlm_edit')->name('Overall.member_schdlm_edit');
-            Route::get('/{schdlId}/update', 'MemberPmController@schdlm_update')->name('Overall.member_schdlm_update');
+            Route::post('/{schdlId}/update', 'MemberPmController@schdlm_update')->name('Overall.member_schdlm_update');
             Route::get('/{downloadId}/download', 'MemberPmController@schdlm_download')->name('Overall.member_schdlm_download');
         });
 
@@ -92,9 +92,4 @@ Route::prefix('PHMS_member')->group(function (){
             Route::post('/pm_search','SearchController@member_pm_search');
         });
     });
-
-    Route::get('test', function() {
-        Storage::disk('google')->put('test20210721.txt', 'Hello World');
-    });
-
 });
