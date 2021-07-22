@@ -12,7 +12,7 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-2 control-label form-title"><span class="text-danger">*</span>進度標題</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="name" name="name" required="">
+                                <input type="text" class="form-control" id="name" name="name" required="" value="{{$schdlToEdit[0]['name']}}">
                             </div>
                         </div>
 
@@ -20,13 +20,13 @@
                             <label for="project_start" class="col-md-2 control-label form-title"><span class="text-danger">*</span>進度起止日期</label>
                             <div class="col-md-8">
                                 <div class="input-group m-b-10">
-                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker_schdl_start" name="schdl_start" required="">
+                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker_schdl_start" name="schdl_start" required="" value="{{$schdlToEdit[0]['schdl_start_date']}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-primary b-0 text-white"><i class="ti-calendar"></i></span>
                                     </div>
                                 </div>
                                 <div class="input-group m-b-10">
-                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker_schdl_end" name="schdl_end">
+                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker_schdl_end" name="schdl_end" required="" value="{{$schdlToEdit[0]['schdl_end_date']}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-primary b-0 text-white"><i class="ti-calendar"></i></span>
                                     </div>
@@ -47,21 +47,21 @@
                             <label for="status" class="col-md-2 control-label form-title"><span class="text-danger">*</span>考核期限</label>
                             <div class="col-md-8">
                                 <div class="input-group m-b-5">
-                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker_limit_start" name="limit_start_data" required="">
+                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker_limit_start" name="limit_start_data" required="" value="{{$schdlToEdit[0]['pa_start_date']}}">
                                     <div class="input-group-append m-r-5">
                                         <span class="input-group-text bg-primary b-0 text-white"><i class="ti-calendar"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" id="timepicker_limit_start" name="limit_start_time">
+                                    <input type="text" class="form-control" id="timepicker_limit_start" name="limit_start_time" value="{{$schdlToEdit[0]['pa_start_time']}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-primary text-white"><i class="zmdi zmdi-time"></i></span>
                                     </div>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker_limit_end" name="limit_end_data" required="">
+                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker_limit_end" name="limit_end_data" required="" value="{{$schdlToEdit[0]['pa_end_date']}}">
                                     <div class="input-group-append m-r-5">
                                         <span class="input-group-text bg-primary b-0 text-white"><i class="ti-calendar"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" id="timepicker_limit_end" name="limit_end_time">
+                                    <input type="text" class="form-control" id="timepicker_limit_end" name="limit_end_time" value="{{$schdlToEdit[0]['pa_end_time']}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-primary text-white"><i class="zmdi zmdi-time"></i></span>
                                     </div>
@@ -72,7 +72,7 @@
                         <div class="form-group row">
                             <label for="remark" class="col-md-2 control-label form-title">備註</label>
                             <div class="col-md-8">
-                                <textarea id="remark" name="remark" class="form-control" maxlength="225" rows="2"></textarea>
+                                <textarea id="remark" name="remark" class="form-control" maxlength="225" rows="2">{{$schdlToEdit[0]['remark']}}</textarea>
                             </div>
                         </div>
                     </div>

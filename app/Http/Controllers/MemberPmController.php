@@ -269,7 +269,8 @@ class MemberPmController extends Controller
     }
 
     public function schdlm_edit($id, $schdlId){
-        dd($schdlId);
+        $schdlToEdit = ProjectSchdl::where('id',$schdlId)->get()->toArray();
+        return view('member_frontend.schdlm_edit',compact('id','schdlToEdit'));
     }
 
     public function schdlm_update(Request $request, $id, $schdlId){
