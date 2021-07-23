@@ -100,10 +100,106 @@
                     </table>
                 </div>
             </div>
+
+            <div class="col-sm-10 m-t-10">
+                @if($project_pa == null)
+{{--                    <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#score_modal">評分</button>--}}
+                    <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#score_modal">評分</button>
+                @else
+                    <button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#edit_modal">編輯</button>
+                @endif
+            </div>
         </div>
         <!-- end row -->
     </div>
     <!-- end container-fluid -->
+
+    <!-- score_modal -->
+    <div id="score_modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title mt-0">進度考核</h4>
+                </div>
+                <div class="modal-body">
+                    <p>◎ 專案整體考核</p>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="project_score" class="control-label">評分分數</label>
+                                <select class="form-control" id="project_score" name="project_score">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="project_explanation" class="control-label">評分說明</label>
+                                <textarea id="project_explanation" name="project_explanation" class="form-control" maxlength="225" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>◎ 成員考核</p>
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="member_pa_table">
+                            <thead>
+                            <tr>
+                                <th width="5%">#</th>
+                                <th>姓名</th>
+                                <th>職稱</th>
+                                <th>分數</th>
+                                <th>說明</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($project_member as $row)
+                                <tr>
+                                    <td>{{$row->id}}</td>
+                                    <td>{{$row->name}}</td>
+                                    @if($row->title==0)
+                                        <td>專任教授</td>
+                                    @elseif($row->title==1)
+                                        <td>知點助理</td>
+                                    @elseif($row->title==2)
+                                        <td>企劃</td>
+                                    @elseif($row->title==3)
+                                        <td>程式</td>
+                                    @elseif($row->title==4)
+                                        <td>美術</td>
+                                    @elseif($row->title==5)
+                                        <td>技美</td>
+                                    @elseif($row->title==6)
+                                        <td>無職務</td>
+                                    @endif
+                                    <td>
+                                        <select class="form-control col-sm-2" id="member_score{{$row->id}}" name="member_score[]">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <textarea id="member_explanation{{$row->id}}" name="member_explanation[]" class="form-control" maxlength="225" rows="2"></textarea>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary waves-effect waves-light">送出</button>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
     <script type="text/javascript">
         $.ajaxSetup({
