@@ -155,14 +155,16 @@ class SearchController extends Controller
         }else{
             if ($keyword_status == 0){
                 $schdl = ProjectSchdl::where('project_id',$project_id)
-                    ->where('pa_start_date','>',$current_time)->get();
-            }elseif ($keyword_status == 2){
-
-            }elseif ($keyword_status == 3){
-
+                    ->whereDate('pa_end_date','>',date("Y-m-d"))
+                    ->whereTime('pa_end_time','>',date("H:i:s"))->get();
+            }elseif ($keyword_status == 1){
+                $schdl = ProjectSchdl::where('project_id',$project_id)
+                    ->whereDate('pa_end_date','<',date("Y-m-d"))
+                    ->orWhere(function($query) {
+                        $query->whereTime('pa_end_time','<',date("H:i:s"));
+                    })->get();
             }
         }
-
         return $schdl;
     }
 }

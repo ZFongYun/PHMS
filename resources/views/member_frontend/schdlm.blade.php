@@ -19,9 +19,9 @@
                     </select>
                     <input type="text" class="form-control" placeholder="表格搜尋" id="keyword" name="keyword">
                     <select class="form-control-select col-sm-5" style="display: none" id="keyword_status" name="keyword_status">
-                        <option value="0">未開始</option>
-                        <option value="1">考核中</option>
-                        <option value="2">已結束</option>
+{{--                        <option value="0">未開始</option>--}}
+                        <option value="0">考核中</option>
+                        <option value="1">已結束</option>
                     </select>
                     <span class="input-group-prepend">
                         <button type="button" class="search btn waves-effect waves-light btn-primary"><i class="fa fa-search"></i></button>
