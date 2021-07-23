@@ -102,10 +102,16 @@
             </div>
 
             <div class="col-sm-10 m-t-10">
-                @if($project_pa == null)
-                    <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#score_modal">評分</button>
+                @if(strtotime(date("Y-m-d H:i:s")) > strtotime($project_schdl[0]['pa_end_date'].' '.$project_schdl[0]['pa_end_time']))
+                    <p class="text-danger">考核已結束</p>
                 @else
-                    <button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#edit_modal">編輯</button>
+                    @if(auth('member')->user()->title == 2)
+                        @if($project_pa == null)
+                            <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#score_modal">評分</button>
+                        @else
+                            <button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#edit_modal">編輯</button>
+                        @endif
+                    @endif
                 @endif
             </div>
         </div>
