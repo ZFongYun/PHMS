@@ -360,7 +360,7 @@ class MemberPmController extends Controller
             ->select('member.id','member.student_ID','member.name','member.title','schdl_member_pa.score','schdl_member_pa.explanation')
             ->get()->toArray();
 
-        return view('member_frontend.schdlm_pa',compact('schdl_name','project_member','project_pa','member_pa'));
+        return view('member_frontend.schdlm_pa',compact('schdl_name','id','schdlId','project_member','project_pa','member_pa'));
     }
 
     public function result($id){

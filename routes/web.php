@@ -93,5 +93,9 @@ Route::prefix('PHMS_member')->group(function (){
             Route::post('/pm_search','SearchController@member_pm_search');
             Route::post('/schdl_search','SearchController@schdl_search');
         });
+        //====評分====
+        Route::prefix('score')->group(function (){
+            Route::post('/store','ScoreController@score_store');
+        });
     });
 });

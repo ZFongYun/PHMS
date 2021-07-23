@@ -103,7 +103,6 @@
 
             <div class="col-sm-10 m-t-10">
                 @if($project_pa == null)
-{{--                    <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#score_modal">評分</button>--}}
                     <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#score_modal">評分</button>
                 @else
                     <button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#edit_modal">編輯</button>
@@ -177,7 +176,7 @@
                                         <td>無職務</td>
                                     @endif
                                     <td>
-                                        <select class="form-control col-sm-2" id="member_score{{$row->id}}" name="member_score[]">
+                                        <select class="form-control col-sm-2" id="{{$row->id}}" name="member_score">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -186,7 +185,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <textarea id="member_explanation{{$row->id}}" name="member_explanation[]" class="form-control" maxlength="225" rows="2"></textarea>
+                                        <textarea id="member_explanation" name="member_explanation" class="form-control" maxlength="225" rows="2"></textarea>
                                     </td>
                                 </tr>
                             @endforeach
@@ -194,7 +193,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary waves-effect waves-light">送出</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light" id="send">送出</button>
                     </div>
                 </div>
             </div><!-- /.modal-content -->
@@ -207,7 +206,44 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    </script>
 
+        $('#send').click(function () {
+            var project_id = {{$id}}; //專案id
+            var schdl_id = {{$schdlId}}; //進度id
+            var member_id_values= []; //成員id
+            var project_score = $("#project_score").val(); //專案考核分數
+            var project_explanation = $("#project_explanation").val(); //專案考核說明
+            var member_score = document.getElementsByName("member_score");
+            var member_explanation = document.getElementsByName("member_explanation");
+            var member_score_values= []; //成員考核分數
+            var member_explanation_values= []; //成員考核說明
+            for(var i=0; i<member_score.length; i++) {
+                member_id_values.push(member_score[i].id)
+                member_score_values.push(member_score[i].value);
+                member_explanation_values.push(member_explanation[i].value);
+            }
+            $(document).ready(function() {
+                $.ajax({
+                    type:'POST',
+                    url:'/PHMS_member/score/store',
+                    data:{project_id: project_id,
+                        schdl_id:schdl_id,
+                        member_id_values:member_id_values,
+                        project_score: project_score,
+                        project_explanation: project_explanation,
+                        member_score_values: member_score_values,
+                        member_explanation_values: member_explanation_values,
+                        _token: '{{csrf_token()}}'},
+                    success: function() {
+                        alert('完成評分')
+                        location.reload();
+                    },
+                    error: function (){
+                        alert('評分失敗')
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
 @section('title','進度考核')
