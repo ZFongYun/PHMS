@@ -200,6 +200,95 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <!-- edit_modal -->
+    <div id="edit_modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title mt-0">進度考核</h4>
+                </div>
+                <div class="modal-body">
+                    @if($project_pa != null)
+                        <p>◎ 專案整體考核</p>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="project_edit_score" class="control-label">評分分數</label>
+                                    <select class="form-control" id="project_edit_score" name="project_edit_score">
+                                        <option value="1" {{$project_pa[0]['score'] == 1 ? 'selected' : ''}}>1</option>
+                                        <option value="2" {{$project_pa[0]['score'] == 2 ? 'selected' : ''}}>2</option>
+                                        <option value="3" {{$project_pa[0]['score'] == 3 ? 'selected' : ''}}>3</option>
+                                        <option value="4" {{$project_pa[0]['score'] == 4 ? 'selected' : ''}}>4</option>
+                                        <option value="5" {{$project_pa[0]['score'] == 5 ? 'selected' : ''}}>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="project_edit_explanation" class="control-label">評分說明</label>
+                                    <textarea id="project_edit_explanation" name="project_edit_explanation" class="form-control" maxlength="225" rows="2">{{$project_pa[0]['explanation']}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <p>◎ 成員考核</p>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th>姓名</th>
+                                    <th>職稱</th>
+                                    <th>分數</th>
+                                    <th>說明</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($member_pa as $row)
+                                    <tr>
+                                        <td>{{$row->id}}</td>
+                                        <td>{{$row->name}}</td>
+                                        @if($row->title==0)
+                                            <td>專任教授</td>
+                                        @elseif($row->title==1)
+                                            <td>知點助理</td>
+                                        @elseif($row->title==2)
+                                            <td>企劃</td>
+                                        @elseif($row->title==3)
+                                            <td>程式</td>
+                                        @elseif($row->title==4)
+                                            <td>美術</td>
+                                        @elseif($row->title==5)
+                                            <td>技美</td>
+                                        @elseif($row->title==6)
+                                            <td>無職務</td>
+                                        @endif
+                                        <td>
+                                            <select class="form-control col-sm-2" id="{{$row->id}}" name="member_edit_score">
+                                                <option value="1" {{$row->score == 1 ? 'selected' : ''}}>1</option>
+                                                <option value="2" {{$row->score == 2 ? 'selected' : ''}}>2</option>
+                                                <option value="3" {{$row->score == 3 ? 'selected' : ''}}>3</option>
+                                                <option value="4" {{$row->score == 4 ? 'selected' : ''}}>4</option>
+                                                <option value="5" {{$row->score == 5 ? 'selected' : ''}}>5</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <textarea id="member_edit_explanation" name="member_edit_explanation" class="form-control" maxlength="225" rows="2">{{$row->explanation}}</textarea>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning waves-effect waves-light" id="edit_send">編輯</button>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -240,6 +329,44 @@
                     },
                     error: function (){
                         alert('評分失敗')
+                    }
+                });
+            });
+        });
+
+        $('#edit_send').click(function () {
+            var project_id = {{$id}}; //專案id
+            var schdl_id = {{$schdlId}}; //進度id
+            var member_id_values= []; //成員id
+            var project_edit_score = $("#project_edit_score").val(); //專案考核分數
+            var project_edit_explanation = $("#project_edit_explanation").val(); //專案考核說明
+            var member_edit_score = document.getElementsByName("member_edit_score");
+            var member_edit_explanation = document.getElementsByName("member_edit_explanation");
+            var member_edit_score_values= []; //成員考核分數
+            var member_edit_explanation_values= []; //成員考核說明
+            for(var i=0; i<member_edit_score.length; i++) {
+                member_id_values.push(member_edit_score[i].id)
+                member_edit_score_values.push(member_edit_score[i].value);
+                member_edit_explanation_values.push(member_edit_explanation[i].value);
+            }
+            $(document).ready(function() {
+                $.ajax({
+                    type:'POST',
+                    url:'/PHMS_member/score/update',
+                    data:{project_id: project_id,
+                        schdl_id:schdl_id,
+                        member_id_values:member_id_values,
+                        project_edit_score: project_edit_score,
+                        project_edit_explanation: project_edit_explanation,
+                        member_edit_score_values: member_edit_score_values,
+                        member_edit_explanation_values: member_edit_explanation_values,
+                        _token: '{{csrf_token()}}'},
+                    success: function() {
+                        alert('完成編輯')
+                        location.reload();
+                    },
+                    error: function (){
+                        alert('編輯失敗')
                     }
                 });
             });

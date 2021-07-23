@@ -96,6 +96,7 @@ Route::prefix('PHMS_member')->group(function (){
         //====評分====
         Route::prefix('score')->group(function (){
             Route::post('/store','ScoreController@score_store');
+            Route::post('/update','ScoreController@score_update');
         });
     });
 });

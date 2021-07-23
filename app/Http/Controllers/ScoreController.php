@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SchdlMemberPa;
 use App\Models\SchdlProjectPa;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ScoreController extends Controller
@@ -39,6 +40,33 @@ class ScoreController extends Controller
             $memberToStore -> score = $member_score_values[$i];
             $memberToStore -> explanation = $member_explanation_values[$i];
             $memberToStore -> save();
+        }
+        return back();
+    }
+
+    public function score_update(Request $request){
+        $project_id = $request->input('project_id');
+        $schdl_id = $request->input('schdl_id');
+        $member_id_values = $request->input('member_id_values');
+        $project_edit_score = $request->input('project_edit_score');
+        $project_edit_explanation = $request->input('project_edit_explanation');
+        $member_edit_score_values = $request->input('member_edit_score_values');
+        $member_edit_explanation_values = $request->input('member_edit_explanation_values');
+
+        $projectToUpdate = SchdlProjectPa::where('project_schdl_id',$schdl_id)->first();
+        $projectToUpdate -> project_schdl_id = $schdl_id;
+        $projectToUpdate -> project_id = $project_id;
+        $projectToUpdate -> score = $project_edit_score;
+        $projectToUpdate -> explanation = $project_edit_explanation;
+        $projectToUpdate -> save();
+
+        for ($i=0; $i<count($member_id_values); $i++){
+            $memberToUpdate = SchdlMemberPa::where('project_schdl_id',$schdl_id)->where('member_id',$member_id_values[$i])->first();
+            $memberToUpdate -> project_schdl_id = $schdl_id;
+            $memberToUpdate -> member_id = $member_id_values[$i];
+            $memberToUpdate -> score = $member_edit_score_values[$i];
+            $memberToUpdate -> explanation = $member_edit_explanation_values[$i];
+            $memberToUpdate -> save();
         }
         return back();
     }
