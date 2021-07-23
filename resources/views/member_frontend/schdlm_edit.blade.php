@@ -56,16 +56,6 @@
                         <div class="form-group row m-b-15">
                             <label for="status" class="col-md-2 control-label form-title"><span class="text-danger">*</span>考核期限</label>
                             <div class="col-md-8">
-                                <div class="input-group m-b-5">
-                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker_limit_start" name="limit_start_date" required="" value="{{$schdlToEdit[0]['pa_start_date']}}">
-                                    <div class="input-group-append m-r-5">
-                                        <span class="input-group-text bg-primary b-0 text-white"><i class="ti-calendar"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" id="timepicker_limit_start" name="limit_start_time" value="{{$schdlToEdit[0]['pa_start_time']}}">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text bg-primary text-white"><i class="zmdi zmdi-time"></i></span>
-                                    </div>
-                                </div>
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker_limit_end" name="limit_end_date" required="" value="{{$schdlToEdit[0]['pa_end_date']}}">
                                     <div class="input-group-append m-r-5">

@@ -76,14 +76,9 @@
     jQuery('#datepicker-project-end').datepicker(); //專案結束日期
     jQuery('#datepicker_schdl_start').datepicker(); //進度開始日期
     jQuery('#datepicker_schdl_end').datepicker(); //進度結束日期
-    jQuery('#datepicker_limit_start').datepicker(); //考核開始日期
     jQuery('#datepicker_limit_end').datepicker(); //考核結束日期
 
     // Time Picker
-    jQuery('#timepicker_limit_start').timepicker({
-        showMeridian : false
-    });
-
     jQuery('#timepicker_limit_end').timepicker({
         showMeridian : false
     });

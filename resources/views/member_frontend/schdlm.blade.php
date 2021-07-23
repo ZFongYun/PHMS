@@ -51,14 +51,10 @@
                             <td>{{$row['schdl_start_date']}} ~ {{$row['schdl_end_date']}}</td>
                             <td><a href="{{route('Overall.member_schdlm_download',[$id, $row['id']])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-download"></i></a></td>
                             <td><a href="{{route('Overall.member_schdlm_pa',[$id, $row['id']])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-account-circle"></i></a></td>
-                            @if(strtotime(date("Y-m-d H:i:s")) > strtotime($row['pa_start_date'].' '.$row['pa_start_time']))
-                                @if(strtotime(date("Y-m-d H:i:s")) > strtotime($row['pa_end_date'].' '.$row['pa_end_time']))
-                                    <td>已結束</td>
-                                @else
-                                    <td>考核中</td>
-                                @endif
+                            @if(strtotime(date("Y-m-d H:i:s")) > strtotime($row['pa_end_date'].' '.$row['pa_end_time']))
+                                <td>已結束</td>
                             @else
-                                <td>未開始</td>
+                                <td>考核中</td>
                             @endif
                             <td><a href="{{route('Overall.member_schdlm_edit',[$id,$row['id']])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-warning"><i class="zmdi zmdi-edit"></i></a></td>
                         </tr>
