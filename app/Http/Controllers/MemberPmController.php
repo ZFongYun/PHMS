@@ -6,6 +6,8 @@ use App\Models\Member;
 use App\Models\Project;
 use App\Models\ProjectMember;
 use App\Models\ProjectSchdl;
+use App\Models\SchdlMemberPa;
+use App\Models\SchdlProjectPa;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -337,6 +339,28 @@ class MemberPmController extends Controller
         $schdlToUpdate -> remark = $remark;
         $schdlToUpdate -> save();
         return redirect('/PHMS_member/pm/'.$id.'/schdlm');
+    }
+
+    public function schdlm_pa($id, $schdlId){
+        $schdl = $this->project_schdl->find($schdlId);
+        $schdl_name = $schdl['name'];
+
+        $project_pa = SchdlProjectPa::where('project_id',$id)
+            ->where('project_schdl_id',$schdlId)->get()->toArray();
+
+        $project_member = DB::table('project_member')
+            ->where('project_id',$id)->whereNull('project_member.deleted_at')
+            ->join('member','project_member.member_id','=','member.id')
+            ->select('member.*')
+            ->get()->toArray();
+
+        $member_pa = DB::table('schdl_member_pa')
+            ->where('project_schdl_id',$schdlId)
+            ->join('member','schdl_member_pa.member_id','=','member.id')
+            ->select('member.id','member.student_ID','member.name','member.title','schdl_member_pa.score','schdl_member_pa.explanation')
+            ->get()->toArray();
+
+        return view('member_frontend.schdlm_pa',compact('schdl_name','project_member','project_pa','member_pa'));
     }
 
     public function result($id){
