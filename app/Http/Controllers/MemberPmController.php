@@ -221,8 +221,6 @@ class MemberPmController extends Controller
             $schdl_start = $request->input('schdl_start');
             $schdl_end = $request->input('schdl_end');
             $file = $request->file('file');
-            $limit_start_date = $request->input('limit_start_date');
-            $limit_start_time = $request->input('limit_start_time');
             $limit_end_date = $request->input('limit_end_date');
             $limit_end_time = $request->input('limit_end_time');
             $remark = $request->input('remark');
@@ -234,8 +232,6 @@ class MemberPmController extends Controller
             $schdlToStore -> schdl_start_date = $schdl_start;
             $schdlToStore -> schdl_end_date = $schdl_end;
             $schdlToStore -> file_name = $file_name;
-            $schdlToStore -> pa_start_date = $limit_start_date;
-            $schdlToStore -> pa_start_time = $limit_start_time;
             $schdlToStore -> pa_end_date = $limit_end_date;
             $schdlToStore -> pa_end_time = $limit_end_time;
             $schdlToStore -> remark = $remark;
@@ -322,8 +318,6 @@ class MemberPmController extends Controller
         $name = $request->input('name');
         $schdl_start = $request->input('schdl_start');
         $schdl_end = $request->input('schdl_end');
-        $limit_start_date = $request->input('limit_start_date');
-        $limit_start_time = $request->input('limit_start_time');
         $limit_end_date = $request->input('limit_end_date');
         $limit_end_time = $request->input('limit_end_time');
         $remark = $request->input('remark');
@@ -332,8 +326,6 @@ class MemberPmController extends Controller
         $schdlToUpdate -> schdl_start_date = $schdl_start;
         $schdlToUpdate -> schdl_end_date = $schdl_end;
         $schdlToUpdate -> file_name = $file_name;
-        $schdlToUpdate -> pa_start_date = $limit_start_date;
-        $schdlToUpdate -> pa_start_time = $limit_start_time;
         $schdlToUpdate -> pa_end_date = $limit_end_date;
         $schdlToUpdate -> pa_end_time = $limit_end_time;
         $schdlToUpdate -> remark = $remark;
