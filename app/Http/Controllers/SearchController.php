@@ -154,35 +154,26 @@ class SearchController extends Controller
                 ->where('name','like','%'.$keyword.'%')->get();
         }else{
             $schdl = ProjectSchdl::where('project_id',$project_id)->get();
-            $choose_id = array();
-
             if ($keyword_status == 0){
+                $schdls = array();
                 foreach ($schdl as $item){
                     $limit = date($item['pa_end_date'] . " " . $item['pa_end_time']);
                     if ($current_time <= $limit){
-                        array_push($choose_id, $item['id']); //取得符合"考核中"條件的項目id
+                        $schdl_tmp = ProjectSchdl::where('id',$item['id'])->get(); //取得符合"考核中"條件的項目
+                        foreach ($schdl_tmp as $value) {
+                            array_push($schdls,$value);
+                        }
                     }
                 }
-                $schdls = array();
-                foreach ($choose_id as $item){
-                    $schdl_tmp = ProjectSchdl::where('id',$item)->get();
-                    foreach ($schdl_tmp as $value) {
-                        array_push($schdls,$value);
-                    }
-                }
-
             }elseif ($keyword_status == 1){
+                $schdls = array();
                 foreach ($schdl as $item){
                     $limit = date($item['pa_end_date'] . " " . $item['pa_end_time']);
                     if ($current_time >= $limit){
-                        array_push($choose_id, $item['id']); //取得符合"已結束"條件的項目id
-                    }
-                }
-                $schdls = array();
-                foreach ($choose_id as $item){
-                    $schdl_tmp = ProjectSchdl::where('id',$item)->get();
-                    foreach ($schdl_tmp as $value) {
-                        array_push($schdls,$value);
+                        $schdl_tmp = ProjectSchdl::where('id',$item['id'])->get(); //取得符合"已結束"條件的項目
+                        foreach ($schdl_tmp as $value) {
+                            array_push($schdls,$value);
+                        }
                     }
                 }
             }
