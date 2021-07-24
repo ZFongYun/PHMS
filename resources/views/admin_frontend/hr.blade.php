@@ -243,7 +243,7 @@
                             }
                         },
                         error: function () {
-                            alert('error')
+                            alert('搜尋錯誤')
                         }
                     });
                 });
