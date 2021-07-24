@@ -147,24 +147,46 @@ class SearchController extends Controller
         $keyword = $request->input('keyword');
         $keyword_status = $request->input('keyword_status');
         $project_id = $request->input('project_id');
-        $current_time = strtotime(date("Y-m-d H:i:s"));
+        $current_time = date("Y-m-d H:i:s");
 
         if ($target == 0){
-            $schdl = ProjectSchdl::where('project_id',$project_id)
+            $schdls = ProjectSchdl::where('project_id',$project_id)
                 ->where('name','like','%'.$keyword.'%')->get();
         }else{
+            $schdl = ProjectSchdl::where('project_id',$project_id)->get();
+            $choose_id = array();
+
             if ($keyword_status == 0){
-                $schdl = ProjectSchdl::where('project_id',$project_id)
-                    ->whereDate('pa_end_date','>',date("Y-m-d"))
-                    ->whereTime('pa_end_time','>',date("H:i:s"))->get();
+                foreach ($schdl as $item){
+                    $limit = date($item['pa_end_date'] . " " . $item['pa_end_time']);
+                    if ($current_time <= $limit){
+                        array_push($choose_id, $item['id']); //取得符合"考核中"條件的項目id
+                    }
+                }
+                $schdls = array();
+                foreach ($choose_id as $item){
+                    $schdl_tmp = ProjectSchdl::where('id',$item)->get();
+                    foreach ($schdl_tmp as $value) {
+                        array_push($schdls,$value);
+                    }
+                }
+
             }elseif ($keyword_status == 1){
-                $schdl = ProjectSchdl::where('project_id',$project_id)
-                    ->whereDate('pa_end_date','<',date("Y-m-d"))
-                    ->orWhere(function($query) {
-                        $query->whereTime('pa_end_time','<',date("H:i:s"));
-                    })->get();
+                foreach ($schdl as $item){
+                    $limit = date($item['pa_end_date'] . " " . $item['pa_end_time']);
+                    if ($current_time >= $limit){
+                        array_push($choose_id, $item['id']); //取得符合"已結束"條件的項目id
+                    }
+                }
+                $schdls = array();
+                foreach ($choose_id as $item){
+                    $schdl_tmp = ProjectSchdl::where('id',$item)->get();
+                    foreach ($schdl_tmp as $value) {
+                        array_push($schdls,$value);
+                    }
+                }
             }
         }
-        return $schdl;
+        return $schdls;
     }
 }

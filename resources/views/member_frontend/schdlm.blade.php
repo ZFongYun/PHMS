@@ -19,7 +19,6 @@
                     </select>
                     <input type="text" class="form-control" placeholder="表格搜尋" id="keyword" name="keyword">
                     <select class="form-control-select col-sm-5" style="display: none" id="keyword_status" name="keyword_status">
-{{--                        <option value="0">未開始</option>--}}
                         <option value="0">考核中</option>
                         <option value="1">已結束</option>
                     </select>
@@ -51,7 +50,7 @@
                             <td>{{$row['schdl_start_date']}} ~ {{$row['schdl_end_date']}}</td>
                             <td><a href="{{route('Overall.member_schdlm_download',[$id, $row['id']])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-download"></i></a></td>
                             <td><a href="{{route('Overall.member_schdlm_pa',[$id, $row['id']])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-account-circle"></i></a></td>
-                            @if(strtotime(date("Y-m-d H:i:s")) > strtotime($row['pa_end_date'].' '.$row['pa_end_time']))
+                            @if(strtotime(date("Y-m-d H:i:s")) >= strtotime($row['pa_end_date'].' '.$row['pa_end_time']))
                                 <td>已結束</td>
                             @else
                                 <td>考核中</td>
@@ -70,7 +69,7 @@
                     <tr>
                         <th>#</th>
                         <th>標題</th>
-                        <th>進度起止日</th>
+                        <th width="20%">進度起止日</th>
                         <th>進度下載</th>
                         <th>考核</th>
                         <th>考核狀態</th>
@@ -133,16 +132,39 @@
                             _token: '{{csrf_token()}}'
                         },
                         success: function (data) {
-                            console.log(data);
+                            var Today = new Date();
+                            var current_time = Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + " " + Today.getHours() + ":" + Today.getMinutes() + ":" + Today.getSeconds();
+                            $('#all_data_table').hide();
+                            $('#search_data_table').show();
+                            if (data == ''){
+                                html_result += '<tr>';
+                                html_result += '<td colspan="7">無結果</td></tr>';
+                                $('#search_body').html(html_result);
+                            }else {
+                                for (var i = 0; i<data.length; i++){
+                                    html_result += '<tr>';
+                                    html_result += '<th scope="row">'+data[i].id+'</th>';
+                                    html_result += '<td>'+data[i].name+'</td>';
+                                    html_result += '<td>'+data[i].schdl_start_date+' ~ '+data[i].schdl_end_date+'</td>';
+                                    html_result += '<td><a href="schdlm/' + data[i].id + '/download" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-download"></i></a></td>';
+                                    html_result += '<td><a href="schdlm/' + data[i].id + '/PA" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-account-circle"></i></a></td>';
+                                    if(Date.parse(current_time).valueOf() >= Date.parse(data[i].pa_end_date + " " + data[i].pa_end_time).valueOf()){
+                                        html_result += '<td>已結束</td>';
+                                    }else{
+                                        html_result += '<td>考核中</td>';
+                                    }
+                                    html_result += '<td><a href="schdlm/' + data[i].id + '/edit" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-warning"><i class="zmdi zmdi-edit"></i></a></td></tr>';
+                                    $('#search_body').html(html_result);
+                                }
+                            }
                         },
                         error: function () {
-                            alert('error')
+                            alert('搜尋錯誤')
                         }
                     });
                 });
             }
         });
     </script>
-
 @endsection
 @section('title','進度管理')
