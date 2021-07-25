@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Models\Project;
 use App\Models\ProjectMember;
+use App\Models\ProjectResult;
 use App\Models\ProjectSchdl;
 use App\Models\SchdlMemberPa;
 use App\Models\SchdlProjectPa;
@@ -19,12 +20,14 @@ class MemberPmController extends Controller
     protected $member;
     protected $project;
     protected $project_schdl;
+    protected $project_result;
 
-    public function __construct(Member $member, Project $project, ProjectSchdl $project_schdl)
+    public function __construct(Member $member, Project $project, ProjectSchdl $project_schdl, ProjectResult $project_result)
     {
         $this->member = $member;
         $this->project = $project;
         $this->project_schdl = $project_schdl;
+        $this->project_result = $project_result;
     }
 
     /**
@@ -358,6 +361,13 @@ class MemberPmController extends Controller
     }
 
     public function result($id){
-        dd($id);
+        $is_null = $this->project_result->where('project_id',$id)->get()->toArray();
+        $project_name = $this->project->find($id);
+
+        if (empty($is_null)){
+            return view('member_frontend.result_null',compact('project_name'));
+        }else{
+            return view('member_frontend.result',compact('project_name'));
+        }
     }
 }
