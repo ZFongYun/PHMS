@@ -155,6 +155,10 @@
                         return false;
                     }
                 }
+                if (img.files[0] == null){
+                    alert("請上傳遊戲截圖。");
+                    return false;
+                }
                 //====遊戲執行檔====
                 var FileExtensions = ["rar", "zip"];
                 if (exe.files[0] != null){
@@ -164,6 +168,10 @@
                         alert("遊戲執行檔格式錯誤。");
                         return false;
                     }
+                }
+                if (exe.files[0] == null){
+                    alert("請上傳遊戲執行檔。");
+                    return false;
                 }
                 //====製作素材====
                 if (material.files[0] != null){
