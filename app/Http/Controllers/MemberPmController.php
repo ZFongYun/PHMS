@@ -365,9 +365,22 @@ class MemberPmController extends Controller
         $project_name = $this->project->find($id);
 
         if (empty($is_null)){
-            return view('member_frontend.result_null',compact('project_name'));
+            return view('member_frontend.result_null',compact('id','project_name'));
         }else{
-            return view('member_frontend.result',compact('project_name'));
+            return view('member_frontend.result',compact('id','project_name'));
         }
+    }
+
+    public function result_create($id){
+        $project_member = DB::table('project_member')
+            ->where('project_id',$id)->whereNull('project_member.deleted_at')
+            ->join('member','project_member.member_id','=','member.id')
+            ->select('member.name','member.title')
+            ->get()->toArray();
+        return view('member_frontend.result_create',compact('id','project_member'));
+    }
+
+    public function result_store($id, Request $request){
+        dd($id);
     }
 }

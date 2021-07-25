@@ -75,6 +75,7 @@ Route::prefix('PHMS_member')->group(function (){
         //====專案管理====
         Route::resource('pm', 'MemberPmController');
         Route::get('pm/{id}/schdlm', 'MemberPmController@schdlm')->name('Overall.member_schdlm');
+        Route::get('pm/{id}/result', 'MemberPmController@result')->name('Overall.member_result');
         //====進度管理====
         Route::prefix('pm/{id}/schdlm')->group(function (){
             Route::get('/create', 'MemberPmController@schdlm_create')->name('Overall.member_schdlm_create');
@@ -84,8 +85,15 @@ Route::prefix('PHMS_member')->group(function (){
             Route::get('/{downloadId}/download', 'MemberPmController@schdlm_download')->name('Overall.member_schdlm_download');
             Route::get('/{schdlId}/PA', 'MemberPmController@schdlm_pa')->name('Overall.member_schdlm_pa');
         });
+        //====成果展示====
+        Route::prefix('pm/{id}/result')->group(function (){
+            Route::get('/create', 'MemberPmController@result_create')->name('Overall.member_result_create');
+            Route::post('/store', 'MemberPmController@result_store')->name('Overall.member_result_store');
+//            Route::get('/{schdlId}/edit', 'MemberPmController@schdlm_edit')->name('Overall.member_schdlm_edit');
+//            Route::post('/{schdlId}/update', 'MemberPmController@schdlm_update')->name('Overall.member_schdlm_update');
+//            Route::get('/{downloadId}/download', 'MemberPmController@schdlm_download')->name('Overall.member_schdlm_download');
+        });
 
-        Route::get('pm/{id}/result', 'MemberPmController@result')->name('Overall.member_result');
 
         //====搜尋====
         Route::prefix('search')->group(function (){
