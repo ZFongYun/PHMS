@@ -91,7 +91,7 @@
             'error': '發生錯誤，請重新上傳。'
         },
         error: {
-            'fileSize': 'The file size is too big (1M max).'
+            'fileSize': '檔案大小超出規定。'
         }
     });
 </script>

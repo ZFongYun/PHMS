@@ -20,7 +20,7 @@
                         <div class="form-group row">
                             <label for="introduction" class="col-md-2 control-label form-title"><span class="text-danger">*</span>遊戲介紹/背景</label>
                             <div class="col-md-8">
-                                <textarea id="introduction" name="introduction" class="form-control" maxlength="225" rows="2"></textarea>
+                                <textarea id="introduction" name="introduction" class="form-control" maxlength="225" rows="2" required=""></textarea>
                             </div>
                         </div>
 
@@ -89,42 +89,93 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="video" class="col-md-2 control-label form-title">宣導影片</label>
+                            <label for="video" class="col-md-2 control-label form-title">宣傳影片</label>
                             <div class="col-md-8">
-                                <input type="file" name="video" class="dropify" data-height="100" accept=".mp4" data-max-file-size="50M"/>
+                                <input type="file" id="video" name="video" class="dropify" data-height="100" accept=".mp4" data-max-file-size="60M"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="img" class="col-md-2 control-label form-title"><span class="text-danger">*</span>遊戲截圖</label>
                             <div class="col-md-8">
-                                <input type="file" name="img" class="dropify" data-height="100" accept=".png,.jpg,.svg" data-max-file-size="50M" multiple/>
+                                <input type="file" id="img" name="img[]" class="dropify" data-height="100" accept=".jpg, .jpeg, .bmp, .gif, .png" multiple/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="exe" class="col-md-2 control-label form-title"><span class="text-danger">*</span>遊戲執行檔</label>
                             <div class="col-md-8">
-                                <input type="file" name="exe" class="dropify" data-height="100" accept=".zip,.rar" data-max-file-size="50M"/>
+                                <input type="file" id="exe" name="exe" class="dropify" data-height="100" accept=".zip, .rar" data-max-file-size="1G"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="material" class="col-md-2 control-label form-title">製作素材</label>
                             <div class="col-md-8">
-                                <input type="file" name="material" class="dropify" data-height="100" accept=".zip,.rar" data-max-file-size="50M" multiple/>
+                                <input type="file" id="material" name="material" class="dropify" data-height="100" accept=".zip, .rar" data-max-file-size="1G"/>
                             </div>
                         </div>
 
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-success w-md waves-effect waves-light button-font">新增</button>
+                        <button type="submit" id="submit" class="btn btn-success w-md waves-effect waves-light button-font">新增</button>
                     </div><!-- end col -->
+
                 </form>
             </div>
         </div>
         <!-- end row -->
     </div>
     <!-- end container-fluid -->
+
+    <script>
+        $(function(){
+            $("#submit").click(function(){
+                var video = document.getElementById('video');
+                var img = document.getElementById('img');
+                var exe = document.getElementById('exe');
+                var material = document.getElementById('material');
+
+                //====宣傳影片====
+                if (video.files[0] != null){
+                    if (video.files[0].type != "video/mp4"){
+                        alert("宣導影片格式錯誤。");
+                        return false;
+                    }
+                }
+                //====遊戲截圖====
+                if (parseInt(img.files.length)>6){
+                    alert("遊戲截圖上限為5張。");
+                    return false;
+                }
+                var imgFileExtensions = ["image/jpg", "image/jpeg", "image/bmp", "image/gif", "image/png"];
+                for (var i=0; i<img.files.length; i++){
+                    if(!imgFileExtensions.includes(img.files[i].type)){
+                        alert("遊戲截圖格式錯誤。");
+                        return false;
+                    }
+                }
+                //====遊戲執行檔====
+                var FileExtensions = ["rar", "zip"];
+                if (exe.files[0] != null){
+                    var exe_string = exe.files[0].name;
+                    var exe_split = exe_string.split(".");
+                    if(!FileExtensions.includes(exe_split[1])){
+                        alert("遊戲執行檔格式錯誤。");
+                        return false;
+                    }
+                }
+                //====製作素材====
+                if (material.files[0] != null){
+                    var material_string = material.files[0].name;
+                    var material_split = material_string.split(".");
+                    if(!FileExtensions.includes(material_split[1])){
+                        alert("製作素材格式錯誤。");
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
 @endsection
 @section('title','新增成果')
