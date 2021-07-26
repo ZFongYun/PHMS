@@ -692,4 +692,9 @@ class MemberPmController extends Controller
 
         return redirect('/PHMS_member/pm/'.$id.'/result');
     }
+
+    public function format_download(){
+        $file = public_path().'/storage/成果資料上傳格式.pdf';
+        return response()->download($file);
+    }
 }

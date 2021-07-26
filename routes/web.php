@@ -91,7 +91,7 @@ Route::prefix('PHMS_member')->group(function (){
             Route::post('/store', 'MemberPmController@result_store')->name('Overall.member_result_store');
             Route::get('/{resultId}/edit', 'MemberPmController@result_edit')->name('Overall.member_result_edit');
             Route::post('/{resultId}/update', 'MemberPmController@result_update')->name('Overall.member_result_update');
-//            Route::get('/{downloadId}/download', 'MemberPmController@schdlm_download')->name('Overall.member_schdlm_download');
+            Route::get('/download', 'MemberPmController@format_download')->name('Overall.format_download');
         });
 
 
