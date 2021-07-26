@@ -140,18 +140,18 @@
                             <div class="col-md-8">
                                 <a href="{{$img1_url}}">{{$img1_name}}</a><br>
                                 @if($img2_url != '')
-                                    <a href="{{$img2_url}}">{{$img2_name}}</a>
+                                    <a href="{{$img2_url}}">{{$img2_name}}</a><br>
                                 @endif
                                 @if($img3_url != '')
-                                    <a href="{{$img3_url}}">{{$img3_name}}</a>
+                                    <a href="{{$img3_url}}">{{$img3_name}}</a><br>
                                 @endif
                                 @if($img4_url != '')
-                                    <a href="{{$img4_url}}">{{$img4_name}}</a>
+                                    <a href="{{$img4_url}}">{{$img4_name}}</a><br>
                                 @endif
                                 @if($img5_url != '')
-                                    <a href="{{$img5_url}}">{{$img5_name}}</a>
+                                    <a href="{{$img5_url}}">{{$img5_name}}</a><br>
                                 @endif
-                                <button type="button" class="btn waves-effect waves-light btn-primary btn-sm m-l-10" onclick="reUploadImg()">重新上傳</button>
+                                <button type="button" class="btn waves-effect waves-light btn-primary btn-sm m-t-10" onclick="reUploadImg()">重新上傳</button>
                             </div>
                         </div>
 
