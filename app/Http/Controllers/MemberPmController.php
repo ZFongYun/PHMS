@@ -367,7 +367,8 @@ class MemberPmController extends Controller
         if (empty($is_null)){
             return view('member_frontend.result_null',compact('id','project_name'));
         }else{
-            return view('member_frontend.result',compact('id','project_name'));
+            $resultToIndex = $this->project_result->where('project_id',$id)->get()->toArray();
+            return view('member_frontend.result',compact('resultToIndex','project_name'));
         }
     }
 
@@ -452,5 +453,16 @@ class MemberPmController extends Controller
         }
 
         return redirect('/PHMS_member/pm/'.$id.'/result');
+    }
+
+    public function result_edit($id, $resultId){
+        $resultToEdit = $this->project_result->where('id',$resultId)
+            ->where('project_id',$id)->get()->toArray();
+        $project_member = DB::table('project_member')
+            ->where('project_id',$id)->whereNull('project_member.deleted_at')
+            ->join('member','project_member.member_id','=','member.id')
+            ->select('member.name','member.title')
+            ->get()->toArray();
+        return view('member_frontend.result_edit',compact('id','resultToEdit','project_member'));
     }
 }

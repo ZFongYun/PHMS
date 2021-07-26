@@ -7,7 +7,7 @@
                 <p class="page-title">{{$project_name['name']}} | 成果展示</p>
             </div>
             <div class="col-sm-4">
-                <a href="#" class="btn btn-warning waves-effect waves-light m-b-15">編輯專案</a>
+                <a href="{{route('Overall.member_result_edit',[$resultToIndex[0]['project_id'],$resultToIndex[0]['id']])}}" class="btn btn-warning waves-effect waves-light m-b-15">編輯專案</a>
             </div>
         </div>
         <!-- end row -->

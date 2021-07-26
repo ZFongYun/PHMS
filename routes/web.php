@@ -89,7 +89,7 @@ Route::prefix('PHMS_member')->group(function (){
         Route::prefix('pm/{id}/result')->group(function (){
             Route::get('/create', 'MemberPmController@result_create')->name('Overall.member_result_create');
             Route::post('/store', 'MemberPmController@result_store')->name('Overall.member_result_store');
-//            Route::get('/{schdlId}/edit', 'MemberPmController@schdlm_edit')->name('Overall.member_schdlm_edit');
+            Route::get('/{resultId}/edit', 'MemberPmController@result_edit')->name('Overall.member_result_edit');
 //            Route::post('/{schdlId}/update', 'MemberPmController@schdlm_update')->name('Overall.member_schdlm_update');
 //            Route::get('/{downloadId}/download', 'MemberPmController@schdlm_download')->name('Overall.member_schdlm_download');
         });
