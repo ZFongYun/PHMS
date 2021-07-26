@@ -392,8 +392,6 @@ class MemberPmController extends Controller
         $exe = $request->file('exe');
         $material = $request->file('material');
 
-//        dd($img);
-
         $types = "";
         foreach ($type as $value){
             $types = $types . " " . $value;
@@ -407,14 +405,52 @@ class MemberPmController extends Controller
         $resultToStore->function = $function;
         $resultToStore->teacher = $teacher;
         $resultToStore->team = $team;
-        $resultToStore->movie_file_name = $video->getClientOriginalName();
-        $resultToStore->pic_file_name1 = $img->getClientOriginalName();
-        $resultToStore->pic_file_name2 = $img->getClientOriginalName();
-        $resultToStore->pic_file_name3 = $img->getClientOriginalName();
-        $resultToStore->pic_file_name4 = $img->getClientOriginalName();
-        $resultToStore->pic_file_name5 = $img->getClientOriginalName();
+        if ($video != null){
+            $resultToStore->movie_file_name = $video->getClientOriginalName();
+        }
+
+        $resultToStore->pic_file_name1 = $img[0]->getClientOriginalName();
+        if (isset($img[1])){
+            $resultToStore->pic_file_name2 = $img[1]->getClientOriginalName();
+        }
+        if (isset($img[2])){
+            $resultToStore->pic_file_name3 = $img[2]->getClientOriginalName();
+        }
+        if (isset($img[3])){
+            $resultToStore->pic_file_name4 = $img[3]->getClientOriginalName();
+        }
+        if (isset($img[4])){
+            $resultToStore->pic_file_name5 = $img[4]->getClientOriginalName();
+        }
         $resultToStore->executable_file_name = $exe->getClientOriginalName();
+        if ($material != null){
+            $resultToStore->material = $material->getClientOriginalName();
+        }
+        $resultToStore->save();
 
+        //將檔案存儲到雲端
+        if ($video != null){
+            $video_path = $video->getPathName();
+            $video_data = File::get($video_path);
+            Storage::cloud()->put($video->getClientOriginalName(), $video_data);
+        }
 
+        foreach ($img as $item){
+            $img_path = $item->getPathName();
+            $img_data = File::get($img_path);
+            Storage::cloud()->put($item->getClientOriginalName(), $img_data);
+        }
+
+        $exe_path = $exe->getPathName();
+        $exe_data = File::get($exe_path);
+        Storage::cloud()->put($exe->getClientOriginalName(), $exe_data);
+
+        if ($material != null){
+            $material_path = $material->getPathName();
+            $material_data = File::get($material_path);
+            Storage::cloud()->put($material->getClientOriginalName(), $material_data);
+        }
+
+        return redirect('/PHMS_member/pm/'.$id.'/result');
     }
 }
