@@ -458,11 +458,238 @@ class MemberPmController extends Controller
     public function result_edit($id, $resultId){
         $resultToEdit = $this->project_result->where('id',$resultId)
             ->where('project_id',$id)->get()->toArray();
+        $type_chk_arr = explode(" ",$resultToEdit[0]['type']);
         $project_member = DB::table('project_member')
             ->where('project_id',$id)->whereNull('project_member.deleted_at')
             ->join('member','project_member.member_id','=','member.id')
             ->select('member.name','member.title')
             ->get()->toArray();
-        return view('member_frontend.result_edit',compact('id','resultToEdit','project_member'));
+
+        $dir = '/';
+        $recursive = false; //是否取得資料夾下的目錄
+        $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+        $video_file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($resultToEdit[0]['movie_file_name'], PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($resultToEdit[0]['movie_file_name'], PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last();
+        if (isset($video_file)){
+            $video_url = Storage::cloud()->url($video_file['path']);
+            $video_name = $video_file['name'];
+        }else{
+            $video_url = '';
+            $video_name = '無';
+        }
+
+        $img1_file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($resultToEdit[0]['pic_file_name1'], PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($resultToEdit[0]['pic_file_name1'], PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last();
+        if (isset($img1_file)){
+            $img1_url = Storage::cloud()->url($img1_file['path']);
+            $img1_name = $img1_file['name'];
+        }else{
+            $img1_url = '';
+            $img1_name = '無';
+        }
+
+        $img2_file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($resultToEdit[0]['pic_file_name2'], PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($resultToEdit[0]['pic_file_name2'], PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last();
+        if (isset($img2_file)){
+            $img2_url = Storage::cloud()->url($img2_file['path']);
+            $img2_name = $img2_file['name'];
+        }else{
+            $img2_url = '';
+            $img2_name = '無';
+        }
+
+        $img3_file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($resultToEdit[0]['pic_file_name3'], PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($resultToEdit[0]['pic_file_name3'], PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last();
+        if (isset($img3_file)){
+            $img3_url = Storage::cloud()->url($img3_file['path']);
+            $img3_name = $img3_file['name'];
+        }else{
+            $img3_url = '';
+            $img3_name = '無';
+        }
+
+        $img4_file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($resultToEdit[0]['pic_file_name4'], PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($resultToEdit[0]['pic_file_name4'], PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last();
+        if (isset($img4_file)){
+            $img4_url = Storage::cloud()->url($img4_file['path']);
+            $img4_name = $img4_file['name'];
+        }else{
+            $img4_url = '';
+            $img4_name = '無';
+        }
+
+        $img5_file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($resultToEdit[0]['pic_file_name5'], PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($resultToEdit[0]['pic_file_name5'], PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last();
+        if (isset($img5_file)){
+            $img5_url = Storage::cloud()->url($img5_file['path']);
+            $img5_name = $img5_file['name'];
+        }else{
+            $img5_url = '';
+            $img5_name = '無';
+        }
+
+        $exe_file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($resultToEdit[0]['executable_file_name'], PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($resultToEdit[0]['executable_file_name'], PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last();
+        $exe_url = Storage::cloud()->url($exe_file['path']);
+        $exe_name = $exe_file['name'];
+
+        $material_file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($resultToEdit[0]['material'], PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($resultToEdit[0]['material'], PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last();
+        if (isset($material_file)){
+            $material_url = Storage::cloud()->url($material_file['path']);
+            $material_name = $material_file['name'];
+        }else{
+            $material_url = '';
+            $material_name = '無';
+        }
+
+        return view('member_frontend.result_edit',
+            compact('id','resultToEdit','type_chk_arr','project_member',
+                'video_url','video_name','exe_url','exe_name','material_url','material_name',
+                'img1_url','img1_name', 'img2_url','img2_name', 'img3_url','img3_name',
+                'img4_url','img4_name', 'img5_url','img5_name'));
+    }
+
+    public function result_update(Request $request, $id, $resultId){
+        $name = $request->input('name');
+        $introduction = $request->input('introduction');
+        $type = $request->input('type');
+        $function = $request->input('function');
+        $teacher = $request->input('teacher');
+        $team = $request->input('team');
+        $video = $request->file('video');
+        $img = $request->file('img');
+        $exe = $request->file('exe');
+        $material = $request->file('material');
+        $isVideoRe = $request->input('isVideoRe');
+        $isImgRe = $request->input('isImgRe');
+        $isExeRe = $request->input('isExeRe');
+        $isMaterialRe = $request->input('isMaterialRe');
+        $resultToUpdate = $this->project_result->find($resultId);
+
+        if ($isVideoRe == 0){ //未改
+            $video_name = $resultToUpdate['movie_file_name'];
+        }else{
+            $video_name = $video->getClientOriginalName();
+            //將檔案存儲到雲端
+            $video_path = $video->getPathName();
+            $video_data = File::get($video_path);
+            Storage::cloud()->put($video_name, $video_data);
+        }
+
+        if ($isImgRe == 0){ //未改
+            $img1_name = $resultToUpdate['pic_file_name1'];
+            $img2_name = $resultToUpdate['pic_file_name2'];
+            $img3_name = $resultToUpdate['pic_file_name3'];
+            $img4_name = $resultToUpdate['pic_file_name4'];
+            $img5_name = $resultToUpdate['pic_file_name5'];
+        }else{
+            $img1_name = $img[0]->getClientOriginalName();
+            if (isset($img[1])){
+                $img2_name = $img[1]->getClientOriginalName();
+            }
+            if (isset($img[2])){
+                $img3_name = $img[2]->getClientOriginalName();
+            }
+            if (isset($img[3])){
+                $img4_name = $img[3]->getClientOriginalName();
+            }
+            if (isset($img[4])){
+                $img5_name = $img[4]->getClientOriginalName();
+            }
+            foreach ($img as $item){
+                $img_path = $item->getPathName();
+                $img_data = File::get($img_path);
+                Storage::cloud()->put($item->getClientOriginalName(), $img_data);
+            }
+        }
+
+        if ($isExeRe == 0){ //未改
+            $exe_name = $resultToUpdate['executable_file_name'];
+        }else{
+            $exe_name = $exe->getClientOriginalName();
+            //將檔案存儲到雲端
+            $exe_path = $exe->getPathName();
+            $exe_data = File::get($exe_path);
+            Storage::cloud()->put($exe_name, $exe_data);
+        }
+
+        if ($isMaterialRe == 0){ //未改
+            $material_name = $resultToUpdate['material'];
+        }else{
+            $material_name = $material->getClientOriginalName();
+            //將檔案存儲到雲端
+            $material_path = $material->getPathName();
+            $material_data = File::get($material_path);
+            Storage::cloud()->put($material_name, $material_data);
+        }
+
+        $types = "";
+        foreach ($type as $value){
+            $types = $types . " " . $value;
+        }
+
+        $resultToUpdate->project_id = $id;
+        $resultToUpdate->name = $name;
+        $resultToUpdate->introduction = $introduction;
+        $resultToUpdate->type = $types;
+        $resultToUpdate->function = $function;
+        $resultToUpdate->teacher = $teacher;
+        $resultToUpdate->team = $team;
+        if ($video != null){
+            $resultToUpdate->movie_file_name = $video_name;
+        }
+        $resultToUpdate->pic_file_name1 = $img1_name;
+        if (isset($img[1])){
+            $resultToUpdate->pic_file_name2 = $img2_name;
+        }
+        if (isset($img[2])){
+            $resultToUpdate->pic_file_name3 = $img3_name;
+        }
+        if (isset($img[3])){
+            $resultToUpdate->pic_file_name4 = $img4_name;
+        }
+        if (isset($img[4])){
+            $resultToUpdate->pic_file_name5 = $img5_name;
+        }
+        $resultToUpdate->executable_file_name = $exe_name;
+        if ($material != null){
+            $resultToUpdate->material = $material_name;
+        }
+        $resultToUpdate->save();
+
+        return redirect('/PHMS_member/pm/'.$id.'/result');
     }
 }
