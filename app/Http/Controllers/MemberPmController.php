@@ -381,6 +381,40 @@ class MemberPmController extends Controller
     }
 
     public function result_store($id, Request $request){
-        dd($id);
+        $name = $request->input('name');
+        $introduction = $request->input('introduction');
+        $type = $request->input('type');
+        $function = $request->input('function');
+        $teacher = $request->input('teacher');
+        $team = $request->input('team');
+        $video = $request->file('video');
+        $img = $request->file('img');
+        $exe = $request->file('exe');
+        $material = $request->file('material');
+
+//        dd($img);
+
+        $types = "";
+        foreach ($type as $value){
+            $types = $types . " " . $value;
+        }
+
+        $resultToStore = $this->project_result;
+        $resultToStore->project_id = $id;
+        $resultToStore->name = $name;
+        $resultToStore->introduction = $introduction;
+        $resultToStore->type = $types;
+        $resultToStore->function = $function;
+        $resultToStore->teacher = $teacher;
+        $resultToStore->team = $team;
+        $resultToStore->movie_file_name = $video->getClientOriginalName();
+        $resultToStore->pic_file_name1 = $img->getClientOriginalName();
+        $resultToStore->pic_file_name2 = $img->getClientOriginalName();
+        $resultToStore->pic_file_name3 = $img->getClientOriginalName();
+        $resultToStore->pic_file_name4 = $img->getClientOriginalName();
+        $resultToStore->pic_file_name5 = $img->getClientOriginalName();
+        $resultToStore->executable_file_name = $exe->getClientOriginalName();
+
+
     }
 }
