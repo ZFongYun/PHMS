@@ -8,7 +8,7 @@
                 <form action="{{route('Overall.member_result_update',[$resultToEdit['0']['project_id'],$resultToEdit['0']['id']])}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="col-md-8">
-                        <h5 class="text-danger m-b-0">☆ 新增成果前，請先<a href="">點我</a>下載上傳規範 ☆</h5>
+                        <h5 class="text-danger m-b-0">☆ 上傳文件前，請先<a href="">點我</a>下載上傳規範 ☆</h5>
                         <h5 class="star">注意！「*」為必填欄位</h5>
                         <div class="form-group row">
                             <label for="name" class="col-md-2 control-label form-title"><span class="text-danger">*</span>遊戲名稱</label>
