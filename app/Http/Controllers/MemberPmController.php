@@ -368,7 +368,37 @@ class MemberPmController extends Controller
             return view('member_frontend.result_null',compact('id','project_name'));
         }else{
             $resultToIndex = $this->project_result->where('project_id',$id)->get()->toArray();
-            return view('member_frontend.result',compact('resultToIndex','project_name'));
+            $project_member = DB::table('project_member')
+                ->where('project_id',$id)->whereNull('project_member.deleted_at')
+                ->join('member','project_member.member_id','=','member.id')
+                ->select('member.id','member.name','member.title')
+                ->get()->toArray();
+
+            $dir = '/';
+            $recursive = false; //是否取得資料夾下的目錄
+            $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+            $video_file = $contents
+                ->where('type', '=', 'file')
+                ->where('filename', '=', pathinfo($resultToIndex[0]['movie_file_name'], PATHINFO_FILENAME))
+                ->where('extension', '=', pathinfo($resultToIndex[0]['movie_file_name'], PATHINFO_EXTENSION))
+                ->sortBy('timestamp')
+                ->last();
+            if (isset($video_file)){
+                $video_url = Storage::cloud()->url($video_file['path']);
+            }else{
+                $video_url = '';
+            }
+            $exe_file = $contents
+                ->where('type', '=', 'file')
+                ->where('filename', '=', pathinfo($resultToIndex[0]['executable_file_name'], PATHINFO_FILENAME))
+                ->where('extension', '=', pathinfo($resultToIndex[0]['executable_file_name'], PATHINFO_EXTENSION))
+                ->sortBy('timestamp')
+                ->last();
+            $exe_url = Storage::cloud()->url($exe_file['path']);
+            $exe_name = $exe_file['name'];
+
+            return view('member_frontend.result',
+                compact('resultToIndex','project_name','project_member','video_url','exe_url','exe_name'));
         }
     }
 
