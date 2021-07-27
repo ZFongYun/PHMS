@@ -12,23 +12,23 @@
             <div class="col-sm-4 m-b-10" align="right">
                 <a href="{{route('Overall.member_result_edit',[$resultToIndex[0]['project_id'],$resultToIndex[0]['id']])}}" class="btn btn-warning waves-effect waves-light m-b-15">編輯專案</a>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-6">
                 <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        @for($i=1; $i<count($img); $i++)
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$i}}" aria-label="Slide {{$i+1}}"></button>
+                        @endfor
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{ URL::asset('assets/images/thumbnail/4.jpg') }}" class="d-block w-100" alt="...">
+                            <img src="{{$img[0]}}" class="d-block w-100">
                         </div>
-                        <div class="carousel-item">
-                            <img src="{{ URL::asset('assets/images/thumbnail/2.jpg') }}" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ URL::asset('assets/images/thumbnail/3.jpg') }}" class="d-block w-100" alt="...">
-                        </div>
+                        @for($i=1; $i<count($img); $i++)
+                            <div class="carousel-item">
+                                <img src="{{$img[$i]}}" class="d-block w-100">
+                            </div>
+                        @endfor
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -40,29 +40,25 @@
                     </button>
                 </div>
             </div>
-
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <h4>遊戲介紹/背景</h4>
                 <p class="m-l-10">{{$resultToIndex[0]['introduction']}}</p>
-
-                <h5>遊戲類型</h5>
+                <h4>遊戲類型</h4>
                 <p class="m-l-10">{{$resultToIndex[0]['type']}}</p>
-
             </div>
 
-            <div class="col-sm-7 m-t-10">
-                <iframe src="{{$video_url}}" height="338" width="650"></iframe>
+            <div class="col-sm-6 m-t-10">
+                <iframe src="{{$video_url}}" class="d-block w-100" height="324"></iframe>
             </div>
-
-            <div class="col-sm-5 m-t-10">
-                <h5>遊玩方法</h5>
+            <div class="col-sm-6 m-t-10">
+                <h4>遊玩方法</h4>
                 <p class="m-l-10">{{$resultToIndex[0]['function']}}</p>
             </div>
 
             <div class="col-sm-6 m-t-10">
-                <div class="card card-custom card-border">
+                <div class="card card-primary card-border">
                     <div class="card-heading">
-                        <h2 class="card-title text-custom m-0">遊戲下載</h2>
+                        <h3 class="card-title text-primary m-0">遊戲下載</h3>
                     </div>
                     <div class="card-body">
                         <a href="{{$exe_url}}" class="btn waves-effect waves-light btn-primary">download</a>
@@ -70,11 +66,10 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-6 m-t-10">
-                <div class="card card-custom card-border">
+                <div class="card card-primary card-border">
                     <div class="card-heading">
-                        <h2 class="card-title text-custom m-0">相關資訊</h2>
+                        <h3 class="card-title text-primary m-0">相關資訊</h3>
                     </div>
                     <div class="card-body">
                         <dl class="row m-b-10">

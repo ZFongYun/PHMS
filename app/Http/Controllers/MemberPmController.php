@@ -397,8 +397,60 @@ class MemberPmController extends Controller
             $exe_url = Storage::cloud()->url($exe_file['path']);
             $exe_name = $exe_file['name'];
 
+            $img = array();
+            if ($resultToIndex[0]['pic_file_name1'] != null){
+                $img1_file = $contents
+                    ->where('type', '=', 'file')
+                    ->where('filename', '=', pathinfo($resultToIndex[0]['pic_file_name1'], PATHINFO_FILENAME))
+                    ->where('extension', '=', pathinfo($resultToIndex[0]['pic_file_name1'], PATHINFO_EXTENSION))
+                    ->sortBy('timestamp')
+                    ->last();
+                $img1_url = Storage::cloud()->url($img1_file['path']);
+                array_push($img,$img1_url);
+            }
+            if ($resultToIndex[0]['pic_file_name2'] != null){
+                $img2_file = $contents
+                    ->where('type', '=', 'file')
+                    ->where('filename', '=', pathinfo($resultToIndex[0]['pic_file_name2'], PATHINFO_FILENAME))
+                    ->where('extension', '=', pathinfo($resultToIndex[0]['pic_file_name2'], PATHINFO_EXTENSION))
+                    ->sortBy('timestamp')
+                    ->last();
+                $img2_url = Storage::cloud()->url($img2_file['path']);
+                array_push($img,$img2_url);
+            }
+            if ($resultToIndex[0]['pic_file_name3'] != null){
+                $img3_file = $contents
+                    ->where('type', '=', 'file')
+                    ->where('filename', '=', pathinfo($resultToIndex[0]['pic_file_name3'], PATHINFO_FILENAME))
+                    ->where('extension', '=', pathinfo($resultToIndex[0]['pic_file_name3'], PATHINFO_EXTENSION))
+                    ->sortBy('timestamp')
+                    ->last();
+                $img3_url = Storage::cloud()->url($img3_file['path']);
+                array_push($img,$img3_url);
+            }
+            if ($resultToIndex[0]['pic_file_name4'] != null){
+                $img4_file = $contents
+                    ->where('type', '=', 'file')
+                    ->where('filename', '=', pathinfo($resultToIndex[0]['pic_file_name4'], PATHINFO_FILENAME))
+                    ->where('extension', '=', pathinfo($resultToIndex[0]['pic_file_name4'], PATHINFO_EXTENSION))
+                    ->sortBy('timestamp')
+                    ->last();
+                $img4_url = Storage::cloud()->url($img4_file['path']);
+                array_push($img,$img4_url);
+            }
+            if ($resultToIndex[0]['pic_file_name5'] != null){
+                $img5_file = $contents
+                    ->where('type', '=', 'file')
+                    ->where('filename', '=', pathinfo($resultToIndex[0]['pic_file_name5'], PATHINFO_FILENAME))
+                    ->where('extension', '=', pathinfo($resultToIndex[0]['pic_file_name5'], PATHINFO_EXTENSION))
+                    ->sortBy('timestamp')
+                    ->last();
+                $img5_url = Storage::cloud()->url($img5_file['path']);
+                array_push($img,$img5_url);
+            }
+
             return view('member_frontend.result',
-                compact('resultToIndex','project_name','project_member','video_url','exe_url','exe_name'));
+                compact('resultToIndex','project_name','project_member','video_url','exe_url','exe_name','img'));
         }
     }
 
