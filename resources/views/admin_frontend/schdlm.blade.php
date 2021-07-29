@@ -25,7 +25,7 @@
                         <th>標題</th>
                         <th>進度起止日</th>
                         <th>進度下載</th>
-                        <th>考核</th>
+                        <th>考核紀錄</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,7 +51,7 @@
                         <th>標題</th>
                         <th>進度起止日</th>
                         <th>進度下載</th>
-                        <th>考核</th>
+                        <th>考核紀錄</th>
                     </tr>
                     </thead>
                     <tbody id="search_body">
