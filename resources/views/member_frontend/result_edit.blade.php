@@ -26,7 +26,7 @@
 
                         <div class="form-group row">
                             <label for="introduction" class="col-md-2 control-label form-title"><span class="text-danger">*</span>遊戲類型</label>
-                            <div class="checkbox controls">
+                            <div class="checkbox controls col-sm-8">
                                 <input id="typeButton1" type="checkbox" name="type[]" value="休閒" class="input-mini"
                                        @foreach($type_chk_arr as $item)
                                             @if($item == "休閒")
@@ -48,28 +48,26 @@
                                             @endif
                                         @endforeach>
                                 <label for="typeButton3" class="m-r-10">冒險</label>
-                            </div>
-                            <div class="checkbox controls">
                                 <input id="typeButton4" type="checkbox" name="type[]" value="模擬" class="input-mini"
                                        @foreach($type_chk_arr as $item)
-                                            @if($item == "模擬")
-                                                checked
-                                            @endif
-                                        @endforeach>
+                                       @if($item == "模擬")
+                                       checked
+                                    @endif
+                                    @endforeach>
                                 <label for="typeButton4" class="m-r-10">模擬</label>
                                 <input id="typeButton5" type="checkbox" name="type[]" value="養成" class="input-mini"
                                        @foreach($type_chk_arr as $item)
-                                            @if($item == "養成")
-                                                checked
-                                            @endif
-                                        @endforeach>
+                                       @if($item == "養成")
+                                       checked
+                                    @endif
+                                    @endforeach>
                                 <label for="typeButton5" class="m-r-10">養成</label>
                                 <input id="typeButton6" type="checkbox" name="type[]" value="教育" class="input-mini"
                                        @foreach($type_chk_arr as $item)
-                                            @if($item == "教育")
-                                                checked
-                                            @endif
-                                        @endforeach>
+                                       @if($item == "教育")
+                                       checked
+                                    @endif
+                                    @endforeach>
                                 <label for="typeButton6" class="m-r-10">教育</label>
                             </div>
                         </div>
