@@ -51,6 +51,7 @@ Route::prefix('PHMS_admin')->group(function (){
         Route::prefix('search')->group(function (){
             Route::post('/hr_search','SearchController@hr_search');
             Route::post('/pm_search','SearchController@pm_search');
+            Route::post('/schdl_search','SearchController@admin_schdl_search');
         });
     });
 });
@@ -98,8 +99,6 @@ Route::prefix('PHMS_member')->group(function (){
             Route::post('/{resultId}/update', 'MemberPmController@result_update')->name('Overall.member_result_update');
             Route::get('/download', 'MemberPmController@format_download')->name('Overall.format_download');
         });
-
-
         //====搜尋====
         Route::prefix('search')->group(function (){
             Route::post('/hr_search','SearchController@hr_search');

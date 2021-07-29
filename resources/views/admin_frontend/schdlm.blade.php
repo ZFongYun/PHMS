@@ -82,51 +82,39 @@
             var project_id = {{$id}};
             var html_result = '';
 
-            if (target == "請選擇"){
-                alert("請選擇搜尋目標");
-            }else {
-                $(document).ready(function() {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/PHMS_member/search/schdl_search',
-                        data: {
-                            keyword: keyword,
-                            project_id: project_id,
-                            _token: '{{csrf_token()}}'
-                        },
-                        success: function (data) {
-                            // var Today = new Date();
-                            // var current_time = Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + " " + Today.getHours() + ":" + Today.getMinutes() + ":" + Today.getSeconds();
-                            // $('#all_data_table').hide();
-                            // $('#search_data_table').show();
-                            // if (data == ''){
-                            //     html_result += '<tr>';
-                            //     html_result += '<td colspan="7">無結果</td></tr>';
-                            //     $('#search_body').html(html_result);
-                            // }else {
-                            //     for (var i = 0; i<data.length; i++){
-                            //         html_result += '<tr>';
-                            //         html_result += '<th scope="row">'+data[i].id+'</th>';
-                            //         html_result += '<td>'+data[i].name+'</td>';
-                            //         html_result += '<td>'+data[i].schdl_start_date+' ~ '+data[i].schdl_end_date+'</td>';
-                            //         html_result += '<td><a href="schdlm/' + data[i].id + '/download" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-download"></i></a></td>';
-                            //         html_result += '<td><a href="schdlm/' + data[i].id + '/PA" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-account-circle"></i></a></td>';
-                            //         if(Date.parse(current_time).valueOf() >= Date.parse(data[i].pa_end_date + " " + data[i].pa_end_time).valueOf()){
-                            //             html_result += '<td>已結束</td>';
-                            //         }else{
-                            //             html_result += '<td>考核中</td>';
-                            //         }
-                            //         html_result += '<td><a href="schdlm/' + data[i].id + '/edit" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-warning"><i class="zmdi zmdi-edit"></i></a></td></tr>';
-                            //         $('#search_body').html(html_result);
-                            //     }
-                            // }
-                        },
-                        error: function () {
-                            alert('搜尋錯誤')
+            $(document).ready(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/PHMS_admin/search/schdl_search',
+                    data: {
+                        keyword: keyword,
+                        project_id: project_id,
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function (data) {
+                        $('#all_data_table').hide();
+                        $('#search_data_table').show();
+                        if (data == ''){
+                            html_result += '<tr>';
+                            html_result += '<td colspan="5">無結果</td></tr>';
+                            $('#search_body').html(html_result);
+                        }else {
+                            for (var i = 0; i<data.length; i++){
+                                html_result += '<tr>';
+                                html_result += '<th scope="row">'+data[i].id+'</th>';
+                                html_result += '<td>'+data[i].name+'</td>';
+                                html_result += '<td>'+data[i].schdl_start_date+' ~ '+data[i].schdl_end_date+'</td>';
+                                html_result += '<td><a href="schdlm/' + data[i].id + '/download" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-download"></i></a></td>';
+                                // html_result += '<td><a href="schdlm/' + data[i].id + '/PA" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-account-circle"></i></a></td>';
+                                $('#search_body').html(html_result);
+                            }
                         }
-                    });
+                    },
+                    error: function () {
+                        alert('搜尋錯誤')
+                    }
                 });
-            }
+            });
         });
     </script>
 @endsection

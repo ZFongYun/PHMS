@@ -180,4 +180,16 @@ class SearchController extends Controller
         }
         return $schdls;
     }
+
+    public function admin_schdl_search(Request $request){
+        $keyword = $request->input('keyword');
+        $project_id = $request->input('project_id');
+
+        $schdls = ProjectSchdl::where('project_id',$project_id)
+            ->where('name','like','%'.$keyword.'%')->get();
+
+        return $schdls;
+    }
+
+
 }
