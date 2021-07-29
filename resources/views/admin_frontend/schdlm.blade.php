@@ -9,7 +9,7 @@
             <div class="col-sm-12 m-b-15" align="right">
                 <div class="input-group col-sm-5">
                     <button type="button" class="btn waves-effect waves-light btn-primary btn-sm m-r-5" onclick="displayAllData()">顯示全部資料</button>
-                    <input type="text" class="form-control" placeholder="表格搜尋" id="keyword" name="keyword">
+                    <input type="text" class="form-control" placeholder="進度標題搜尋" id="keyword" name="keyword">
                     <span class="input-group-prepend">
                         <button type="button" class="search btn waves-effect waves-light btn-primary"><i class="fa fa-search"></i></button>
                     </span>
