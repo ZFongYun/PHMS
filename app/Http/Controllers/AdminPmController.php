@@ -6,6 +6,7 @@ use App\Models\Member;
 use App\Models\Project;
 use App\Models\ProjectMember;
 use App\Models\ProjectSchdl;
+use App\Models\SchdlProjectPa;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -210,6 +211,30 @@ class AdminPmController extends Controller
         return response($rawData, 200)
             ->header('ContentType', $file['mimetype'])
             ->header('Content-Disposition', "attachment; filename=$filename"); //下載文件
+    }
+
+    public function schdlm_pa($id, $schdlId){
+        $schdl = $this->project_schdl->find($schdlId);
+        $schdl_name = $schdl['name'];
+
+        $project_pa = SchdlProjectPa::where('project_id',$id)
+            ->where('project_schdl_id',$schdlId)->get()->toArray();
+
+        $project_member = DB::table('project_member')
+            ->where('project_id',$id)->whereNull('project_member.deleted_at')
+            ->join('member','project_member.member_id','=','member.id')
+            ->select('member.*')
+            ->get()->toArray();
+
+        $member_pa = DB::table('schdl_member_pa')
+            ->where('project_schdl_id',$schdlId)
+            ->join('member','schdl_member_pa.member_id','=','member.id')
+            ->select('member.id','member.student_ID','member.name','member.title','schdl_member_pa.score','schdl_member_pa.explanation')
+            ->get()->toArray();
+
+        $project_schdl = $this->project_schdl->where('project_id',$id)->where('id',$schdlId)->get()->toArray();
+
+        return view('admin_frontend.schdlm_pa',compact('schdl_name','id','schdlId','project_member','project_pa','member_pa','project_schdl'));
     }
 
     public function result($id){

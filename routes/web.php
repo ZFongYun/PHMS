@@ -45,7 +45,7 @@ Route::prefix('PHMS_admin')->group(function (){
         //====進度管理====
         Route::prefix('pm/{id}/schdlm')->group(function (){
             Route::get('/{schdlId}/download', 'AdminPmController@schdlm_download')->name('Overall.admin_schdlm_download');
-//            Route::get('/{schdlId}/PA', 'AdminPmController@schdlm_pa')->name('Overall.member_schdlm_pa');
+            Route::get('/{schdlId}/PA', 'AdminPmController@schdlm_pa')->name('Overall.admin_schdlm_pa');
         });
         //====搜尋====
         Route::prefix('search')->group(function (){

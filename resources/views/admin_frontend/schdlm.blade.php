@@ -35,7 +35,7 @@
                             <td>{{$row['name']}}</td>
                             <td>{{$row['schdl_start_date']}} ~ {{$row['schdl_end_date']}}</td>
                             <td><a href="{{route('Overall.admin_schdlm_download',[$id, $row['id']])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-download"></i></a></td>
-                            <td><a href="#" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-account-circle"></i></a></td>
+                            <td><a href="{{route('Overall.admin_schdlm_pa',[$id, $row['id']])}}" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-account-circle"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -105,7 +105,7 @@
                                 html_result += '<td>'+data[i].name+'</td>';
                                 html_result += '<td>'+data[i].schdl_start_date+' ~ '+data[i].schdl_end_date+'</td>';
                                 html_result += '<td><a href="schdlm/' + data[i].id + '/download" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-download"></i></a></td>';
-                                // html_result += '<td><a href="schdlm/' + data[i].id + '/PA" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-account-circle"></i></a></td>';
+                                html_result += '<td><a href="schdlm/' + data[i].id + '/PA" class="btn btn-icon waves-effect btn-rounded btn-sm waves-light btn-primary"><i class="zmdi zmdi-account-circle"></i></a></td>';
                                 $('#search_body').html(html_result);
                             }
                         }
