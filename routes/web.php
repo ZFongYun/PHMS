@@ -42,6 +42,11 @@ Route::prefix('PHMS_admin')->group(function (){
         Route::get('pm/{id}/schdlm', 'AdminPmController@schdlm')->name('Overall.admin_schdlm');
         Route::get('pm/{id}/result', 'AdminPmController@result')->name('Overall.admin_result');
         Route::get('PM/{id}/destroy_exception', 'AdminPmController@destroy_exception')->name('Overall.pm_destroy_exception');
+        //====進度管理====
+        Route::prefix('pm/{id}/schdlm')->group(function (){
+            Route::get('/{schdlId}/download', 'AdminPmController@schdlm_download')->name('Overall.admin_schdlm_download');
+//            Route::get('/{schdlId}/PA', 'AdminPmController@schdlm_pa')->name('Overall.member_schdlm_pa');
+        });
         //====搜尋====
         Route::prefix('search')->group(function (){
             Route::post('/hr_search','SearchController@hr_search');

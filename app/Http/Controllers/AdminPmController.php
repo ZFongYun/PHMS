@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Models\Project;
 use App\Models\ProjectMember;
+use App\Models\ProjectSchdl;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdminPmController extends Controller
 {
     protected $project;
+    protected $project_schdl;
 
-    public function __construct(Project $project)
+    public function __construct(Project $project, ProjectSchdl $project_schdl)
     {
         $this->project = $project;
+        $this->project_schdl = $project_schdl;
     }
 
     /**
@@ -174,17 +178,41 @@ class AdminPmController extends Controller
         return redirect('/PHMS_admin/pm');
     }
 
-    public function schdlm($id){
-        dd($id);
-    }
-
-    public function result($id){
-        dd($id);
-    }
-
     public function destroy_exception($id){
         $projectToDestroy = $this->project->find($id);
         $projectToDestroy -> delete();
         return redirect('/PHMS_admin/pm');
+    }
+
+    public function schdlm($id){
+        $schdlToIndex = $this->project_schdl->where('project_id',$id)->get();
+        $project = $this->project->find($id);
+        $project_name = $project['name'];
+        return view('admin_frontend.schdlm',compact('id','schdlToIndex','project_name'));
+    }
+
+    public function schdlm_download($id,$schdlId){
+        $filename = ProjectSchdl::where('id',$schdlId)->value('file_name');
+
+        $dir = '/';
+        $recursive = false; //是否取得資料夾下的目錄
+        $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->sortBy('timestamp')
+            ->last(); //在$contents找是否有符合的文件
+
+        $rawData = Storage::cloud()->get($file['path']); //從$file取得路徑名稱
+
+        return response($rawData, 200)
+            ->header('ContentType', $file['mimetype'])
+            ->header('Content-Disposition', "attachment; filename=$filename"); //下載文件
+    }
+
+    public function result($id){
+        dd($id);
     }
 }
