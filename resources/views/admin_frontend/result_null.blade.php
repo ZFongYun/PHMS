@@ -1,0 +1,19 @@
+@extends('admin_frontend.layout.master')
+@section('content')
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="page-title">{{$project_name}} | 成果展示</p>
+            </div>
+            <div class="col-sm-4">
+                <div class="alert alert-danger">
+                    <strong>未有成果資料</strong>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container-fluid -->
+@endsection
+@section('title','成果展示')

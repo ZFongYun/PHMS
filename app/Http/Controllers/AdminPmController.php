@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Models\Project;
 use App\Models\ProjectMember;
+use App\Models\ProjectResult;
 use App\Models\ProjectSchdl;
 use App\Models\SchdlProjectPa;
 use Illuminate\Database\Eloquent\Model;
@@ -16,11 +17,13 @@ class AdminPmController extends Controller
 {
     protected $project;
     protected $project_schdl;
+    protected $project_result;
 
-    public function __construct(Project $project, ProjectSchdl $project_schdl)
+    public function __construct(Project $project, ProjectSchdl $project_schdl, ProjectResult $project_result)
     {
         $this->project = $project;
         $this->project_schdl = $project_schdl;
+        $this->project_result = $project_result;
     }
 
     /**
@@ -238,6 +241,111 @@ class AdminPmController extends Controller
     }
 
     public function result($id){
-        dd($id);
+        $is_null = $this->project_result->where('project_id',$id)->get()->toArray();
+        $project_name = Project::where('id',$id)->value('name');
+
+        if (empty($is_null)){
+            return view('admin_frontend.result_null',compact('id','project_name'));
+        }else{
+            $resultToIndex = $this->project_result->where('project_id',$id)->get()->toArray();
+            $project_member = DB::table('project_member')
+                ->where('project_id',$id)->whereNull('project_member.deleted_at')
+                ->join('member','project_member.member_id','=','member.id')
+                ->select('member.id','member.name','member.title')
+                ->get()->toArray();
+
+            $dir = '/';
+            $recursive = false; //是否取得資料夾下的目錄
+            $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+            $video_file = $contents
+                ->where('type', '=', 'file')
+                ->where('filename', '=', pathinfo($resultToIndex[0]['movie_file_name'], PATHINFO_FILENAME))
+                ->where('extension', '=', pathinfo($resultToIndex[0]['movie_file_name'], PATHINFO_EXTENSION))
+                ->sortBy('timestamp')
+                ->last();
+            if (isset($video_file)){
+                $video_url = Storage::cloud()->url($video_file['path']);
+            }else{
+                $video_url = '';
+            }
+            $exe_file = $contents
+                ->where('type', '=', 'file')
+                ->where('filename', '=', pathinfo($resultToIndex[0]['executable_file_name'], PATHINFO_FILENAME))
+                ->where('extension', '=', pathinfo($resultToIndex[0]['executable_file_name'], PATHINFO_EXTENSION))
+                ->sortBy('timestamp')
+                ->last();
+            $exe_url = Storage::cloud()->url($exe_file['path']);
+            $exe_name = $exe_file['name'];
+
+            $img = array();
+            if ($resultToIndex[0]['pic_file_name1'] != null){
+                $img1_file = $contents
+                    ->where('type', '=', 'file')
+                    ->where('filename', '=', pathinfo($resultToIndex[0]['pic_file_name1'], PATHINFO_FILENAME))
+                    ->where('extension', '=', pathinfo($resultToIndex[0]['pic_file_name1'], PATHINFO_EXTENSION))
+                    ->sortBy('timestamp')
+                    ->last();
+                $img1_url = Storage::cloud()->url($img1_file['path']);
+                array_push($img,$img1_url);
+            }
+            if ($resultToIndex[0]['pic_file_name2'] != null){
+                $img2_file = $contents
+                    ->where('type', '=', 'file')
+                    ->where('filename', '=', pathinfo($resultToIndex[0]['pic_file_name2'], PATHINFO_FILENAME))
+                    ->where('extension', '=', pathinfo($resultToIndex[0]['pic_file_name2'], PATHINFO_EXTENSION))
+                    ->sortBy('timestamp')
+                    ->last();
+                $img2_url = Storage::cloud()->url($img2_file['path']);
+                array_push($img,$img2_url);
+            }
+            if ($resultToIndex[0]['pic_file_name3'] != null){
+                $img3_file = $contents
+                    ->where('type', '=', 'file')
+                    ->where('filename', '=', pathinfo($resultToIndex[0]['pic_file_name3'], PATHINFO_FILENAME))
+                    ->where('extension', '=', pathinfo($resultToIndex[0]['pic_file_name3'], PATHINFO_EXTENSION))
+                    ->sortBy('timestamp')
+                    ->last();
+                $img3_url = Storage::cloud()->url($img3_file['path']);
+                array_push($img,$img3_url);
+            }
+            if ($resultToIndex[0]['pic_file_name4'] != null){
+                $img4_file = $contents
+                    ->where('type', '=', 'file')
+                    ->where('filename', '=', pathinfo($resultToIndex[0]['pic_file_name4'], PATHINFO_FILENAME))
+                    ->where('extension', '=', pathinfo($resultToIndex[0]['pic_file_name4'], PATHINFO_EXTENSION))
+                    ->sortBy('timestamp')
+                    ->last();
+                $img4_url = Storage::cloud()->url($img4_file['path']);
+                array_push($img,$img4_url);
+            }
+            if ($resultToIndex[0]['pic_file_name5'] != null){
+                $img5_file = $contents
+                    ->where('type', '=', 'file')
+                    ->where('filename', '=', pathinfo($resultToIndex[0]['pic_file_name5'], PATHINFO_FILENAME))
+                    ->where('extension', '=', pathinfo($resultToIndex[0]['pic_file_name5'], PATHINFO_EXTENSION))
+                    ->sortBy('timestamp')
+                    ->last();
+                $img5_url = Storage::cloud()->url($img5_file['path']);
+                array_push($img,$img5_url);
+            }
+
+            $material_file = $contents
+                ->where('type', '=', 'file')
+                ->where('filename', '=', pathinfo($resultToIndex[0]['material'], PATHINFO_FILENAME))
+                ->where('extension', '=', pathinfo($resultToIndex[0]['material'], PATHINFO_EXTENSION))
+                ->sortBy('timestamp')
+                ->last();
+            if (isset($material_file)){
+                $material_url = Storage::cloud()->url($material_file['path']);
+                $material_name = $material_file['name'];
+            }else{
+                $material_url = '';
+                $material_name = '';
+            }
+
+            return view('admin_frontend.result',
+                compact('resultToIndex','project_name','project_member',
+                    'video_url','exe_url','exe_name','img','material_url','material_name'));
+        }
     }
 }
