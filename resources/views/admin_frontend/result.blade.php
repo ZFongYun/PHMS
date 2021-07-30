@@ -96,19 +96,19 @@
                                 <dd class="col-sm-7">
                                     @foreach($project_member as $row)
                                         @if($row->title==0)
-                                            專任教授 | <a href="{{action('AdminPmController@show',$row->id)}}">{{$row->name}}</a><br>
+                                            專任教授 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                         @elseif($row->title==1)
-                                            知點助理 | <a href="{{action('AdminPmController@show',$row->id)}}">{{$row->name}}</a><br>
+                                            知點助理 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                         @elseif($row->title==2)
-                                            企劃 | <a href="{{action('AdminPmController@show',$row->id)}}">{{$row->name}}</a><br>
+                                            企劃 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                         @elseif($row->title==3)
-                                            程式 | <a href="{{action('AdminPmController@show',$row->id)}}">{{$row->name}}</a><br>
+                                            程式 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                         @elseif($row->title==4)
-                                            美術 | <a href="{{action('AdminPmController@show',$row->id)}}">{{$row->name}}</a><br>
+                                            美術 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                         @elseif($row->title==5)
-                                            技美 | <a href="{{action('AdminPmController@show',$row->id)}}">{{$row->name}}</a><br>
+                                            技美 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                         @elseif($row->title==6)
-                                            無職務 | <a href="{{action('AdminPmController@show',$row->id)}}">{{$row->name}}</a><br>
+                                            無職務 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                         @endif
                                     @endforeach
                                 </dd>
