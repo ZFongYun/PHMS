@@ -119,7 +119,7 @@ class MemberPmController extends Controller
         $project_member = DB::table('project_member')
             ->where('project_id',$id)->whereNull('project_member.deleted_at')
             ->join('member','project_member.member_id','=','member.id')
-            ->select('member.name','member.title')
+            ->select('member.name','member.title','member.id')
             ->get()->toArray();
         return view('member_frontend.pm_show',compact('projectToShow','project_member'));
     }

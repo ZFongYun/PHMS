@@ -46,19 +46,19 @@
                         <dd class="col-sm-9">
                             @foreach($project_member as $row)
                                 @if($row->title==0)
-                                    專任教授 | {{$row->name}}<br>
+                                    專任教授 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                 @elseif($row->title==1)
-                                    知點助理 | {{$row->name}}<br>
+                                    知點助理 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                 @elseif($row->title==2)
-                                    企劃 | {{$row->name}}<br>
+                                    企劃 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                 @elseif($row->title==3)
-                                    程式 | {{$row->name}}<br>
+                                    程式 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                 @elseif($row->title==4)
-                                    美術 | {{$row->name}}<br>
+                                    美術 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                 @elseif($row->title==5)
-                                    技美 | {{$row->name}}<br>
+                                    技美 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                 @elseif($row->title==6)
-                                    無職務 | {{$row->name}}<br>
+                                    無職務 | <a href="{{action('AdminHrController@show',$row->id)}}">{{$row->name}}</a><br>
                                 @endif
                             @endforeach
                         </dd>
