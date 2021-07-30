@@ -4,8 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-    <meta name="author" content="Coderthemes">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -13,16 +11,13 @@
 
     <title>@yield('title')</title>
 
-    {{--    <!-- Custom box css -->--}}
-    {{--    <link href="{{ URL::asset('../plugins/custombox/dist/custombox.min.css') }}" rel="stylesheet">--}}
-
     {{--    <!-- Date picker css -->--}}
     <link href="{{ URL::asset('../plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 
-{{--    <!-- Time picker css -->--}}
+    {{--    <!-- Time picker css -->--}}
     <link href="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet">
 
-<!-- form Uploads -->
+    <!-- form Uploads -->
     <link href="{{ URL::asset('../plugins/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ URL::asset('assets_member/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -60,9 +55,6 @@
 <script src="{{ URL::asset('assets_member/js/wow.min.js') }}"></script>
 <script src="{{ URL::asset('assets_member/js/jquery.nicescroll.js') }}"></script>
 <script src="{{ URL::asset('assets_member/js/jquery.scrollTo.min.js') }}"></script>
-
-<!-- Modal-Effect -->
-{{--<script src="{{ URL::asset('../plugins/custombox/dist/custombox.min.js') }}"></script>--}}
 
 <!-- App js -->
 <script src="{{ URL::asset('assets_member/js/jquery.core.js') }}"></script>

@@ -12,14 +12,8 @@
 
     <title>@yield('title')</title>
 
-{{--    <!-- Custom box css -->--}}
-{{--    <link href="{{ URL::asset('../plugins/custombox/dist/custombox.min.css') }}" rel="stylesheet">--}}
-
-{{--    <!-- Date picker css -->--}}
+    {{--    <!-- Date picker css -->--}}
     <link href="{{ URL::asset('../plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
-
-{{--    <!-- Time picker css -->--}}
-{{--    <link href="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet">--}}
 
     <!-- form Uploads -->
     <link href="{{ URL::asset('../plugins/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
@@ -48,9 +42,6 @@
     var resizefunc = [];
 </script>
 
-
-
-
 <!-- jQuery  -->
 <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ URL::asset('assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -63,15 +54,11 @@
 <script src="{{ URL::asset('assets/js/jquery.nicescroll.js') }}"></script>
 <script src="{{ URL::asset('assets/js/jquery.scrollTo.min.js') }}"></script>
 
-<!-- Modal-Effect -->
-{{--<script src="{{ URL::asset('../plugins/custombox/dist/custombox.min.js') }}"></script>--}}
-
 <!-- App js -->
 <script src="{{ URL::asset('assets/js/jquery.core.js') }}"></script>
 <script src="{{ URL::asset('assets/js/jquery.app.js') }}"></script>
 
 <!-- Plugins Js -->
-{{--<script src="{{ URL::asset('../plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>--}}
 <script src="{{ URL::asset('../plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 
 <!-- file uploads js -->
@@ -82,19 +69,6 @@
     jQuery('#datepicker-project-start').datepicker();
     jQuery('#datepicker-project-end').datepicker();
 
-    // Time Picker
-    // jQuery('#timepicker-start').timepicker({
-    //     showMeridian : false
-    // });
-
-    // jQuery('#timepicker-end').timepicker({
-    //     showMeridian : false
-    // });
-
-    // jQuery('#timepicker-upload').timepicker({
-    //     showMeridian : false
-    // });
-
     $('.dropify').dropify({
         messages: {
             'default': '請將文件拖放到此處或單擊該區域上傳文件。',
@@ -103,11 +77,10 @@
             'error': '發生錯誤，請重新上傳。'
         },
         error: {
-            'fileSize': 'The file size is too big (1M max).'
+            'fileSize': '檔案大小超出規定。'
         }
     });
 </script>
 
 </body>
 </html>
-
