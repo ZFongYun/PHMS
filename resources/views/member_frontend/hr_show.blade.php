@@ -1,6 +1,5 @@
 @extends('member_frontend.layout.master')
 @section('content')
-
     <div class="container-fluid">
         <!-- Page-Title -->
         <div class="row">
@@ -42,7 +41,7 @@
                 <p class="little-title">歷年製作的專案項目</p>
                 <div class="col-sm-8 m-b-10" style="padding-left: 30px">
                     @foreach($member_project as $row)
-                        <a href="{{action('MemberPmController@show',$row->id)}}" style="line-height: 30px">{{$row->name}}</a>
+                        <a href="{{route('Overall.member_result',$row->id)}}" style="line-height: 30px">{{$row->name}}</a>
                         <br>
                     @endforeach
                 </div>
@@ -55,6 +54,5 @@
         <!-- end row -->
     </div>
     <!-- end container-fluid -->
-
 @endsection
 @section('title','成員詳情')

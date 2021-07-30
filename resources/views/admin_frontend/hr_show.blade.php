@@ -42,7 +42,7 @@
                 <p class="little-title">歷年製作的專案項目</p>
                 <div class="col-sm-8 m-b-10" style="padding-left: 30px">
                     @foreach($member_project as $row)
-                        <a href="{{action('AdminPmController@show',$row->id)}}" style="line-height: 30px">{{$row->name}}</a>
+                        <a href="{{route('Overall.admin_result',$row->id)}}" style="line-height: 30px">{{$row->name}}</a>
                         <br>
                     @endforeach
                 </div>
