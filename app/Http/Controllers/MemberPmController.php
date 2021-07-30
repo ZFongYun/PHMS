@@ -362,7 +362,7 @@ class MemberPmController extends Controller
 
     public function result($id){
         $is_null = $this->project_result->where('project_id',$id)->get()->toArray();
-        $project_name = $this->project->find($id);
+        $project_name = Project::where('id',$id)->value('name');
 
         if (empty($is_null)){
             return view('member_frontend.result_null',compact('id','project_name'));

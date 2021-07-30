@@ -4,7 +4,7 @@
         <!-- Page-Title -->
         <div class="row">
             <div class="col-sm-12">
-                <p class="page-title">{{$project_name['name']}} | 成果展示</p>
+                <p class="page-title">{{$project_name}} | 成果展示</p>
             </div>
             <div class="col-sm-8 m-b-10">
                 <h2>{{$resultToIndex[0]['name']}}</h2>
