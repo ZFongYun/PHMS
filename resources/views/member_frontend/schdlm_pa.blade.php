@@ -151,7 +151,7 @@
                     <hr>
                     <p>◎ 成員考核</p>
                     <div class="table-responsive">
-                        <table class="table table-hover" id="member_pa_table">
+                        <table class="table" id="member_pa_table">
                             <thead>
                             <tr>
                                 <th width="5%">#</th>
@@ -239,7 +239,7 @@
                         <hr>
                         <p>◎ 成員考核</p>
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table">
                                 <thead>
                                 <tr>
                                     <th width="5%">#</th>
