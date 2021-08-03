@@ -179,6 +179,8 @@ class AdminPmController extends Controller
     {
         $projectToDestroy = $this->project->find($id);
         $projectToDestroy -> delete();
+
+        $memberToDestroy = ProjectMember::where('project_id',$id)->delete();
         return redirect('/PHMS_admin/pm');
     }
 
