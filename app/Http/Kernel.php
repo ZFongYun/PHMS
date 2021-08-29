@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
 
         'auth.admin' => \App\Http\Middleware\AdminMiddleware::class,
         'auth.member' => \App\Http\Middleware\MemberMiddleware::class,
+        'leader_check' => \App\Http\Middleware\LeaderCheckMiddelware::class,
     ];
 }
