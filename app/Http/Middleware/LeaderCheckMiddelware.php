@@ -20,7 +20,8 @@ class LeaderCheckMiddelware
         $member_title = Member::where('id',$member_id)->pluck('title');
 
         if ($member_title[0] != 2) {
-            return redirect('/PHMS_member/pm');
+            echo "<script>alert('無權限新增。')</script>";
+            echo back();
         }
         return $next($request);
     }
