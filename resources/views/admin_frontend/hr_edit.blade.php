@@ -66,7 +66,7 @@
                                     <option value="7" {{$member_position[0]['position'] == 7 ? 'selected' : ''}}>企劃助教</option>
                                     <option value="8" {{$member_position[0]['position'] == 8 ? 'selected' : ''}}>程式助教</option>
                                     <option value="9" {{$member_position[0]['position'] == 9 ? 'selected' : ''}}>美術助教</option>
-                                    <option value="10" {{$member_position[0]['position'] == 10 ? 'selected' : ''}}>無</option>
+                                    <option value="10" {{$member_position[0]['position'] == 10 ? 'selected' : ''}}>無職務</option>
                                 </select>
                                 <button type="button" onclick="add_field()" class="btn btn-primary btn-sm m-t-10 m-b-10 waves-effect waves-light button-font">再新增一列</button>
                                     @for($i=1; $i<count($member_position); $i++)

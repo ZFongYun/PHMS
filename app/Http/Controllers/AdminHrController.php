@@ -206,6 +206,9 @@ class AdminHrController extends Controller
     {
         $memberToEdit = $this->member->find($id);
         $member_position = MemberPosition::where('member_id',$id)->get()->toArray();
+        if($member_position == null){
+            $member_position[0]['position'] = 10;
+        }
         $project = Project::all()->toArray();
         $project_is_chk = DB::table('member_project')
             ->where('member_id',$id)->whereNull('member_project.deleted_at')
