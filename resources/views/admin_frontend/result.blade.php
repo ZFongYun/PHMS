@@ -46,7 +46,8 @@
 
             <div class="col-sm-6 m-t-10">
                 @if($video_url != '')
-                    <iframe src="{{$video_url}}" class="d-block w-100" height="324"></iframe>
+{{--                    <iframe src="{{$video_url}}" class="d-block w-100" height="324"></iframe>--}}
+                    <video src="{{$video_url}}" controls class="d-block w-100" height="324"></video>
                 @else
                     <label>未上傳影片</label>
                 @endif

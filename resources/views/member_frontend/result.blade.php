@@ -48,7 +48,8 @@
             </div>
 
             <div class="col-sm-6 m-t-10">
-                <iframe src="{{$video_url}}" class="d-block w-100" height="324"></iframe>
+{{--                <iframe src="{{$video_url}}" class="d-block w-100" height="324"></iframe>--}}
+                <video src="{{$video_url}}" controls class="d-block w-100" height="324"></video>
             </div>
             <div class="col-sm-6 m-t-10">
                 <h4>遊玩方法</h4>
