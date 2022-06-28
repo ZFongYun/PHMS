@@ -2,7 +2,7 @@
 此系統的管理、績效考核功能，提供使用者管理團隊事務與提升自主學習能力。
 
 ### 安裝
-1. 在terminal輸入`https://github.com/ZFongYun/EST2022.git`，下載專案資料夾
+1. 在terminal輸入`https://github.com/ZFongYun/PHMS.git`，下載專案資料夾
 2. 開啟專案，複製`.env .example`成新增`.env`，接著設定資料庫與google drive相關環境變數
 3. 在terminal輸入`php artisan key:generate`，以建立`.env`的`APP_KEY`
 4. 在terminal輸入`php artisan migrate`，遷移資料表至資料庫
