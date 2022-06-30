@@ -9,7 +9,7 @@
 5. 在terminal輸入`php artisan db:seed --class=AdminSeeder`，將6組管理員帳號新增至資料表中
 
 ### 系統架構
-![圖片1](https://user-images.githubusercontent.com/53658361/176249280-0389abe9-f0e1-4de8-a5f8-9ab7f3faa6c0.png)
+![PHMS](https://user-images.githubusercontent.com/53658361/176618575-1107bca6-75a4-438a-b3e3-b720e5e3e840.png)
 
 此系統的主要使用者分別為二種，第一種為管理者，第二種為一般用戶。管理者與一般用戶可以在電腦或行動裝置開啟瀏覽器並輸入系統網址後，即可進入專案暨人資考核系統。
 
