@@ -1,6 +1,8 @@
 ## 專案暨人資考核系統
 此系統的管理、績效考核功能，提供使用者管理團隊事務與提升自主學習能力。
 
+![phms](https://user-images.githubusercontent.com/53658361/179455981-c800ddc0-214c-470d-a127-e5cf34623d11.jpg)
+
 ### 安裝
 1. 在terminal輸入`git clone https://github.com/ZFongYun/PHMS.git`下載專案資料夾
 2. 開啟網頁虛擬器(XAMPP...etc)，為專案配置虛擬目錄，以及新增資料庫
